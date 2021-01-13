@@ -1,28 +1,22 @@
-import Head from 'next/head'
-import Link from 'next/link'
+import React from 'react';
+import Link from 'next/link';
 import { useAppContext, updateContext } from '../../context/state';
 
-export default function Home() {
-
-  console.log(useAppContext())
-  updateContext({ test:'ok'})
-  console.log(useAppContext())
+export default function Main() {
+  console.log(useAppContext());
+  updateContext({ test: 'ok' });
+  console.log(useAppContext());
 
   const product = {
     id: 1,
-    name: "Teapot",
+    name: 'Teapot',
     price: 1.226,
-    image: "https://assets.catawiki.nl/assets/2019/12/16/a/8/c/a8ccba43-31ee-4d24-a509-6d36ee2d7e35.jpg",
-    description: "Cast iron teapot let your drink water be healthy. TOWA cast iron teapot can improve the water quality by releasing iron ions and absorbing chloride ions in water. So the water after boiled by our cast iron teapot can be more sweeter and softer, which is suitable for all kinds of tea making or other drinks making."
-  }
+    image: 'https://assets.catawiki.nl/assets/2019/12/16/a/8/c/a8ccba43-31ee-4d24-a509-6d36ee2d7e35.jpg',
+    description: 'Cast iron teapot let your drink water be healthy. TOWA cast iron teapot can improve the water quality by releasing iron ions and absorbing chloride ions in water. So the water after boiled by our cast iron teapot can be more sweeter and softer, which is suitable for all kinds of tea making or other drinks making.',
+  };
 
   return (
     <div className="container">
-      <Head>
-        <title>One Item Store</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <main>
         <h1 className="title">
           Handmade TOWA Pot
@@ -35,23 +29,29 @@ export default function Home() {
         </li>
 
         <p className="description">
-          brought to you by <a href="https://nextjs.org">Marco Schiorlin</a>
+          brought to you by
+          {' '}
+          <a href="https://nextjs.org">Marco Schiorlin</a>
         </p>
-        
+
         <div className="grid">
           <div className="product">
             <h2 className="product__title">{product.name}</h2>
             <p className="product__description">{product.description}</p>
-            <img src={product.image} alt="" className="product__image"/>
+            <img src={product.image} alt="" className="product__image" />
             <div className="product__price-button-container">
-              <div className="product__price">${product.price.toFixed(2)}</div>
-              <button 
+              <div className="product__price">
+                $
+                {product.price.toFixed(2)}
+              </div>
+              <button
                 className="snipcart-add-item product__button"
                 data-item-id={product.id}
                 data-item-name={product.name}
                 data-item-price={product.price}
-                data-item-url={"TODO"}
-                data-item-image={product.image}>
+                data-item-url="TODO"
+                data-item-image={product.image}
+              >
                 Add to cart
               </button>
             </div>
@@ -69,7 +69,8 @@ export default function Home() {
         </a>
       </footer>
 
-      <style jsx>{`
+      {/* <style jsx>
+        {`
         .container {
           min-height: 100vh;
           padding: 0 0.5rem;
@@ -202,9 +203,9 @@ export default function Home() {
         .product {
           display: grid;
           width: 100%;
-        
+
           display: grid;
-          grid-template-areas: 
+          grid-template-areas:
           "title        title         image"
           "description  description  image"
           "button       button       image"
@@ -212,23 +213,23 @@ export default function Home() {
           grid-template-columns: 1fr 1fr 3fr;
           margin-bottom: 100px;
           grid-column-gap: 100px;
-        
+
           &:nth-of-type(odd) {
-            grid-template-areas: 
+            grid-template-areas:
             "image title        title"
             "image description  description"
             "image button       button"
             "image .            .";
             grid-template-columns: 3fr 1fr 1fr;
-        
+
             // @include mobile {
-            //   grid-template-areas: 
+            //   grid-template-areas:
             //   "image        image      "
             //   "title         title     "
             //   "description  description"
             //   "button       button     ";
             //   grid-template-columns: 1fr 1fr;
-          
+
             //   img {
             //     height: 300px;
             //     width: 100%;
@@ -236,15 +237,15 @@ export default function Home() {
             //   }
             // }
           }
-        
-          &__title {  
+
+          &__title {
             margin: 0;
             grid-area: title;
             font-size: 32px;
             font-weight: bold;
           }
-        
-          &__description { 
+
+          &__description {
             grid-area: description;
             line-height: 1.75rem;
             min-height: 175px;
@@ -252,14 +253,14 @@ export default function Home() {
             //   min-height: 0px;
             // }
           }
-        
-          &__price { 
+
+          &__price {
             grid-area: price;
             font-size: 28px;
             font-weight: bold;
           }
-        
-          &__image { 
+
+          &__image {
             grid-area: image;
             width: 100%;
             height: 100%;
@@ -267,12 +268,12 @@ export default function Home() {
             border-radius: 4px;
             box-shadow: 0px 18.025px 43.775px rgba(0, 0, 0, 0.25);
           }
-        
+
           &__price-button-container {
             display: flex;
             grid-area: button;
           }
-        
+
           &__button {
             margin-left: 30px;
             font-size: 14px;
@@ -285,14 +286,14 @@ export default function Home() {
             background-color: #00ff00;
             color: white;
             position: relative;
-        
+
             &:hover {
               transition: 0.2s all;
               &:before {
                 transform: scale(1.15, 1.4);
               }
             }
-        
+
             &:before {
               content: ' ';
               position: absolute;
@@ -308,15 +309,15 @@ export default function Home() {
               transition: all 0.3s cubic-bezier(0.16, 0.8, 0.66, 1.54);
             }
           }
-        
+
           // @include mobile {
-          //   grid-template-areas: 
+          //   grid-template-areas:
           //   "image        image      "
           //   "title         title     "
           //   "description  description"
           //   "button       button     ";
           //   grid-template-columns: 1fr 1fr;
-        
+
           //   img {
           //     height: 300px;
           //     width: 100%;
@@ -324,9 +325,12 @@ export default function Home() {
           //   }
           // }
         }
-      `}</style>
+      `}
 
-      <style jsx global>{`
+      </style>
+
+      <style jsx global>
+        {`
         html,
         body {
           padding: 0;
@@ -339,7 +343,9 @@ export default function Home() {
         * {
           box-sizing: border-box;
         }
-      `}</style>
+      `}
+
+      </style> */}
     </div>
-  )
+  );
 }

@@ -1,14 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Input, InputGroup, Button, Heading, Modal, ModalOverlay, ModalContent,
   ModalBody, Alert, AlertIcon, FormLabel, InputRightElement, FormControl,
   ModalFooter,
 } from '@chakra-ui/react';
+import fire from '../../../config/fire-config';
 
-const CreateModal = (isOpen, onOpen, onClose) => {
+const CreateModal = (isOpen, onOpen, onClose, productId) => {
   const initialRef = React.useRef();
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
+
+  const [state, setState] = useState({ isLoading: false });
+  const updateState = (target, value) => {
+    setState({ ...state, [target]: value });
+  };
+
+  const handleSubmit = (event) => {
+    setState({ ...state, isLoading: true });
+
+    event.preventDefault();
+    fire.auth().createUserWithEmailAndPassword(state.email, state.password)
+      .then((response) => {
+        fire.firestore()
+          .collection('products')
+          .doc(productId)
+          .set({ userId: response.user.uid }, { merge: true });
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          setState({ ...state, isLoading: false }); onClose();
+        }, 1000);
+      });
+
+    onOpen();
+  };
 
   return (
     <>
@@ -33,20 +62,20 @@ const CreateModal = (isOpen, onOpen, onClose) => {
               <AlertIcon />
               If you want to be able to accept
               payments or edit your listing, please
-              create an account with just Username and Password.
+              create an Account.
             </Alert>
 
             <FormControl>
-              <FormLabel mt="16px">Username</FormLabel>
-              <Input ref={initialRef} placeholder="First name" />
+              <FormLabel mt="16px">Email</FormLabel>
+              <Input ref={initialRef} placeholder="john.doe@gmail.com" onInput={(e) => updateState('email', e.target.value)} />
             </FormControl>
 
-            <FormLabel mt="16px">Password</FormLabel>
+            <FormLabel mt="16px">Password (6 characters minumum)</FormLabel>
             <InputGroup size="md">
               <Input
                 pr="4.5rem"
                 type={show ? 'text' : 'password'}
-                placeholder="Something to remember"
+                onInput={(e) => updateState('password', e.target.value)}
               />
               <InputRightElement width="4.5rem">
                 <Button h="1.75rem" size="sm" onClick={handleClick}>
@@ -60,13 +89,11 @@ const CreateModal = (isOpen, onOpen, onClose) => {
               <Input
                 pr="4.5rem"
                 type={show ? 'text' : 'password'}
-                placeholder="Something to remember"
               />
             </InputGroup>
           </ModalBody>
-
           <ModalFooter>
-            <Button colorScheme="teal" onClick={onClose}>Create Account</Button>
+            <Button isLoading={state.isLoading} colorScheme="teal" onClick={handleSubmit}>Create Account</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

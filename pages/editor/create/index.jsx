@@ -23,7 +23,6 @@ const CreatePage = () => {
   const descriptionPlaceholder = 'Some long long long long long long description';
 
   const product = {
-    id: 1,
     storeName: storeNamePlaceholder,
     author: '',
     contact: contactPlaceholder,
@@ -42,16 +41,20 @@ const CreatePage = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const handleSubmit = (event) => {
     event.preventDefault();
+
     fire.firestore()
-      .collection('pages')
-      .add(state);
+      .collection('products')
+      .add(state)
+      .then((docRef) => {
+        updateState('id', docRef.id);
+      });
 
     onOpen();
   };
 
   return (
     <div>
-      {CreateModal(isOpen, onOpen, onClose)}
+      {CreateModal(isOpen, onOpen, onClose, state.id)}
       <div className="container">
         <div className="left">
           <VStack spacing="24px" mt="24px" mb="24px">

@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
+import Router from 'next/router';
 import {
   Input, InputGroup, Button, Heading, Modal, ModalOverlay, ModalContent,
-  ModalBody, Alert, AlertIcon, FormLabel, InputRightElement, FormControl,
-  ModalFooter,
+  ModalBody, FormLabel, InputRightElement, FormControl, ModalFooter,
 } from '@chakra-ui/react';
 import fire from '../config/fire-config';
 
@@ -31,6 +31,7 @@ const LoginModal = (isOpen, onOpen, onClose) => {
         setTimeout(() => {
           setState({ ...state, isLoading: false });
           onClose();
+          Router.push('/home');
         }, 1000);
       });
   };

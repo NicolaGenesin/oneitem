@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import Router from 'next/router';
 import Link from 'next/link';
 import {
   Box, Center, Heading, Button, Text, List, ListItem, ListIcon,
@@ -8,8 +9,23 @@ import {
 } from 'react-icons/md';
 import Header from './Header';
 import Footer from './Footer';
+import fire from '../config/fire-config';
 
 function Main() {
+  useEffect(() => {
+    if (fire) {
+      if (fire.auth().currentUser) {
+        Router.push('/home');
+      } else {
+        fire.auth().onAuthStateChanged((user) => {
+          if (user) {
+            Router.push('/home');
+          }
+        });
+      }
+    }
+  });
+
   return (
     <Box>
       <Header />

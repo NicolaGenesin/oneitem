@@ -1,14 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Input, InputGroup, Button, Heading, Modal, ModalOverlay, ModalContent,
   ModalBody, Alert, AlertIcon, FormLabel, InputRightElement, FormControl,
   ModalFooter,
 } from '@chakra-ui/react';
+import fire from '../config/fire-config';
 
 const LoginModal = (isOpen, onOpen, onClose) => {
   const initialRef = React.useRef();
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
+
+  const [state, setState] = useState({ isLoading: false });
+  const updateState = (target, value) => {
+    setState({ ...state, [target]: value });
+  };
+
+  const handleSubmit = (event) => {
+    setState({ ...state, isLoading: true });
+
+    event.preventDefault();
+    fire.auth().signInWithEmailAndPassword(state.email, state.password)
+      .then((response) => {
+        console.log(response.user);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {
+        setTimeout(() => {
+          setState({ ...state, isLoading: false });
+          onClose();
+        }, 1000);
+      });
+  };
 
   return (
     <>
@@ -24,16 +49,16 @@ const LoginModal = (isOpen, onOpen, onClose) => {
             <Heading size="md" mt="16px" mb="16px">Welcome Back!</Heading>
 
             <FormControl>
-              <FormLabel mt="16px">Username</FormLabel>
-              <Input ref={initialRef} placeholder="First name" />
+              <FormLabel mt="16px">Email</FormLabel>
+              <Input ref={initialRef} placeholder="john.doe@gmail.com" onInput={(e) => updateState('email', e.target.value)} />
             </FormControl>
 
             <FormLabel mt="16px">Password</FormLabel>
             <InputGroup size="md">
               <Input
+                onInput={(e) => updateState('password', e.target.value)}
                 pr="4.5rem"
                 type={show ? 'text' : 'password'}
-                placeholder="Something to remember"
               />
               <InputRightElement width="4.5rem">
                 <Button h="1.75rem" size="sm" onClick={handleClick}>
@@ -44,7 +69,7 @@ const LoginModal = (isOpen, onOpen, onClose) => {
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme="teal" onClick={onClose}>Login</Button>
+            <Button isLoading={state.isLoading} colorScheme="teal" onClick={handleSubmit}>Login</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

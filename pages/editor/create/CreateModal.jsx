@@ -32,11 +32,10 @@ const CreateModal = (isOpen, onOpen, onClose, productId) => {
       })
       .finally(() => {
         setTimeout(() => {
-          setState({ ...state, isLoading: false }); onClose();
+          setState({ ...state, isLoading: false });
+          onClose();
         }, 1000);
       });
-
-    onOpen();
   };
 
   return (

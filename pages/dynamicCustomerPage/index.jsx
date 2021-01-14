@@ -7,29 +7,27 @@ import {
 } from '@chakra-ui/react';
 import { useAppContext, updateContext } from '../../context/state';
 
-export default function Main() {
-  // console.log(useAppContext());
-  // updateContext({ test: 'ok' });
-  // console.log(useAppContext());
-
-  const product = {
-    id: 1,
-    companyName: 'Biggie LTD',
-    author: 'Marco Schiorlin',
-    contact: 'john@gmail.com',
-    name: 'Teapot',
-    price: 10.226,
-    currency: '$',
-    image: 'https://assets.catawiki.nl/assets/2019/12/16/a/8/c/a8ccba43-31ee-4d24-a509-6d36ee2d7e35.jpg',
-    description: 'Cast iron teapot let your drink water be healthy. TOWA cast iron teapot can improve the water quality by releasing iron ions and absorbing chloride ions in water. So the water after boiled by our cast iron teapot can be more sweeter and softer, which is suitable for all kinds of tea making or other drinks making.',
-  };
+export default function Main({ product }) {
+  if (!product) {
+    product = {
+      id: 1,
+      storeName: 'Biggie LTD',
+      author: 'Marco Schiorlin',
+      contact: 'john@gmail.com',
+      name: 'Teapot',
+      price: 10.226,
+      currency: '$',
+      image: 'https://assets.catawiki.nl/assets/2019/12/16/a/8/c/a8ccba43-31ee-4d24-a509-6d36ee2d7e35.jpg',
+      description: 'Cast iron teapot let your drink water be healthy. TOWA cast iron teapot can improve the water quality by releasing iron ions and absorbing chloride ions in water. So the water after boiled by our cast iron teapot can be more sweeter and softer, which is suitable for all kinds of tea making or other drinks making.',
+    };
+  }
 
   return (
     <Box>
       <Center>
         <Box mb="24px">
           <Heading as="h2" size="xl">
-            {product.companyName}
+            {product.storeName}
             {' '}
             <Badge colorScheme="green">Preview</Badge>
           </Heading>
@@ -68,7 +66,7 @@ export default function Main() {
                 <Center>
                   <Heading size="xl" mr="24px">
                     {product.currency}
-                    {product.price.toFixed(2)}
+                    {product.price && product.price}
                   </Heading>
                   <Button colorScheme="teal" size="lg" variant="outline">Buy</Button>
                 </Center>
@@ -85,7 +83,7 @@ export default function Main() {
               <Text>
                 ©
                 {' '}
-                {product.companyName}
+                {product.storeName}
               </Text>
             </VStack>
           </Center>

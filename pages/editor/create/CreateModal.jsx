@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   Input, InputGroup, Button, Heading, Modal, ModalOverlay, ModalContent,
   ModalBody, Alert, AlertIcon, FormLabel, InputRightElement, FormControl,
@@ -37,6 +37,20 @@ const CreateModal = (isOpen, onOpen, onClose, productId) => {
         }, 1000);
       });
   };
+
+  const onEnterPress = useCallback((event) => {
+    if (event.keyCode === 13) {
+      handleSubmit(event);
+    }
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener('keydown', onEnterPress, false);
+
+    return () => {
+      document.removeEventListener('keydown', onEnterPress, false);
+    };
+  }, []);
 
   return (
     <>

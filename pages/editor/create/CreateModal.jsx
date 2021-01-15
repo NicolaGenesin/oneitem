@@ -23,9 +23,9 @@ const CreateModal = (isOpen, onOpen, onClose, productId) => {
     fire.auth().createUserWithEmailAndPassword(state.email, state.password)
       .then((response) => {
         fire.firestore()
-          .collection('products')
-          .doc(productId)
-          .set({ userId: response.user.uid }, { merge: true });
+          .collection('users')
+          .doc(response.user.uid)
+          .set({ productId });
       })
       .catch((error) => {
         console.log(error);

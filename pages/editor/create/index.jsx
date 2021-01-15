@@ -12,6 +12,11 @@ import DynamicCustomerPage from '../../dynamicCustomerPage';
 import CreateModal from './CreateModal';
 import fire from '../../../config/fire-config';
 
+const cleanURLPath = (string) => string
+  .replace(/[^\w\s]/gi, '')
+  .replaceAll(' ', '')
+  .toLowerCase();
+
 const CreatePage = () => {
   const storeNamePlaceholder = 'Your Store Name';
   const authorPlaceholder = 'Your Name';
@@ -42,11 +47,15 @@ const CreatePage = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
+    const id = `${cleanURLPath(state.storeName)}.${cleanURLPath(state.name)}`;
+    updateState('id', id);
+
     fire.firestore()
       .collection('products')
-      .add(state)
-      .then((docRef) => {
-        updateState('id', docRef.id);
+      .doc(id)
+      .set({ ...state, id })
+      .catch((e) => {
+        console.log(e);
       });
 
     onOpen();

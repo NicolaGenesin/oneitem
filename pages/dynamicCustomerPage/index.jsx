@@ -7,7 +7,7 @@ import {
 } from '@chakra-ui/react';
 import { useAppContext, updateContext } from '../../context/state';
 
-export default function Main({ product }) {
+export default function Main({ product, preview }) {
   if (!product) {
     product = {
       id: 1,
@@ -29,7 +29,7 @@ export default function Main({ product }) {
           <Heading as="h2" size="xl">
             {product.storeName}
             {' '}
-            <Badge colorScheme="green">Preview</Badge>
+            {preview && <Badge colorScheme="green">Preview</Badge>}
           </Heading>
         </Box>
       </Center>

@@ -137,7 +137,7 @@ const CreatePage = () => {
         </div>
         <div className="right">
           <Box mt="24px">
-            <DynamicCustomerPage product={state} />
+            <DynamicCustomerPage preview product={state} />
           </Box>
         </div>
       </div>

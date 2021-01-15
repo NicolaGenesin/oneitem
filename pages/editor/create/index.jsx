@@ -8,7 +8,7 @@ import {
 import {
   MdKeyboardBackspace,
 } from 'react-icons/md';
-import DynamicCustomerPage from '../../dynamicCustomerPage';
+import ProductPage from '../../product-page';
 import CreateModal from './CreateModal';
 import fire from '../../../config/fire-config';
 
@@ -53,7 +53,7 @@ const CreatePage = () => {
     fire.firestore()
       .collection('products')
       .doc(id)
-      .set({ ...state, id })
+      .set({ ...state, id, visible: true })
       .catch((e) => {
         console.log(e);
       });
@@ -137,7 +137,7 @@ const CreatePage = () => {
         </div>
         <div className="right">
           <Box mt="24px">
-            <DynamicCustomerPage preview product={state} />
+            <ProductPage preview product={state} />
           </Box>
         </div>
       </div>

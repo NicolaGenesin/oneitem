@@ -7,7 +7,7 @@ import {
 } from '@chakra-ui/react';
 import { useAppContext, updateContext } from '../../context/state';
 
-export default function Main({ product, preview }) {
+export default function ProductPage({ product, preview }) {
   if (!product) {
     product = {
       id: 1,

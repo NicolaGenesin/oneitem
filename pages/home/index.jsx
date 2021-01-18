@@ -9,7 +9,7 @@ import {
   MdBuild, MdDelete, MdPayment, MdExitToApp, MdLink,
 } from 'react-icons/md';
 import {
-  FaFacebook, FaPinterest, FaTwitter,
+  FaFacebook, FaInstagram, FaTwitter,
 } from 'react-icons/fa';
 import fire from '../../config/fire-config';
 
@@ -110,7 +110,7 @@ const LoggedInHome = (props) => {
           <VStack>
             <Stat>
               <StatLabel>Page Views</StatLabel>
-              <StatNumber align="center">44</StatNumber>
+              <StatNumber align="center">{ state.views }</StatNumber>
             </Stat>
           </VStack>
         </HStack>
@@ -146,10 +146,16 @@ const LoggedInHome = (props) => {
               {
               // TODO check http://www.sharelinkgenerator.com/
               /* <IconButton
-            colorScheme="blue"
+              colorScheme="blue"
             aria-label="Pinterest share"
             icon={<FaPinterest />}
           /> */}
+
+              <IconButton
+                colorScheme="red"
+                aria-label="Instagram share"
+                icon={<FaInstagram />}
+              />
             </HStack>
           </Center>
         </Box>

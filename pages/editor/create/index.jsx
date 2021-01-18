@@ -53,7 +53,9 @@ const CreatePage = () => {
     fire.firestore()
       .collection('products')
       .doc(id)
-      .set({ ...state, id, visible: true })
+      .set({
+        ...state, id, visible: true, views: 0,
+      })
       .catch((e) => {
         console.log(e);
       });

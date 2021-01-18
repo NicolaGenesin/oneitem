@@ -20,13 +20,18 @@ const PublicProductPage = (props) => {
 }; 
 
 PublicProductPage.getInitialProps = async function ({query}) {
-  const productResponse = await fire.firestore()
+  const productReference = fire.firestore()
     .collection('products')
     .doc(query.productId)
-    .get();
 
-  if (productResponse.exists) {
-    return { ...productResponse.data() };
+  productReference.update({
+    views: fire.firestore.FieldValue.increment(1)
+  });
+
+  const doc = await productReference.get();
+
+  if (doc.exists) {
+    return { ...doc.data() };
   } else {
     return {}
   }

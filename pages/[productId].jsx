@@ -31,10 +31,14 @@ PublicProductPage.getInitialProps = async function ({query}) {
   const doc = await productReference.get();
 
   if (doc.exists) {
-    return { ...doc.data() };
-  } else {
-    return {}
-  }
+    const data = doc.data()
+
+    if (data.visible) {
+      return { ...data };
+    }
+  } 
+ 
+  return {}
 }
 
 export default PublicProductPage;

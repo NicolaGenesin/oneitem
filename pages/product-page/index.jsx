@@ -1,9 +1,7 @@
 import React from 'react';
-import Link from 'next/link';
 import {
-  Input, Text, Textarea, VStack, InputGroup, NumberInput, Select, Box, Image, Button, Heading, Divider,
-  NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, HStack, Center,
-  Badge,
+  Text, VStack, Box, Image, Button, Heading,
+  Divider, HStack, Center, Badge,
 } from '@chakra-ui/react';
 import { useAppContext, updateContext } from '../../context/state';
 

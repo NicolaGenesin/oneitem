@@ -6,7 +6,7 @@ import {
   Heading, StatLabel, Center, IconButton, Input,
 } from '@chakra-ui/react';
 import {
-  MdBuild, MdDelete, MdPayment, MdExitToApp, MdLink,
+  MdBuild, MdDelete, MdPayment, MdExitToApp, MdLink, MdPanoramaFishEye,
 } from 'react-icons/md';
 import {
   FaFacebook, FaInstagram, FaTwitter,
@@ -20,6 +20,25 @@ const shareToFacebookHandler = (url) => {
 const shareToTwitterHandler = (url) => {
   const text = escape(`Hi! Come check out our unique item at ${url}`);
   window.open(`https://twitter.com/intent/tweet?text=${text}`);
+};
+
+const logout = (event) => {
+  event.preventDefault();
+  fire.auth().signOut();
+};
+
+const changeListingStatus = (event, state, setState) => {
+  event.preventDefault();
+
+  const productReference = fire.firestore()
+    .collection('products')
+    .doc(state.productId);
+
+  productReference.update({
+    visible: !state.visible,
+  });
+
+  setState({ ...state, visible: !state.visible });
 };
 
 const copyToClipboard = (url) => {
@@ -78,11 +97,6 @@ const LoggedInHome = (props) => {
     }
   });
 
-  const logout = (event) => {
-    event.preventDefault();
-    fire.auth().signOut();
-  };
-
   if (!fire.auth().currentUser) {
     return (
       <Box bg="yellow.200">Loading</Box>
@@ -116,7 +130,8 @@ const LoggedInHome = (props) => {
         </HStack>
         <Button w="300px" leftIcon={<MdPayment />} colorScheme="teal" onClick={logout}>Accept Payments</Button>
         <Button w="300px" leftIcon={<MdBuild />} colorScheme="teal" onClick={logout}>Edit Listing</Button>
-        <Button w="300px" leftIcon={<MdDelete />} colorScheme="teal" onClick={logout}>Hide Listing</Button>
+        {state.visible && <Button w="300px" leftIcon={<MdDelete />} colorScheme="teal" onClick={(event) => { changeListingStatus(event, state, setState); }}>Hide Listing</Button>}
+        {!state.visible && <Button w="300px" leftIcon={<MdPanoramaFishEye />} colorScheme="teal" onClick={(event) => { changeListingStatus(event, state, setState); }}>Publish Listing</Button>}
         <Button w="300px" mb="24px" leftIcon={<MdExitToApp />} colorScheme="teal" onClick={logout}>Logout</Button>
         <Heading as="h2" size="xl">Share</Heading>
         <Box>

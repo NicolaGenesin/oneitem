@@ -47,7 +47,7 @@ const CreatePage = (props) => {
       .doc(state.id)
       .set({
         ...state,
-        views: 0,
+        views: state.views || 0,
         visible: true,
         userId,
       })

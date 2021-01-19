@@ -1,15 +1,11 @@
 import React, { useState } from 'react';
+import Router from 'next/router';
 import {
-  Input, Text, Textarea, VStack, InputGroup,
-  NumberInput, Select, Box, Image, Button,
-  Heading, NumberInputField, HStack, IconButton,
-  useDisclosure, Link,
+  useDisclosure,
 } from '@chakra-ui/react';
-import {
-  MdKeyboardBackspace,
-} from 'react-icons/md';
 import ProductPage from '../../product-page';
 import CreateModal from './CreateModal';
+import LeftColumn from '../LeftColumn';
 import fire from '../../../config/fire-config';
 
 const cleanURLPath = (string) => string
@@ -17,31 +13,35 @@ const cleanURLPath = (string) => string
   .replaceAll(' ', '')
   .toLowerCase();
 
-const CreatePage = () => {
-  const storeNamePlaceholder = 'Your Store Name';
-  const authorPlaceholder = 'Your Name';
-  const contactPlaceholder = 'john@doe.com';
-  const namePlaceholder = 'The item name';
-  const pricePlaceholder = 20;
-  const currencyPlaceholder = '$';
-  const imagePlaceholder = 'https://assets.catawiki.nl/assets/2019/12/16/a/8/c/a8ccba43-31ee-4d24-a509-6d36ee2d7e35.jpg';
-  const descriptionPlaceholder = 'Some long long long long long long description';
+const placeholders = {
+  storeNamePlaceholder: 'Your Store Name',
+  authorPlaceholder: 'Your Name',
+  contactPlaceholder: 'john@doe.com',
+  namePlaceholder: 'The item name',
+  pricePlaceholder: 20,
+  currencyPlaceholder: '$',
+  imagePlaceholder: 'https://assets.catawiki.nl/assets/2019/12/16/a/8/c/a8ccba43-31ee-4d24-a509-6d36ee2d7e35.jpg',
+  descriptionPlaceholder: 'A very long description',
+};
 
-  const product = {
-    storeName: storeNamePlaceholder,
-    author: '',
-    contact: contactPlaceholder,
-    name: namePlaceholder,
-    price: pricePlaceholder,
-    currency: currencyPlaceholder,
-    image: imagePlaceholder,
-    description: descriptionPlaceholder,
-  };
+const product = {
+  storeName: placeholders.storeNamePlaceholder,
+  author: '',
+  contact: placeholders.contactPlaceholder,
+  name: placeholders.namePlaceholder,
+  price: placeholders.pricePlaceholder,
+  currency: placeholders.currencyPlaceholder,
+  image: placeholders.imagePlaceholder,
+  description: placeholders.descriptionPlaceholder,
+};
 
-  const [state, setState] = useState(product);
+const CreatePage = (props) => {
+  const [state, setState] = useState(props || product);
   const updateState = (target, value) => {
     setState({ ...state, [target]: value });
   };
+
+  console.log(state);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const handleSubmit = (event) => {
@@ -60,7 +60,11 @@ const CreatePage = () => {
         console.log(e);
       });
 
-    onOpen();
+    if (state.createMode) {
+      onOpen();
+    } else {
+      Router.push('/home');
+    }
   };
 
   return (
@@ -68,103 +72,71 @@ const CreatePage = () => {
       {CreateModal(isOpen, onOpen, onClose, state.id)}
       <div className="container">
         <div className="left">
-          <VStack spacing="24px" mt="24px" mb="24px">
-            <HStack w="460px">
-              <Link href="/">
-                <IconButton
-                  variant="ghost"
-                  colorScheme="teal"
-                  aria-label="Call Sage"
-                  fontSize="20px"
-                  icon={<MdKeyboardBackspace />}
-                />
-              </Link>
-              <Heading as="h2" size="xl">
-                Create a new listing
-              </Heading>
-            </HStack>
-            <Box w="460px">
-              <Text mb="8px">Store Name</Text>
-              <Input onInput={(e) => updateState('storeName', e.target.value)} placeholder={storeNamePlaceholder} />
-            </Box>
-
-            <Box w="460px">
-              <Text mb="8px">Author Name</Text>
-              <Input onInput={(e) => updateState('author', e.target.value)} placeholder={authorPlaceholder} />
-            </Box>
-
-            <Box w="460px">
-              <Text mb="8px">Item Name</Text>
-              <Input onInput={(e) => updateState('name', e.target.value)} placeholder={namePlaceholder} />
-            </Box>
-
-            <Box w="460px">
-              <Text mb="8px">Item Description</Text>
-              <Textarea h="150px" onInput={(e) => updateState('description', e.target.value)} placeholder={descriptionPlaceholder} />
-            </Box>
-
-            <Box w="460px">
-              <Text mb="8px">Price (including VAT and shipment)</Text>
-              <InputGroup>
-                <Select placeholder={currencyPlaceholder} maxW="65px" mr="8px">
-                  <option value="option1">€</option>
-                  <option value="option2">$</option>
-                  <option value="option3">£</option>
-                </Select>
-                <NumberInput defaultValue={20} min={1} max={50000} precision={2} step={0.2} w="100%">
-                  <NumberInputField onInput={(e) => updateState('price', e.target.value)} />
-                </NumberInput>
-              </InputGroup>
-            </Box>
-
-            <Box w="460px">
-              <Text mb="8px">Image</Text>
-              <Image
-                fallbackSrc="https://via.placeholder.com/450"
-                boxSize="100px"
-                objectFit="cover"
-                src="https://assets.catawiki.nl/assets/2019/12/16/a/8/c/a8ccba43-31ee-4d24-a509-6d36ee2d7e35.jpg"
-              />
-            </Box>
-
-            <Box w="460px">
-              <Text mb="8px">Contact Email</Text>
-              <Input placeholder={contactPlaceholder} onInput={(e) => updateState('contact', e.target.value)} />
-            </Box>
-
-            <HStack>
-              <Button colorScheme="blue" onClick={handleSubmit}>Create my Store</Button>
-            </HStack>
-          </VStack>
+          <LeftColumn
+            product={state}
+            placeholders={placeholders}
+            updateState={updateState}
+            handleSubmit={handleSubmit}
+            createMode={state.createMode}
+          />
         </div>
         <div className="right">
-          <Box mt="24px">
-            <ProductPage preview product={state} />
-          </Box>
+          <ProductPage mt="24px" preview product={state} />
         </div>
       </div>
       <style jsx>
         {`
-            .container {
-                height: auto;
-                overflow: hidden;
-            }
-            
-            .left {
-                width: 500px;
-                float: left;
-                background: #e8f6fe;
-            }
-            
-            .right {
-                float: none;
-                width: auto;
-                overflow: hidden;
-            }
-            `}
+          .container {
+              height: auto;
+              overflow: hidden;
+          }
+          
+          .left {
+              width: 500px;
+              float: left;
+              background: #e8f6fe;
+          }
+          
+          .right {
+              float: none;
+              width: auto;
+              overflow: hidden;
+          }
+        `}
       </style>
     </div>
   );
+};
+
+CreatePage.getInitialProps = async function () {
+  const user = fire.auth().currentUser;
+
+  const getProduct = async () => {
+    const userResponse = await fire.firestore()
+      .collection('users')
+      .doc(user.uid)
+      .get();
+
+    if (userResponse.exists) {
+      const data = userResponse.data();
+      const productResponse = await fire.firestore()
+        .collection('products')
+        .doc(data.productId)
+        .get();
+
+      if (productResponse.exists) {
+        return { ...data, ...productResponse.data(), createMode: false };
+      }
+    }
+
+    return { createMode: true };
+  };
+
+  if (user) {
+    return getProduct();
+  }
+
+  return { error: true };
 };
 
 export default CreatePage;

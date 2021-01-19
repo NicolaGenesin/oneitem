@@ -6,11 +6,14 @@ import {
   Heading, StatLabel, Center, IconButton, Input,
 } from '@chakra-ui/react';
 import {
-  MdBuild, MdDelete, MdPayment, MdExitToApp, MdLink, MdPanoramaFishEye,
+  MdBuild, MdDelete, MdPayment, MdExitToApp, MdLink,
 } from 'react-icons/md';
 import {
   FaFacebook, FaInstagram, FaTwitter,
 } from 'react-icons/fa';
+import {
+  AiOutlineEye,
+} from 'react-icons/ai';
 import fire from '../../config/fire-config';
 
 const shareToFacebookHandler = (url) => {
@@ -25,6 +28,16 @@ const shareToTwitterHandler = (url) => {
 const logout = (event) => {
   event.preventDefault();
   fire.auth().signOut();
+};
+
+const acceptPayments = (event) => {
+  event.preventDefault();
+};
+
+const editListing = (event) => {
+  event.preventDefault();
+
+  Router.push('/editor/create');
 };
 
 const changeListingStatus = (event, state, setState) => {
@@ -128,10 +141,10 @@ const LoggedInHome = (props) => {
             </Stat>
           </VStack>
         </HStack>
-        <Button w="300px" leftIcon={<MdPayment />} colorScheme="teal" onClick={logout}>Accept Payments</Button>
-        <Button w="300px" leftIcon={<MdBuild />} colorScheme="teal" onClick={logout}>Edit Listing</Button>
+        <Button w="300px" leftIcon={<MdPayment />} colorScheme="teal" onClick={acceptPayments}>Accept Payments</Button>
+        <Button w="300px" leftIcon={<MdBuild />} colorScheme="teal" onClick={editListing}>Edit Listing</Button>
         {state.visible && <Button w="300px" leftIcon={<MdDelete />} colorScheme="teal" onClick={(event) => { changeListingStatus(event, state, setState); }}>Hide Listing</Button>}
-        {!state.visible && <Button w="300px" leftIcon={<MdPanoramaFishEye />} colorScheme="teal" onClick={(event) => { changeListingStatus(event, state, setState); }}>Publish Listing</Button>}
+        {!state.visible && <Button w="300px" leftIcon={<AiOutlineEye />} colorScheme="teal" onClick={(event) => { changeListingStatus(event, state, setState); }}>Publish Listing</Button>}
         <Button w="300px" mb="24px" leftIcon={<MdExitToApp />} colorScheme="teal" onClick={logout}>Logout</Button>
         <Heading as="h2" size="xl">Share</Heading>
         <Box>
@@ -199,6 +212,8 @@ LoggedInHome.getInitialProps = async function () {
         return { ...data, ...productResponse.data() };
       }
     }
+
+    return {};
   };
 
   if (user) {

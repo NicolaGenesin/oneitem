@@ -15,6 +15,8 @@ import {
   AiOutlineEye,
 } from 'react-icons/ai';
 import fire from '../../config/fire-config';
+import useAuth from '../useAuth';
+import Loader from '../../components/Loader';
 
 const shareToFacebookHandler = (url) => {
   window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`);
@@ -45,13 +47,13 @@ const changeListingStatus = (event, state, setState) => {
 
   const productReference = fire.firestore()
     .collection('products')
-    .doc(state.id);
+    .doc(product.id);
 
   productReference.update({
-    visible: !state.visible,
+    visible: !product.visible,
   });
 
-  setState({ ...state, visible: !state.visible });
+  setState({ ...state, visible: !product.visible });
 };
 
 const copyToClipboard = (url) => {
@@ -89,34 +91,16 @@ const copyToClipboard = (url) => {
   });
 };
 
-const LoggedInHome = (props) => {
-  const [state, setState] = useState(props);
+const LoggedInHome = () => {
+  const {
+    pending, isSignedIn, user, product,
+  } = useAuth();
 
-  console.log(props);
-
-  useEffect(() => {
-    if (fire) {
-      const user = fire.auth().currentUser;
-
-      if (!user) {
-        Router.push('/');
-      } else {
-        fire.auth().onAuthStateChanged((newUser) => {
-          if (!newUser) {
-            Router.push('/');
-          }
-        });
-      }
-    }
-  });
-
-  if (!fire.auth().currentUser) {
-    return (
-      <Box bg="yellow.200">Loading</Box>
-    );
+  if (pending) {
+    return <Loader />;
   }
 
-  const pageUrl = `https://todo.com/${state.id}`;
+  const pageUrl = `https://todo.com/${product.id}`;
 
   return (
     <Center h="100vh" bg="yellow.200">
@@ -124,7 +108,7 @@ const LoggedInHome = (props) => {
         <Text mb="16px">
           Hi
           {' '}
-          {fire.auth().currentUser.email}
+          {user.email}
         </Text>
         <Heading as="h2" size="xl">Your Listing</Heading>
         <HStack spacing="48px" mb="16px">
@@ -137,14 +121,14 @@ const LoggedInHome = (props) => {
           <VStack>
             <Stat>
               <StatLabel>Page Views</StatLabel>
-              <StatNumber align="center">{ state.views }</StatNumber>
+              <StatNumber align="center">{ product.views }</StatNumber>
             </Stat>
           </VStack>
         </HStack>
         <Button w="300px" leftIcon={<MdPayment />} colorScheme="teal" onClick={acceptPayments}>Accept Payments</Button>
         <Button w="300px" leftIcon={<MdBuild />} colorScheme="teal" onClick={editListing}>Edit Listing</Button>
-        {state.visible && <Button w="300px" leftIcon={<MdDelete />} colorScheme="teal" onClick={(event) => { changeListingStatus(event, state, setState); }}>Hide Listing</Button>}
-        {!state.visible && <Button w="300px" leftIcon={<AiOutlineEye />} colorScheme="teal" onClick={(event) => { changeListingStatus(event, state, setState); }}>Publish Listing</Button>}
+        {product.visible && <Button w="300px" leftIcon={<MdDelete />} colorScheme="teal" onClick={(event) => { changeListingStatus(event, state, setState); }}>Hide Listing</Button>}
+        {!product.visible && <Button w="300px" leftIcon={<AiOutlineEye />} colorScheme="teal" onClick={(event) => { changeListingStatus(event, state, setState); }}>Publish Listing</Button>}
         <Button w="300px" mb="24px" leftIcon={<MdExitToApp />} colorScheme="teal" onClick={logout}>Logout</Button>
         <Heading as="h2" size="xl">Share</Heading>
         <Box>
@@ -178,49 +162,17 @@ const LoggedInHome = (props) => {
             aria-label="Pinterest share"
             icon={<FaPinterest />}
           /> */}
-
-              <IconButton
+              {/* <IconButton
                 colorScheme="red"
                 aria-label="Instagram share"
                 icon={<FaInstagram />}
-              />
+              /> */}
             </HStack>
           </Center>
         </Box>
       </VStack>
     </Center>
   );
-};
-
-LoggedInHome.getInitialProps = async function () {
-  const user = fire.auth().currentUser;
-
-  const getProduct = async () => {
-    const userResponse = await fire.firestore()
-      .collection('users')
-      .doc(user.uid)
-      .get();
-
-    if (userResponse.exists) {
-      const data = userResponse.data();
-      const productResponse = await fire.firestore()
-        .collection('products')
-        .doc(data.productId)
-        .get();
-
-      if (productResponse.exists) {
-        return { ...productResponse.data() };
-      }
-    }
-
-    return {};
-  };
-
-  if (user) {
-    return getProduct();
-  }
-
-  return { error: true };
 };
 
 export default LoggedInHome;

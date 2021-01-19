@@ -5,7 +5,7 @@ import {
 } from '@chakra-ui/react';
 import ProductPage from '../../product-page';
 import CreateModal from './CreateModal';
-import LeftColumn from '../LeftColumn';
+import LeftColumn from '../../../components/LeftColumn';
 import fire from '../../../config/fire-config';
 
 const placeholders = {
@@ -35,9 +35,6 @@ const CreatePage = (props) => {
   const updateState = (target, value) => {
     setState({ ...state, [target]: value });
   };
-
-  console.log(props.id);
-  console.log(state.id);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const handleSubmit = (event) => {

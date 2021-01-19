@@ -4,7 +4,7 @@ import {
   Input, Text, Textarea, VStack, InputGroup,
   NumberInput, Select, Box, Image, Button,
   Heading, NumberInputField, HStack, IconButton,
-  Link,
+  Link, InputLeftAddon,
 } from '@chakra-ui/react';
 import {
   MdKeyboardBackspace,
@@ -76,6 +76,21 @@ const LeftColumn = ({
       <Box w="460px">
         <Text mb="8px">Contact Email</Text>
         <Input placeholder={placeholders.contactPlaceholder} onInput={(e) => updateState('contact', e.target.value)} value={product.contact} />
+      </Box>
+
+      <Box w="460px">
+        <Text mb="8px">Your address name on one9</Text>
+        <InputGroup>
+          <InputLeftAddon children="www.one9.com/" />
+          <Input
+            type="tel"
+            placeholder="turtle-teapot"
+            value={product.id}
+            onInput={(e) => {
+              updateState('id', e.target.value);
+            }}
+          />
+        </InputGroup>
       </Box>
 
       <HStack>

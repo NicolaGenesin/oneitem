@@ -8,11 +8,6 @@ import CreateModal from './CreateModal';
 import LeftColumn from '../LeftColumn';
 import fire from '../../../config/fire-config';
 
-const cleanURLPath = (string) => string
-  .replace(/[^\w\s]/gi, '')
-  .replaceAll(' ', '')
-  .toLowerCase();
-
 const placeholders = {
   storeNamePlaceholder: 'Your Store Name',
   authorPlaceholder: 'Your Name',
@@ -41,24 +36,39 @@ const CreatePage = (props) => {
     setState({ ...state, [target]: value });
   };
 
-  console.log(state);
+  console.log(props.id);
+  console.log(state.id);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const id = `${cleanURLPath(state.storeName)}.${cleanURLPath(state.name)}`;
-    updateState('id', id);
+    const userId = fire.auth().currentUser.uid;
 
     fire.firestore()
       .collection('products')
-      .doc(id)
+      .doc(state.id)
       .set({
-        ...state, id, visible: true, views: 0,
+        ...state,
+        views: 0,
+        visible: true,
+        userId,
       })
       .catch((e) => {
         console.log(e);
       });
+
+    if (props.id !== state.id) {
+      fire.firestore()
+        .collection('products')
+        .doc(props.id)
+        .delete();
+
+      fire.firestore()
+        .collection('users')
+        .doc(userId)
+        .set({ productId: state.id });
+    }
 
     if (state.createMode) {
       onOpen();
@@ -125,7 +135,7 @@ CreatePage.getInitialProps = async function () {
         .get();
 
       if (productResponse.exists) {
-        return { ...data, ...productResponse.data(), createMode: false };
+        return { ...productResponse.data(), createMode: false };
       }
     }
 

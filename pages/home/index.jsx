@@ -45,7 +45,7 @@ const changeListingStatus = (event, state, setState) => {
 
   const productReference = fire.firestore()
     .collection('products')
-    .doc(state.productId);
+    .doc(state.id);
 
   productReference.update({
     visible: !state.visible,
@@ -116,7 +116,7 @@ const LoggedInHome = (props) => {
     );
   }
 
-  const pageUrl = `https://todo.com/${state.productId}`;
+  const pageUrl = `https://todo.com/${state.id}`;
 
   return (
     <Center h="100vh" bg="yellow.200">
@@ -209,7 +209,7 @@ LoggedInHome.getInitialProps = async function () {
         .get();
 
       if (productResponse.exists) {
-        return { ...data, ...productResponse.data() };
+        return { ...productResponse.data() };
       }
     }
 

@@ -1,0 +1,10 @@
+{
+    "intro": {
+        "welcome": "a, {{username}}!",
+        "text": "a",
+        "description": "This example demonstrate how to change the language for SSG and SSR optimized pages."
+    },
+    "dashboard": {
+        "description": "This example demonstrate how to change the language on client side only. Useful for dashboards because they don't require SEO."
+    }
+}

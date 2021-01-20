@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import {
   Box,
   Button, Text, HStack, VStack, Stat, StatNumber,
@@ -17,6 +17,9 @@ import {
 import fire from '../../config/fire-config';
 import useAuth from '../useAuth';
 import Loader from '../../components/Loader';
+import useI18n from '../../hooks/use-i18n';
+import EN from '../../locales/en.json';
+import IT from '../../locales/it.json';
 
 const shareToFacebookHandler = (url) => {
   window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`);
@@ -92,6 +95,13 @@ const copyToClipboard = (url) => {
 };
 
 const LoggedInHome = ({ hostname }) => {
+  const i18n = useI18n();
+
+  useEffect(() => {
+    i18n.locale('en', IT);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const {
     pending,
     user,
@@ -122,6 +132,8 @@ const LoggedInHome = ({ hostname }) => {
                 Hi
                 {' '}
                 {user.email}
+
+                {i18n.t('intro.text')}
               </Text>
               <Heading as="h2" size="xl">Your Listing</Heading>
               <HStack spacing="48px" mb="16px">

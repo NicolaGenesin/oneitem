@@ -10,6 +10,7 @@ const theme = extendTheme({ colors });
 export default class CustomApp extends App {
   render() {
     const { Component, pageProps } = this.props;
+
     return (
       <ChakraProvider theme={theme}>
         <AppWrapper>

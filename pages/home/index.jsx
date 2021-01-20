@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import {
   Box,
   Button, Text, HStack, VStack, Stat, StatNumber,
@@ -17,6 +17,7 @@ import {
 import fire from '../../config/fire-config';
 import useAuth from '../useAuth';
 import Loader from '../../components/Loader';
+import usei18n from '../../i18n/index';
 
 const shareToFacebookHandler = (url) => {
   window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`);
@@ -92,6 +93,8 @@ const copyToClipboard = (url) => {
 };
 
 const LoggedInHome = ({ hostname }) => {
+  const i18n = usei18n();
+
   const {
     pending,
     user,
@@ -99,6 +102,8 @@ const LoggedInHome = ({ hostname }) => {
   } = useAuth();
 
   const [state, setState] = useState({});
+
+  console.log('locale', i18n.t('intro.welcome', { username: 'gigio' }));
 
   useEffect(() => {
     if (product) {

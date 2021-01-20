@@ -91,9 +91,11 @@ const copyToClipboard = (url) => {
   });
 };
 
-const LoggedInHome = () => {
+const LoggedInHome = ({ hostname }) => {
   const {
-    pending, isSignedIn, user, product,
+    pending,
+    user,
+    product,
   } = useAuth();
 
   const [state, setState] = useState({});
@@ -108,7 +110,7 @@ const LoggedInHome = () => {
     return <Loader />;
   }
 
-  const pageUrl = `https://todo.com/${state.id}`;
+  const pageUrl = `${hostname}/${state.id}`;
 
   return (
     <div>
@@ -196,6 +198,16 @@ const LoggedInHome = () => {
       </style>
     </div>
   );
+};
+
+LoggedInHome.getInitialProps = async function ({ req }) {
+  if (req) {
+    const { host } = req.headers;
+
+    return { hostname: host };
+  }
+
+  return { hostname: 'error_refresh_page' };
 };
 
 export default LoggedInHome;

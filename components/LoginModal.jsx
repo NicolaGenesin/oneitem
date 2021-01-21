@@ -1,8 +1,11 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, {
+  useState, useEffect, useRef, useCallback,
+} from 'react';
 import Router from 'next/router';
 import {
   Input, InputGroup, Button, Heading, Modal, ModalOverlay, ModalContent,
   ModalBody, FormLabel, InputRightElement, FormControl, ModalFooter,
+  Alert, AlertIcon, AlertDescription, AlertTitle,
 } from '@chakra-ui/react';
 import fire from '../config/fire-config';
 
@@ -15,23 +18,30 @@ const LoginModal = (isOpen, onOpen, onClose) => {
   const updateState = (target, value) => {
     setState({ ...state, [target]: value });
   };
+  const stateRef = useRef();
 
-  const handleSubmit = (event) => {
-    setState({ ...state, isLoading: true });
+  stateRef.current = state;
+
+  const handleSubmit = (event, modalState) => {
+    const newState = modalState || stateRef.current;
+    setState({ ...newState, isLoading: true });
 
     event.preventDefault();
-    fire.auth().signInWithEmailAndPassword(state.email, state.password)
+    fire.auth().signInWithEmailAndPassword(newState.email, newState.password)
       .then((response) => {
-        console.log(response.user);
+        console.log('Logged In', response.user.uid);
+
+        setTimeout(() => {
+          onClose();
+          Router.push('/home');
+        }, 1000);
       })
       .catch((error) => {
         console.log(error);
       })
       .finally(() => {
         setTimeout(() => {
-          setState({ ...state, isLoading: false });
-          onClose();
-          Router.push('/home');
+          setState({ ...newState, isLoading: false, error: true });
         }, 1000);
       });
   };
@@ -43,10 +53,10 @@ const LoginModal = (isOpen, onOpen, onClose) => {
   }, []);
 
   useEffect(() => {
-    document.addEventListener('keydown', onEnterPress, false);
+    document.addEventListener('keydown', (e) => onEnterPress(e), false);
 
     return () => {
-      document.removeEventListener('keydown', onEnterPress, false);
+      document.removeEventListener('keydown', (e) => onEnterPress(e), false);
     };
   }, []);
 
@@ -81,10 +91,17 @@ const LoginModal = (isOpen, onOpen, onClose) => {
                 </Button>
               </InputRightElement>
             </InputGroup>
+            {state.error && (
+            <Alert status="error" rounded="md" mt="16px">
+              <AlertIcon />
+              <AlertDescription mr={2}>
+                The email address or password is incorrect.
+              </AlertDescription>
+            </Alert>
+            )}
           </ModalBody>
-
           <ModalFooter>
-            <Button isLoading={state.isLoading} colorScheme="teal" onClick={handleSubmit}>Login</Button>
+            <Button isLoading={state.isLoading} colorScheme="teal" onClick={(e) => handleSubmit(e, state)}>Login</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

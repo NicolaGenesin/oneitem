@@ -2,11 +2,16 @@ import React, { useState, useEffect, useCallback } from 'react';
 import {
   Input, InputGroup, Button, Heading, Modal, ModalOverlay, ModalContent,
   ModalBody, Alert, AlertIcon, FormLabel, InputRightElement, FormControl,
-  ModalFooter,
+  ModalFooter, HStack, IconButton, VStack, Text, Popover, PopoverTrigger,
+  PopoverArrow, PopoverHeader, PopoverContent,
 } from '@chakra-ui/react';
+import {
+  MdLink,
+} from 'react-icons/md';
+import { copyToClipboard } from '../utils/document';
 import fire from '../config/fire-config';
 
-const CreateModal = (isOpen, onOpen, onClose, productId) => {
+const CreateModal = (isOpen, onOpen, onClose, hostname, productId) => {
   const initialRef = React.useRef();
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
@@ -52,6 +57,8 @@ const CreateModal = (isOpen, onOpen, onClose, productId) => {
     };
   }, []);
 
+  const pageUrl = `${hostname}/${productId}`;
+
   return (
     <>
       <Modal
@@ -64,12 +71,28 @@ const CreateModal = (isOpen, onOpen, onClose, productId) => {
         <ModalContent>
           <ModalBody pb={6}>
             <Heading size="md" mt="16px" mb="16px">Done!</Heading>
-            <Alert status="success" rounded="md">
-              <AlertIcon />
-              Your page is now visible here!
-              {' '}
-              one9.com/xyzu.teapot
-            </Alert>
+            <VStack>
+              <Text w="100%">
+                Your page is now available at this page!
+              </Text>
+              <HStack w="100%">
+                <Input variant="filled" value={pageUrl} onChange={() => {}} />
+                <Popover>
+                  <PopoverTrigger>
+                    <IconButton
+                      colorScheme="pink"
+                      aria-label="Link share"
+                      icon={<MdLink />}
+                      onClick={() => { copyToClipboard(pageUrl); }}
+                    />
+                  </PopoverTrigger>
+                  <PopoverContent w="230px">
+                    <PopoverArrow />
+                    <PopoverHeader>Copied to your clipboard!</PopoverHeader>
+                  </PopoverContent>
+                </Popover>
+              </HStack>
+            </VStack>
             <Heading size="md" mt="16px" mb="16px">What's next?</Heading>
             <Alert status="info" rounded="md">
               <AlertIcon />

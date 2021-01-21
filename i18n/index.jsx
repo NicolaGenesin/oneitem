@@ -12,7 +12,7 @@ const i18n = rosetta({
       editListing: 'Edit Listing',
       hideListing: 'Hide Listing',
       publishListing: 'Publish Listing',
-      logout: 'logout',
+      logout: 'Logout',
       share: 'Share',
     },
     components: {

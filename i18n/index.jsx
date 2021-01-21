@@ -15,6 +15,22 @@ const i18n = rosetta({
       logout: 'logout',
       share: 'Share',
     },
+    components: {
+      leftColumn: {
+        titleCreate: 'Create a new listing',
+        titleEdit: 'Edit your Listing',
+        storeName: 'Store Name',
+        authorName: 'Author Name',
+        itemName: 'Item Name',
+        itemDescription: 'Item Description',
+        price: 'Price (including VAT and shipment)',
+        image: 'Image',
+        contactEmail: 'Contact Email',
+        addressHere: 'Your address on one9',
+        buttonCreate: 'Create my Listing',
+        buttonUpdate: 'Update my Listing',
+      },
+    },
     // support(obj) {
     //   const hour = Math.floor(Math.random() * 3) + 9;
     //   let str = `For questions, I'm available on ${obj.date.toLocaleDateString()}`;
@@ -34,6 +50,22 @@ const i18n = rosetta({
       publishListing: 'Pubblica Inserzione',
       logout: 'Esci',
       share: 'Condividi',
+    },
+    components: {
+      leftColumn: {
+        titleCreate: 'Crea una nuova inserzione',
+        titleEdit: 'Aggiorna la tua inserzione',
+        storeName: 'Nome attività',
+        authorName: 'Il tuo nome',
+        itemName: 'Nome oggetto',
+        itemDescription: 'Descrizione oggetto',
+        price: 'Prezzo (comprensivo di IVA e spedizione)',
+        image: 'Immagine',
+        contactEmail: 'Email di contatto',
+        addressHere: 'Il tuo indirizzo su questo sito',
+        buttonCreate: 'Crea la mia inserzione',
+        buttonUpdate: 'Aggiorna la mia inserzione',
+      },
     },
   },
 });

@@ -38,8 +38,6 @@ const LoginModal = (isOpen, onOpen, onClose) => {
       })
       .catch((error) => {
         console.log(error);
-      })
-      .finally(() => {
         setTimeout(() => {
           setState({ ...newState, isLoading: false, error: true });
         }, 1000);

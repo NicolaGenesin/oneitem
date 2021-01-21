@@ -1,14 +1,18 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, {
+  useState, useEffect, useRef, useCallback,
+} from 'react';
 import {
   Input, InputGroup, Button, Heading, Modal, ModalOverlay, ModalContent,
   ModalBody, Alert, AlertIcon, FormLabel, InputRightElement, FormControl,
   ModalFooter, HStack, IconButton, VStack, Text, Popover, PopoverTrigger,
-  PopoverArrow, PopoverHeader, PopoverContent,
+  PopoverArrow, PopoverHeader, PopoverContent, AlertDescription,
 } from '@chakra-ui/react';
 import {
   MdLink,
 } from 'react-icons/md';
+import Router from 'next/router';
 import { copyToClipboard } from '../utils/document';
+import { isValidEmail } from '../utils/validation';
 import fire from '../config/fire-config';
 
 const CreateModal = (isOpen, onOpen, onClose, hostname, productId) => {
@@ -17,28 +21,41 @@ const CreateModal = (isOpen, onOpen, onClose, hostname, productId) => {
   const handleClick = () => setShow(!show);
 
   const [state, setState] = useState({ isLoading: false });
+  const stateRef = useRef();
+
+  stateRef.current = { ...state, productId };
+
   const updateState = (target, value) => {
     setState({ ...state, [target]: value });
   };
 
   const handleSubmit = (event) => {
-    setState({ ...state, isLoading: true });
+    const newState = stateRef.current;
+
+    if (newState.password !== newState.confirmPassword || !isValidEmail(newState.email)) {
+      setState({ ...newState, isLoading: false, error: true });
+      return;
+    }
+
+    setState({ ...newState, isLoading: true });
 
     event.preventDefault();
-    fire.auth().createUserWithEmailAndPassword(state.email, state.password)
+    fire.auth().createUserWithEmailAndPassword(newState.email, newState.password)
       .then((response) => {
         fire.firestore()
           .collection('users')
           .doc(response.user.uid)
-          .set({ productId });
+          .set({ productId: newState.productId });
+
+        setTimeout(() => {
+          onClose();
+          Router.push('/home');
+        }, 1000);
       })
       .catch((error) => {
         console.log(error);
-      })
-      .finally(() => {
         setTimeout(() => {
-          setState({ ...state, isLoading: false });
-          onClose();
+          setState({ ...newState, isLoading: false, error: true });
         }, 1000);
       });
   };
@@ -125,11 +142,21 @@ const CreateModal = (isOpen, onOpen, onClose, hostname, productId) => {
               <Input
                 pr="4.5rem"
                 type={show ? 'text' : 'password'}
+                onInput={(e) => updateState('confirmPassword', e.target.value)}
               />
             </InputGroup>
+
+            {state.error && (
+            <Alert status="error" rounded="md" mt="16px">
+              <AlertIcon />
+              <AlertDescription mr={2}>
+                The email may not be valid, the passwords could be too weak or not match.
+              </AlertDescription>
+            </Alert>
+            )}
           </ModalBody>
           <ModalFooter>
-            <Button isLoading={state.isLoading} colorScheme="teal" onClick={handleSubmit}>Create Account</Button>
+            <Button disabled={!state.email || !state.password || !state.confirmPassword} isLoading={state.isLoading} colorScheme="teal" onClick={handleSubmit}>Create Account</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

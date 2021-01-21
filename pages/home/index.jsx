@@ -15,7 +15,7 @@ import {
   AiOutlineEye,
 } from 'react-icons/ai';
 import fire from '../../config/fire-config';
-import useAuth from '../useAuth';
+import useAuth from '../../hooks/useAuth';
 import Loader from '../../components/Loader';
 import usei18n from '../../i18n/index';
 

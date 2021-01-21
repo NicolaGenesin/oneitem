@@ -4,7 +4,7 @@ import {
   ModalBody, Alert, AlertIcon, FormLabel, InputRightElement, FormControl,
   ModalFooter,
 } from '@chakra-ui/react';
-import fire from '../../../config/fire-config';
+import fire from '../config/fire-config';
 
 const CreateModal = (isOpen, onOpen, onClose, productId) => {
   const initialRef = React.useRef();

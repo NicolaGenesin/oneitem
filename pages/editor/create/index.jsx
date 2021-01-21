@@ -81,7 +81,7 @@ const CreatePage = (props) => {
 
   return (
     <div>
-      {CreateModal(isOpen, onOpen, onClose, state.id)}
+      {CreateModal(isOpen, onOpen, onClose, props.hostname, state.id)}
       <div className="container">
         <div className="left">
           <LeftColumn
@@ -120,7 +120,7 @@ const CreatePage = (props) => {
   );
 };
 
-CreatePage.getInitialProps = async function () {
+CreatePage.getInitialProps = async function ({ req }) {
   const user = fire.auth().currentUser;
 
   const getProduct = async () => {
@@ -144,11 +144,23 @@ CreatePage.getInitialProps = async function () {
     return { createMode: true };
   };
 
+  let initialProps = { createMode: true };
+
   if (user) {
-    return getProduct();
+    initialProps = getProduct();
   }
 
-  return { createMode: true };
+  if (req) {
+    const { host } = req.headers;
+
+    initialProps.hostname = host;
+  } else {
+    initialProps.hostname = 'error_refresh_page';
+  }
+
+  console.log(initialProps);
+
+  return initialProps;
 };
 
 export default CreatePage;

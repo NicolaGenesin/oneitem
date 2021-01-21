@@ -40,17 +40,20 @@ const CreatePage = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    const userId = fire.auth().currentUser.uid;
+    const data = {
+      ...state,
+      views: state.views || 0,
+      visible: true,
+    };
+
+    if (fire.auth().currentUser) {
+      data.userId = fire.auth().currentUser.uid;
+    }
 
     fire.firestore()
       .collection('products')
       .doc(state.id)
-      .set({
-        ...state,
-        views: state.views || 0,
-        visible: true,
-        userId,
-      })
+      .set(data)
       .catch((e) => {
         console.log(e);
       });
@@ -61,10 +64,12 @@ const CreatePage = (props) => {
         .doc(props.id)
         .delete();
 
-      fire.firestore()
-        .collection('users')
-        .doc(userId)
-        .set({ productId: state.id });
+      if (data.userId) {
+        fire.firestore()
+          .collection('users')
+          .doc(data.userId)
+          .set({ productId: state.id });
+      }
     }
 
     if (state.createMode) {
@@ -143,7 +148,7 @@ CreatePage.getInitialProps = async function () {
     return getProduct();
   }
 
-  return { error: true };
+  return { createMode: true };
 };
 
 export default CreatePage;

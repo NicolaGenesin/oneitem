@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Router, { useRouter } from 'next/router';
+import Router from 'next/router';
 import {
   Box,
   Button, Text, HStack, VStack, Stat, StatNumber,
@@ -103,8 +103,6 @@ const LoggedInHome = ({ hostname }) => {
 
   const [state, setState] = useState({});
 
-  console.log('locale', i18n.t('intro.welcome', { username: 'gigio' }));
-
   useEffect(() => {
     if (product) {
       setState(product);
@@ -124,31 +122,31 @@ const LoggedInHome = ({ hostname }) => {
           <Box bg="white" p="16px" rounded="md" boxShadow="2xl">
             <VStack>
               <Text mb="16px">
-                Hi
-                {' '}
-                {user.email}
+                {i18n.t('home.hi', { email: user.email })}
               </Text>
-              <Heading as="h2" size="xl">Your Listing</Heading>
+              <Heading as="h2" size="xl">
+                {i18n.t('home.title')}
+              </Heading>
               <HStack spacing="48px" mb="16px">
                 <VStack>
                   <Stat>
-                    <StatLabel>Items Sold</StatLabel>
+                    <StatLabel>{i18n.t('home.itemsSold')}</StatLabel>
                     <StatNumber align="center">0</StatNumber>
                   </Stat>
                 </VStack>
                 <VStack>
                   <Stat>
-                    <StatLabel>Page Views</StatLabel>
+                    <StatLabel>{i18n.t('home.pageViews')}</StatLabel>
                     <StatNumber align="center">{ state.views }</StatNumber>
                   </Stat>
                 </VStack>
               </HStack>
-              <Button w="300px" leftIcon={<MdPayment />} bg="activeButton" onClick={acceptPayments}>Accept Payments</Button>
-              <Button w="300px" leftIcon={<MdBuild />} bg="activeButton" onClick={editListing}>Edit Listing</Button>
-              {state.visible && <Button w="300px" leftIcon={<MdDelete />} bg="activeButton" onClick={(event) => { changeListingStatus(event, state, setState); }}>Hide Listing</Button>}
-              {!state.visible && <Button w="300px" leftIcon={<AiOutlineEye />} bg="activeButton" onClick={(event) => { changeListingStatus(event, state, setState); }}>Publish Listing</Button>}
-              <Button w="300px" mb="24px" leftIcon={<MdExitToApp />} bg="activeButton" onClick={logout}>Logout</Button>
-              <Heading as="h2" size="xl">Share</Heading>
+              <Button w="300px" leftIcon={<MdPayment />} bg="activeButton" onClick={acceptPayments}>{i18n.t('home.acceptPayments')}</Button>
+              <Button w="300px" leftIcon={<MdBuild />} bg="activeButton" onClick={editListing}>{i18n.t('home.editListing')}</Button>
+              {state.visible && <Button w="300px" leftIcon={<MdDelete />} bg="activeButton" onClick={(event) => { changeListingStatus(event, state, setState); }}>{i18n.t('home.hideListing')}</Button>}
+              {!state.visible && <Button w="300px" leftIcon={<AiOutlineEye />} bg="activeButton" onClick={(event) => { changeListingStatus(event, state, setState); }}>{i18n.t('home.publishListing')}</Button>}
+              <Button w="300px" mb="24px" leftIcon={<MdExitToApp />} bg="activeButton" onClick={logout}>{i18n.t('home.logout')}</Button>
+              <Heading as="h2" size="xl">{i18n.t('home.share')}</Heading>
               <Box>
                 <HStack w="300px" mb="16px">
                   <Input variant="filled" value={pageUrl} onChange={() => {}} />
@@ -174,17 +172,19 @@ const LoggedInHome = ({ hostname }) => {
                       onClick={() => { shareToTwitterHandler(pageUrl); }}
                     />
                     {
-              // TODO check http://www.sharelinkgenerator.com/
-              /* <IconButton
-              bg="activeButton"
-            aria-label="Pinterest share"
-            icon={<FaPinterest />}
-          /> */}
-                    {/* <IconButton
-                colorScheme="red"
-                aria-label="Instagram share"
-                icon={<FaInstagram />}
-              /> */}
+                    // TODO check http://www.sharelinkgenerator.com/
+                    /*
+                    <IconButton
+                      bg="activeButton"
+                      aria-label="Pinterest share"
+                      icon={<FaPinterest />}
+                    }
+                    <IconButton
+                      colorScheme="red"
+                      aria-label="Instagram share"
+                      icon={<FaInstagram />}/>
+                    */
+                    }
                   </HStack>
                 </Center>
               </Box>

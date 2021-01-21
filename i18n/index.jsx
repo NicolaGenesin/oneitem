@@ -3,27 +3,37 @@ import { useRouter } from 'next/router';
 
 const i18n = rosetta({
   en: {
-    intro: {
-      welcome: 'Welcome, {{username}}!',
-      text: 'I hope you find this useful.',
+    home: {
+      hi: 'Hi {{email}}!',
+      title: 'Your Listing',
+      itemsSold: 'Items Sold',
+      pageViews: 'Page Views',
+      acceptPayments: 'Accept Payments',
+      editListing: 'Edit Listing',
+      hideListing: 'Hide Listing',
+      publishListing: 'Publish Listing',
+      logout: 'logout',
+      share: 'Share',
     },
-    support(obj) {
-      const hour = Math.floor(Math.random() * 3) + 9;
-      let str = `For questions, I'm available on ${obj.date.toLocaleDateString()}`;
-      str += `, any time after ${hour}:00.`;
-      return str;
-    },
+    // support(obj) {
+    //   const hour = Math.floor(Math.random() * 3) + 9;
+    //   let str = `For questions, I'm available on ${obj.date.toLocaleDateString()}`;
+    //   str += `, any time after ${hour}:00.`;
+    //   return str;
+    // },
   },
   it: {
-    intro: {
-      welcome: 'Ciao beo, {{username}}!',
-      text: 'I hope you find this useful.',
-    },
-    support(obj) {
-      const hour = Math.floor(Math.random() * 3) + 9;
-      let str = `For questions, I'm available on ${obj.date.toLocaleDateString()}`;
-      str += `, any time after ${hour}:00.`;
-      return str;
+    home: {
+      hi: 'Ciao {{email}}!',
+      title: 'La tua inserzione',
+      itemsSold: 'Unità vendute',
+      pageViews: 'Visite pagina',
+      acceptPayments: 'Accetta Pagamenti',
+      editListing: 'Modifica l\'inserzione',
+      hideListing: 'Nascondi Inserzione',
+      publishListing: 'Pubblica Inserzione',
+      logout: 'Esci',
+      share: 'Condividi',
     },
   },
 });

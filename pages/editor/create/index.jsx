@@ -4,7 +4,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react';
 import ProductPage from '../../product-page';
-import CreateModal from './CreateModal';
+import CreateModal from '../../../components/CreateModal';
 import LeftColumn from '../../../components/LeftColumn';
 import fire from '../../../config/fire-config';
 

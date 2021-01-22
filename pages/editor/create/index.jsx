@@ -14,7 +14,7 @@ const placeholders = {
   contactPlaceholder: 'john@doe.com',
   namePlaceholder: 'The item name',
   pricePlaceholder: 20,
-  currencyPlaceholder: '$',
+  currencyPlaceholder: '€',
   descriptionPlaceholder: 'A very long description',
 };
 
@@ -99,11 +99,13 @@ const CreatePage = (props) => {
       <style jsx>
         {`
           .container {
-              height: auto;
+              height: 100vh;
               overflow: hidden;
           }
           
           .left {
+              height: 100vh;
+              overflow: scroll;
               width: 420px;
               float: left;
               background: #f6fdfd;

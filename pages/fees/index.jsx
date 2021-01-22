@@ -3,7 +3,7 @@ import {
   Box, Center, Heading, List, ListItem, ListIcon,
 } from '@chakra-ui/react';
 import { MdCheckCircle, MdInfoOutline } from 'react-icons/md';
-import Header from '../Header';
+import Header from '../../components/Header';
 
 function Main() {
   return (

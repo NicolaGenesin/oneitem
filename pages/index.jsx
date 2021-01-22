@@ -49,7 +49,7 @@ function Main() {
               </ListItem>
               <ListItem>
                 <ListIcon as={MdLink} color="green.500" />
-                You will be given a link you can share on your social platforms (Example).
+                You will be given a link you can share on your social platforms.
               </ListItem>
               <ListItem>
                 <ListIcon as={MdExtension} color="green.500" />

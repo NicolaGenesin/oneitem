@@ -12,48 +12,44 @@ const MenuItems = ({ children }) => (
 );
 
 const Header = (props) => {
-  const [show, setShow] = React.useState(false);
-  const handleToggle = () => setShow(!show);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <Flex
       as="nav"
       align="center"
-      justify="space-between"
       wrap="wrap"
       padding="1.5rem"
-      bg="teal.500"
+      bg="teal.900"
       color="white"
       {...props}
     >
       {LoginModal(isOpen, onOpen, onClose)}
-
-      <Link href="/">
-        <Heading as="h1" size="lg" letterSpacing="-.1rem">
-          One9
-        </Heading>
-      </Link>
-
-      <Center>
-        <HStack
-          divider={<StackDivider borderColor="gray.200" />}
-          spacing={10}
-          align="stretch"
-        >
-          <Link href="/about">
+      <Box w="100%">
+        <Center>
+          <HStack
+            divider={<StackDivider borderColor="gray.200" />}
+            spacing={10}
+            align="stretch"
+          >
+            <Link href="/">
+              <Heading as="h1" size="lg" letterSpacing="-.1rem">
+                One9
+              </Heading>
+            </Link>
+            {/* <Link href="/about">
             Examples
-          </Link>
-          <Link href="/fees">
-            Fees
-          </Link>
-        </HStack>
-      </Center>
-
-      <Box>
-        <Button bg="transparent" border="1px" onClick={onOpen}>
-          Manage your Store
-        </Button>
+          </Link> */}
+            <Center>
+              <Link href="/fees">
+                Fees
+              </Link>
+            </Center>
+            <Button bg="transparent" border="1px" onClick={onOpen}>
+              Manage your Store
+            </Button>
+          </HStack>
+        </Center>
       </Box>
     </Flex>
   );

@@ -37,33 +37,33 @@ const LeftColumn = ({
         </HStack>
         <Box w="380px">
           <Text mb="8px">{i18n.t('components.leftColumn.storeName')}</Text>
-          <Input onInput={(e) => updateState('storeName', e.target.value)} placeholder={placeholders.storeNamePlaceholder} value={product.storeName} />
+          <Input bg="white" onInput={(e) => updateState('storeName', e.target.value)} placeholder={placeholders.storeNamePlaceholder} value={product.storeName} />
         </Box>
 
         <Box w="380px">
           <Text mb="8px">{i18n.t('components.leftColumn.authorName')}</Text>
-          <Input onInput={(e) => updateState('author', e.target.value)} placeholder={placeholders.authorPlaceholder} value={product.author} />
+          <Input bg="white" onInput={(e) => updateState('author', e.target.value)} placeholder={placeholders.authorPlaceholder} value={product.author} />
         </Box>
 
         <Box w="380px">
           <Text mb="8px">{i18n.t('components.leftColumn.itemName')}</Text>
-          <Input onInput={(e) => updateState('name', e.target.value)} placeholder={placeholders.namePlaceholder} value={product.name} />
+          <Input bg="white" onInput={(e) => updateState('name', e.target.value)} placeholder={placeholders.namePlaceholder} value={product.name} />
         </Box>
 
         <Box w="380px">
           <Text mb="8px">{i18n.t('components.leftColumn.itemDescription')}</Text>
-          <Textarea h="150px" onInput={(e) => updateState('description', e.target.value)} placeholder={placeholders.descriptionPlaceholder} value={product.description} />
+          <Textarea bg="white" h="150px" onInput={(e) => updateState('description', e.target.value)} placeholder={placeholders.descriptionPlaceholder} value={product.description} />
         </Box>
 
         <Box w="380px">
           <Text mb="8px">{i18n.t('components.leftColumn.price')}</Text>
           <InputGroup>
-            <Select placeholder={placeholders.currencyPlaceholder} maxW="65px" mr="8px">
-              <option value="option1">€</option>
-              <option value="option2">$</option>
-              <option value="option3">£</option>
+            <Select bg="white" value={product.currency} maxW="65px" mr="8px" onInput={(e) => updateState('currency', e.target.value)}>
+              <option value="€">€</option>
+              <option value="$">$</option>
+              <option value="£">£</option>
             </Select>
-            <NumberInput defaultValue={20} min={1} max={50000} precision={2} step={0.2} w="100%">
+            <NumberInput bg="white" defaultValue={20} min={1} max={50000} precision={2} step={0.2} w="100%">
               <NumberInputField onInput={(e) => updateState('price', e.target.value)} value={product.price} />
             </NumberInput>
           </InputGroup>
@@ -128,7 +128,7 @@ const LeftColumn = ({
 
         <Box w="380px">
           <Text mb="8px">{i18n.t('components.leftColumn.contactEmail')}</Text>
-          <Input placeholder={placeholders.contactPlaceholder} onInput={(e) => updateState('contact', e.target.value)} value={product.contact} />
+          <Input bg="white" placeholder={placeholders.contactPlaceholder} onInput={(e) => updateState('contact', e.target.value)} value={product.contact} />
         </Box>
 
         <Box w="380px">
@@ -136,6 +136,7 @@ const LeftColumn = ({
           <InputGroup>
             <InputLeftAddon children="www.one9.com/" />
             <Input
+              bg="white"
               type="tel"
               placeholder="turtle-teapot"
               value={product.id}

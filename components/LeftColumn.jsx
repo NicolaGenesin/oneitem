@@ -9,12 +9,25 @@ import {
 import {
   MdKeyboardBackspace,
 } from 'react-icons/md';
+import ImageUploading from 'react-images-uploading';
 import usei18n from '../i18n/index';
+import { storage } from '../config/fire-config';
 
 const LeftColumn = ({
   placeholders, updateState, handleSubmit, createMode, product,
 }) => {
   const i18n = usei18n();
+
+  const [images, setImages] = React.useState([]);
+  const maxNumber = 1;
+
+  const onChange = (imageList, addUpdateIndex) => {
+    // data for submit
+    console.log(imageList, addUpdateIndex);
+    setImages(imageList);
+  };
+
+  console.log(images);
 
   return (
     <Box>
@@ -69,12 +82,59 @@ const LeftColumn = ({
 
         <Box w="460px">
           <Text mb="8px">{i18n.t('components.leftColumn.image')}</Text>
-          <Image
+          {/* <Image
             fallbackSrc="https://via.placeholder.com/450"
             boxSize="100px"
             objectFit="cover"
             src="https://assets.catawiki.nl/assets/2019/12/16/a/8/c/a8ccba43-31ee-4d24-a509-6d36ee2d7e35.jpg"
-          />
+          /> */}
+          <ImageUploading
+            multiple
+            value={images}
+            onChange={onChange}
+            maxNumber={maxNumber}
+            dataURLKey="data_url"
+          >
+            {({
+              imageList,
+              onImageUpload,
+              onImageRemoveAll,
+              onImageUpdate,
+              onImageRemove,
+              isDragging,
+              dragProps,
+            }) => (
+              // write your building UI
+              <div className="upload__image-wrapper">
+                {!imageList.length
+                && (
+                <Button
+                  width="100px"
+                  height="100px"
+                  colorScheme="teal"
+                  variant="outline"
+                  style={isDragging ? { color: 'red' } : undefined}
+                  onClick={onImageUpload}
+                  {...dragProps}
+                >
+                  Click or
+                  <br />
+                  Drop here
+                </Button>
+                )}
+                {/* <Button onClick={onImageRemoveAll}>Remove all images</Button> */}
+                {imageList.map((image, index) => (
+                  <div key={index} className="image-item">
+                    <Image src={image.data_url} alt="Image to upload" width="100px" height="100px" rounded="md" objectFit="cover" mb="16px" />
+                    <div className="image-item__btn-wrapper">
+                      {/* <Button colorScheme="teal" variant="outline" mr="16px" onClick={() => onImageUpdate(index)}>Update</Button> */}
+                      <Button colorScheme="teal" variant="outline" onClick={() => onImageRemove(index)}>Remove</Button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </ImageUploading>
         </Box>
 
         <Box w="460px">

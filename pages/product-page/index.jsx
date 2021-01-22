@@ -23,7 +23,7 @@ export default function ProductPage({ product, preview }) {
   return (
     <Box>
       <Center>
-        <Box mb="24px">
+        <Box m="24px">
           <Heading as="h2" size="xl">
             {product.storeName}
             {' '}
@@ -52,7 +52,8 @@ export default function ProductPage({ product, preview }) {
                 rounded="md"
                 boxSize="260px"
                 objectFit="cover"
-                src={product.image}
+                src={product.images.length && product.images[0].data_url}
+                fallbackSrc="https://via.placeholder.com/1000"
               />
             </Box>
             <Box maxW="400px">

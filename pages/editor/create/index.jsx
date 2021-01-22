@@ -15,23 +15,22 @@ const placeholders = {
   namePlaceholder: 'The item name',
   pricePlaceholder: 20,
   currencyPlaceholder: '$',
-  imagePlaceholder: 'https://assets.catawiki.nl/assets/2019/12/16/a/8/c/a8ccba43-31ee-4d24-a509-6d36ee2d7e35.jpg',
   descriptionPlaceholder: 'A very long description',
 };
 
-const product = {
+const defaultProductState = {
   storeName: placeholders.storeNamePlaceholder,
   author: '',
   contact: placeholders.contactPlaceholder,
   name: placeholders.namePlaceholder,
   price: placeholders.pricePlaceholder,
   currency: placeholders.currencyPlaceholder,
-  image: placeholders.imagePlaceholder,
+  images: [],
   description: placeholders.descriptionPlaceholder,
 };
 
 const CreatePage = (props) => {
-  const [state, setState] = useState(props || product);
+  const [state, setState] = useState(props);
   const updateState = (target, value) => {
     setState({ ...state, [target]: value });
   };
@@ -87,6 +86,7 @@ const CreatePage = (props) => {
           <LeftColumn
             product={state}
             placeholders={placeholders}
+            state={state}
             updateState={updateState}
             handleSubmit={handleSubmit}
             createMode={state.createMode}
@@ -104,9 +104,9 @@ const CreatePage = (props) => {
           }
           
           .left {
-              width: 500px;
+              width: 420px;
               float: left;
-              background: #e8f6fe;
+              background: #f6fdfd;
           }
           
           .right {
@@ -144,7 +144,7 @@ CreatePage.getInitialProps = async function ({ req }) {
     return { createMode: true };
   };
 
-  let initialProps = { createMode: true };
+  let initialProps = { createMode: true, ...defaultProductState };
 
   if (user) {
     initialProps = getProduct();

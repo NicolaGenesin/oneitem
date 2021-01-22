@@ -14,25 +14,14 @@ import usei18n from '../i18n/index';
 import { storage } from '../config/fire-config';
 
 const LeftColumn = ({
-  placeholders, updateState, handleSubmit, createMode, product,
+  placeholders, state, updateState, handleSubmit, createMode, product,
 }) => {
   const i18n = usei18n();
-
-  const [images, setImages] = React.useState([]);
-  const maxNumber = 1;
-
-  const onChange = (imageList, addUpdateIndex) => {
-    // data for submit
-    console.log(imageList, addUpdateIndex);
-    setImages(imageList);
-  };
-
-  console.log(images);
 
   return (
     <Box>
       <VStack spacing="24px" mt="24px" mb="24px">
-        <HStack w="460px">
+        <HStack w="380px">
           <Link href={createMode ? '/' : '/home'}>
             <IconButton
               variant="ghost"
@@ -46,27 +35,27 @@ const LeftColumn = ({
             {createMode ? i18n.t('components.leftColumn.titleCreate') : i18n.t('components.leftColumn.titleEdit')}
           </Heading>
         </HStack>
-        <Box w="460px">
+        <Box w="380px">
           <Text mb="8px">{i18n.t('components.leftColumn.storeName')}</Text>
           <Input onInput={(e) => updateState('storeName', e.target.value)} placeholder={placeholders.storeNamePlaceholder} value={product.storeName} />
         </Box>
 
-        <Box w="460px">
+        <Box w="380px">
           <Text mb="8px">{i18n.t('components.leftColumn.authorName')}</Text>
           <Input onInput={(e) => updateState('author', e.target.value)} placeholder={placeholders.authorPlaceholder} value={product.author} />
         </Box>
 
-        <Box w="460px">
+        <Box w="380px">
           <Text mb="8px">{i18n.t('components.leftColumn.itemName')}</Text>
           <Input onInput={(e) => updateState('name', e.target.value)} placeholder={placeholders.namePlaceholder} value={product.name} />
         </Box>
 
-        <Box w="460px">
+        <Box w="380px">
           <Text mb="8px">{i18n.t('components.leftColumn.itemDescription')}</Text>
           <Textarea h="150px" onInput={(e) => updateState('description', e.target.value)} placeholder={placeholders.descriptionPlaceholder} value={product.description} />
         </Box>
 
-        <Box w="460px">
+        <Box w="380px">
           <Text mb="8px">{i18n.t('components.leftColumn.price')}</Text>
           <InputGroup>
             <Select placeholder={placeholders.currencyPlaceholder} maxW="65px" mr="8px">
@@ -80,7 +69,7 @@ const LeftColumn = ({
           </InputGroup>
         </Box>
 
-        <Box w="460px">
+        <Box w="380px">
           <Text mb="8px">{i18n.t('components.leftColumn.image')}</Text>
           {/* <Image
             fallbackSrc="https://via.placeholder.com/450"
@@ -90,9 +79,9 @@ const LeftColumn = ({
           /> */}
           <ImageUploading
             multiple
-            value={images}
-            onChange={onChange}
-            maxNumber={maxNumber}
+            value={state.images}
+            onChange={(imagesList) => updateState('images', imagesList)}
+            maxNumber={1}
             dataURLKey="data_url"
           >
             {({
@@ -137,12 +126,12 @@ const LeftColumn = ({
           </ImageUploading>
         </Box>
 
-        <Box w="460px">
+        <Box w="380px">
           <Text mb="8px">{i18n.t('components.leftColumn.contactEmail')}</Text>
           <Input placeholder={placeholders.contactPlaceholder} onInput={(e) => updateState('contact', e.target.value)} value={product.contact} />
         </Box>
 
-        <Box w="460px">
+        <Box w="380px">
           <Text mb="8px">{i18n.t('components.leftColumn.addressHere')}</Text>
           <InputGroup>
             <InputLeftAddon children="www.one9.com/" />

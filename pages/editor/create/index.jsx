@@ -6,7 +6,7 @@ import {
 import ProductPage from '../../product-page';
 import CreateModal from '../../../components/CreateModal';
 import LeftColumn from '../../../components/LeftColumn';
-import fire from '../../../config/fire-config';
+import fire, { storage } from '../../../config/fire-config';
 
 const placeholders = {
   storeNamePlaceholder: 'Your Store Name',
@@ -40,7 +40,14 @@ const CreatePage = (props) => {
     event.preventDefault();
 
     const data = {
-      ...state,
+      id: state.id,
+      author: state.author,
+      contact: state.contact,
+      currency: state.currency,
+      description: state.description,
+      name: state.name,
+      price: state.price,
+      storeName: state.storeName,
       views: state.views || 0,
       visible: true,
     };
@@ -49,26 +56,63 @@ const CreatePage = (props) => {
       data.userId = fire.auth().currentUser.uid;
     }
 
-    fire.firestore()
-      .collection('products')
-      .doc(state.id)
-      .set(data)
-      .catch((e) => {
-        console.log(e);
-      });
-
-    if (props.id !== state.id) {
+    if (state.images[0].data_url.startsWith('https')) {
       fire.firestore()
         .collection('products')
-        .doc(props.id)
-        .delete();
+        .doc(state.id)
+        .set({ ...data, images: state.images })
+        .catch((e) => {
+          console.log(e);
+        });
 
-      if (data.userId) {
+      if (props.id !== state.id) {
         fire.firestore()
-          .collection('users')
-          .doc(data.userId)
-          .set({ productId: state.id });
+          .collection('products')
+          .doc(props.id)
+          .delete();
+
+        if (data.userId) {
+          fire.firestore()
+            .collection('users')
+            .doc(data.userId)
+            .set({ productId: state.id });
+        }
       }
+    } else {
+      const uploadTask = storage
+        .ref(`/${state.id}`)
+        .child('product_image')
+        .putString(state.images[0].data_url.split(',')[1], 'base64', { contentType: 'image/jpg' });
+
+      uploadTask.on('state_changed', // or 'state_changed'
+        (snapshot) => {
+        }, (error) => {
+          console.log(error);
+        }, async () => {
+          const data_url = await uploadTask.snapshot.ref.getDownloadURL();
+
+          fire.firestore()
+            .collection('products')
+            .doc(state.id)
+            .set({ ...data, images: [{ data_url }] })
+            .catch((e) => {
+              console.log(e);
+            });
+
+          if (props.id !== state.id) {
+            fire.firestore()
+              .collection('products')
+              .doc(props.id)
+              .delete();
+
+            if (data.userId) {
+              fire.firestore()
+                .collection('users')
+                .doc(data.userId)
+                .set({ productId: state.id });
+            }
+          }
+        });
     }
 
     if (state.createMode) {

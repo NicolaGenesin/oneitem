@@ -11,7 +11,6 @@ import {
 } from 'react-icons/md';
 import ImageUploading from 'react-images-uploading';
 import usei18n from '../i18n/index';
-import { storage } from '../config/fire-config';
 
 const LeftColumn = ({
   placeholders, state, updateState, handleSubmit, createMode, product,

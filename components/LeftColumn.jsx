@@ -17,6 +17,14 @@ const LeftColumn = ({
 }) => {
   const i18n = usei18n();
 
+  const isDisabled = !state.author
+    || !state.contact
+    || !state.description
+    || !state.name
+    || !state.storeName
+    || !state.id
+    || !state.images.length;
+
   return (
     <Box>
       <VStack spacing="24px" mt="24px" mb="24px">
@@ -147,8 +155,8 @@ const LeftColumn = ({
         </Box>
 
         <HStack>
-          {createMode && <Button colorScheme="blue" onClick={handleSubmit}>{i18n.t('components.leftColumn.buttonCreate')}</Button>}
-          {!createMode && <Button colorScheme="blue" onClick={handleSubmit}>{i18n.t('components.leftColumn.buttonUpdate')}</Button>}
+          {createMode && <Button disabled={isDisabled} colorScheme="blue" onClick={handleSubmit}>{i18n.t('components.leftColumn.buttonCreate')}</Button>}
+          {!createMode && <Button disabled={isDisabled} colorScheme="blue" onClick={handleSubmit}>{i18n.t('components.leftColumn.buttonUpdate')}</Button>}
         </HStack>
       </VStack>
     </Box>

@@ -3,23 +3,8 @@ import {
   Text, VStack, Box, Image, Button, Heading,
   Divider, HStack, Center, Badge,
 } from '@chakra-ui/react';
-import { useAppContext, updateContext } from '../../context/state';
 
 export default function ProductPage({ product, preview }) {
-  if (!product) {
-    product = {
-      id: 1,
-      storeName: 'Biggie LTD',
-      author: 'Marco Schiorlin',
-      contact: 'john@gmail.com',
-      name: 'Teapot',
-      price: 10.226,
-      currency: '$',
-      image: 'https://assets.catawiki.nl/assets/2019/12/16/a/8/c/a8ccba43-31ee-4d24-a509-6d36ee2d7e35.jpg',
-      description: 'Cast iron teapot let your drink water be healthy. TOWA cast iron teapot can improve the water quality by releasing iron ions and absorbing chloride ions in water. So the water after boiled by our cast iron teapot can be more sweeter and softer, which is suitable for all kinds of tea making or other drinks making.',
-    };
-  }
-
   return (
     <Box>
       <Center>
@@ -34,7 +19,7 @@ export default function ProductPage({ product, preview }) {
 
       <Divider orientation="horizontal" />
 
-      <Center mt="128px">
+      <Center mt="10%">
         <Box>
           {product.author && (
           <Center>
@@ -52,7 +37,7 @@ export default function ProductPage({ product, preview }) {
                 rounded="md"
                 boxSize="260px"
                 objectFit="cover"
-                src={product.images.length && product.images[0].data_url}
+                src={product.images && product.images.length && product.images[0].data_url}
                 fallbackSrc="https://via.placeholder.com/1000"
               />
             </Box>

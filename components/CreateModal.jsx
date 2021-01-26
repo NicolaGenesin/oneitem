@@ -120,7 +120,7 @@ const CreateModal = (isOpen, onOpen, onClose, hostname, productId) => {
 
             <FormControl>
               <FormLabel mt="16px">Email</FormLabel>
-              <Input ref={initialRef} placeholder="john.doe@gmail.com" onInput={(e) => updateState('email', e.target.value)} />
+              <Input ref={initialRef} placeholder="john@gmail.com" onInput={(e) => updateState('email', e.target.value)} />
             </FormControl>
 
             <FormLabel mt="16px">Password (6 characters minumum)</FormLabel>

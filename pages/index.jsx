@@ -10,8 +10,11 @@ import {
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import fire from '../config/fire-config';
+import usei18n from '../i18n/index';
 
 function Main() {
+  const i18n = usei18n();
+
   useEffect(() => {
     if (fire) {
       if (fire.auth().currentUser) {
@@ -32,39 +35,33 @@ function Main() {
       <Center mt="10%">
         <Box maxW="50%">
           <Heading align="center">
-            Sell the One Product
+            {i18n.t('homeSignedOut.titlePartOne')}
             <br />
-            that identifies yourself.
+            {i18n.t('homeSignedOut.titlePartTwo')}
           </Heading>
           <Box mt="48px">
             <Text align="center">
-              One9 is an online store, where people come together to make, sell,
-              buy and collect unique items. Unlike others, we only let you sell the one
-              piece you think represents you the most.
+              {i18n.t('homeSignedOut.description')}
             </Text>
             <List spacing={3} align="center" mt="48px">
               <ListItem>
                 <ListIcon as={MdCheckCircle} color="green.500" />
-                It takes less than a minute to have your One9 website up and running.
+                {i18n.t('homeSignedOut.listItem1')}
               </ListItem>
               <ListItem>
                 <ListIcon as={MdLink} color="green.500" />
-                You will be given a link you can share on your social platforms.
+                {i18n.t('homeSignedOut.listItem2')}
               </ListItem>
               <ListItem>
                 <ListIcon as={MdExtension} color="green.500" />
-                You can decide to accept payments at any time.
-              </ListItem>
-              <ListItem>
-                <ListIcon as={MdGroup} color="green.500" />
-                We only store data about the item you are selling.
+                {i18n.t('homeSignedOut.listItem3')}
               </ListItem>
             </List>
           </Box>
           <Center mt="48px" mb="148px">
             <Link href="/editor/create">
               <Button colorScheme="teal" size="lg">
-                Create your Store
+                {i18n.t('homeSignedOut.buttonCreate')}
               </Button>
             </Link>
           </Center>

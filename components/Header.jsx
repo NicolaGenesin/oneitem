@@ -2,7 +2,7 @@ import React from 'react';
 import {
   Box, Heading, Flex, Text, Button, Center, Link, HStack, StackDivider, useDisclosure,
 } from '@chakra-ui/react';
-
+import usei18n from '../i18n/index';
 import LoginModal from './LoginModal';
 
 const MenuItems = ({ children }) => (
@@ -12,6 +12,7 @@ const MenuItems = ({ children }) => (
 );
 
 const Header = (props) => {
+  const i18n = usei18n();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
@@ -42,11 +43,11 @@ const Header = (props) => {
           </Link> */}
             <Center>
               <Link href="/fees">
-                Fees
+                {i18n.t('header.fees')}
               </Link>
             </Center>
             <Button bg="transparent" border="1px" onClick={onOpen}>
-              Manage your Store
+              {i18n.t('header.manage')}
             </Button>
           </HStack>
         </Center>

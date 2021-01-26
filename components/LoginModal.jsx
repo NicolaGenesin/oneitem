@@ -5,11 +5,13 @@ import Router from 'next/router';
 import {
   Input, InputGroup, Button, Heading, Modal, ModalOverlay, ModalContent,
   ModalBody, FormLabel, InputRightElement, FormControl, ModalFooter,
-  Alert, AlertIcon, AlertDescription, AlertTitle,
+  Alert, AlertIcon, AlertDescription, Text, Link, Box,
 } from '@chakra-ui/react';
 import fire from '../config/fire-config';
+import usei18n from '../i18n/index';
 
 const LoginModal = (isOpen, onOpen, onClose) => {
+  const i18n = usei18n();
   const initialRef = React.useRef();
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
@@ -69,13 +71,11 @@ const LoginModal = (isOpen, onOpen, onClose) => {
         <ModalOverlay />
         <ModalContent>
           <ModalBody pb={6}>
-            <Heading size="md" mt="16px" mb="16px">Welcome Back!</Heading>
-
+            <Heading size="md" mt="16px" mb="16px">{i18n.t('loginModal.title')}</Heading>
             <FormControl>
               <FormLabel mt="16px">Email</FormLabel>
-              <Input ref={initialRef} placeholder="john.doe@gmail.com" onInput={(e) => updateState('email', e.target.value)} />
+              <Input ref={initialRef} placeholder="john@gmail.com" onInput={(e) => updateState('email', e.target.value)} />
             </FormControl>
-
             <FormLabel mt="16px">Password</FormLabel>
             <InputGroup size="md">
               <Input
@@ -83,9 +83,9 @@ const LoginModal = (isOpen, onOpen, onClose) => {
                 pr="4.5rem"
                 type={show ? 'text' : 'password'}
               />
-              <InputRightElement width="4.5rem">
+              <InputRightElement width="6rem">
                 <Button h="1.75rem" size="sm" onClick={handleClick}>
-                  {show ? 'Hide' : 'Show'}
+                  {show ? i18n.t('loginModal.hidePassword') : i18n.t('loginModal.showPassword')}
                 </Button>
               </InputRightElement>
             </InputGroup>
@@ -93,13 +93,20 @@ const LoginModal = (isOpen, onOpen, onClose) => {
             <Alert status="error" rounded="md" mt="16px">
               <AlertIcon />
               <AlertDescription mr={2}>
-                The email address or password is incorrect.
+                {i18n.t('loginModal.error')}
               </AlertDescription>
             </Alert>
             )}
+            <Box mt="24px">
+              <Link href="/editor/create">
+                <Text fontSize="sm">
+                  {i18n.t('loginModal.createLink')}
+                </Text>
+              </Link>
+            </Box>
           </ModalBody>
           <ModalFooter>
-            <Button isLoading={state.isLoading} colorScheme="teal" onClick={(e) => handleSubmit(e, state)}>Login</Button>
+            <Button disabled={!state.email || !state.password} isLoading={state.isLoading} colorScheme="teal" onClick={(e) => handleSubmit(e, state)}>{i18n.t('loginModal.login')}</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

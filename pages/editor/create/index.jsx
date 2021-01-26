@@ -3,7 +3,7 @@ import Router from 'next/router';
 import {
   useDisclosure,
 } from '@chakra-ui/react';
-import ProductPage from '../../product-page';
+import ProductPage from '../../product';
 import CreateModal from '../../../components/CreateModal';
 import LeftColumn from '../../../components/LeftColumn';
 import fire, { storage } from '../../../config/fire-config';
@@ -149,7 +149,7 @@ const CreatePage = (props) => {
           
           .left {
               height: 100vh;
-              overflow: scroll;
+              overflow-y: scroll;
               width: 420px;
               float: left;
               background: #f6fdfd;
@@ -159,6 +159,26 @@ const CreatePage = (props) => {
               float: none;
               width: auto;
               overflow: hidden;
+          }
+
+          /* width */
+          ::-webkit-scrollbar {
+            width: 5px;
+          }
+
+          /* Track */
+          ::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+          }
+          
+          /* Handle */
+          ::-webkit-scrollbar-thumb {
+            background: #888; 
+          }
+
+          /* Handle on hover */
+          ::-webkit-scrollbar-thumb:hover {
+            background: #555; 
           }
         `}
       </style>

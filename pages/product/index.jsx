@@ -8,6 +8,10 @@ import usei18n from '../../i18n/index';
 export default function ProductPage({ product, preview }) {
   const i18n = usei18n();
 
+  if (!product) {
+    return <div />;
+  }
+
   return (
     <Box>
       <Center>

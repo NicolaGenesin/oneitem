@@ -4,6 +4,8 @@ import {
   Box,
   Button, Text, HStack, VStack, Stat, StatNumber,
   Heading, StatLabel, Center, IconButton, Input,
+  Popover, PopoverTrigger, PopoverContent, PopoverHeader,
+  PopoverBody, PopoverArrow, PopoverCloseButton,
 } from '@chakra-ui/react';
 import {
   MdBuild, MdDelete, MdPayment, MdExitToApp, MdLink,
@@ -107,7 +109,20 @@ const LoggedInHome = () => {
                   </Stat>
                 </VStack>
               </HStack>
-              <Button w="300px" leftIcon={<MdPayment />} bg="activeButton" color="black" onClick={acceptPayments}>{i18n.t('home.acceptPayments')}</Button>
+              <Popover>
+                <PopoverTrigger>
+                  <Button w="300px" leftIcon={<MdPayment />} bg="activeButton" color="black">{i18n.t('home.acceptPayments')}</Button>
+                </PopoverTrigger>
+                <PopoverContent>
+                  <PopoverArrow />
+                  <PopoverCloseButton />
+                  <PopoverHeader>Not implemented / Non implementato</PopoverHeader>
+                  <PopoverBody>
+                    From here you will create an account with Stripe so you can receive money.
+                    After this is done, people will be able to buy your product.
+                  </PopoverBody>
+                </PopoverContent>
+              </Popover>
               <Button w="300px" leftIcon={<MdBuild />} bg="activeButton" color="black" onClick={editListing}>{i18n.t('home.editListing')}</Button>
               {state.visible && <Button w="300px" leftIcon={<MdDelete />} bg="activeButton" color="black" onClick={(event) => { changeListingStatus(event, state, setState); }}>{i18n.t('home.hideListing')}</Button>}
               {!state.visible && <Button w="300px" leftIcon={<AiOutlineEye />} bg="activeButton" color="black" onClick={(event) => { changeListingStatus(event, state, setState); }}>{i18n.t('home.publishListing')}</Button>}

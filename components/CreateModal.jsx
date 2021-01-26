@@ -14,8 +14,10 @@ import Router from 'next/router';
 import { copyToClipboard } from '../utils/document';
 import { isValidEmail } from '../utils/validation';
 import fire from '../config/fire-config';
+import usei18n from '../i18n/index';
 
 const CreateModal = (isOpen, onOpen, onClose, hostname, productId) => {
+  const i18n = usei18n();
   const initialRef = React.useRef();
   const [show, setShow] = React.useState(false);
   const handleClick = () => setShow(!show);
@@ -87,10 +89,10 @@ const CreateModal = (isOpen, onOpen, onClose, hostname, productId) => {
         <ModalOverlay />
         <ModalContent>
           <ModalBody pb={6}>
-            <Heading size="md" mt="16px" mb="16px">Done!</Heading>
+            <Heading size="md" mt="16px" mb="16px">{i18n.t('createModal.title')}</Heading>
             <VStack>
               <Text w="100%">
-                Your page is now available at this page!
+                {i18n.t('createModal.pageAvalTitle')}
               </Text>
               <HStack w="100%">
                 <Input variant="filled" value={pageUrl} onChange={() => {}} />
@@ -105,39 +107,34 @@ const CreateModal = (isOpen, onOpen, onClose, hostname, productId) => {
                   </PopoverTrigger>
                   <PopoverContent w="230px">
                     <PopoverArrow />
-                    <PopoverHeader>Copied to your clipboard!</PopoverHeader>
+                    <PopoverHeader>{i18n.t('createModal.copiedToClipboard')}</PopoverHeader>
                   </PopoverContent>
                 </Popover>
               </HStack>
             </VStack>
-            <Heading size="md" mt="16px" mb="16px">What's next?</Heading>
+            <Heading size="md" mt="16px" mb="16px">{i18n.t('createModal.whatsNext')}</Heading>
             <Alert status="info" rounded="md">
               <AlertIcon />
-              If you want to be able to accept
-              payments or edit your listing, please
-              create an Account.
+              {i18n.t('createModal.alertInfo')}
             </Alert>
-
             <FormControl>
-              <FormLabel mt="16px">Email</FormLabel>
+              <FormLabel mt="16px">{i18n.t('createModal.email')}</FormLabel>
               <Input ref={initialRef} placeholder="john@gmail.com" onInput={(e) => updateState('email', e.target.value)} />
             </FormControl>
-
-            <FormLabel mt="16px">Password (6 characters minumum)</FormLabel>
+            <FormLabel mt="16px">{i18n.t('createModal.password')}</FormLabel>
             <InputGroup size="md">
               <Input
                 pr="4.5rem"
                 type={show ? 'text' : 'password'}
                 onInput={(e) => updateState('password', e.target.value)}
               />
-              <InputRightElement width="4.5rem">
+              <InputRightElement width="5.5rem">
                 <Button h="1.75rem" size="sm" onClick={handleClick}>
-                  {show ? 'Hide' : 'Show'}
+                  {show ? i18n.t('createModal.hidePassword') : i18n.t('createModal.showPassword')}
                 </Button>
               </InputRightElement>
             </InputGroup>
-
-            <FormLabel mt="16px">Confirm Password</FormLabel>
+            <FormLabel mt="16px">{i18n.t('createModal.confirmPassword')}</FormLabel>
             <InputGroup size="md">
               <Input
                 pr="4.5rem"
@@ -145,18 +142,17 @@ const CreateModal = (isOpen, onOpen, onClose, hostname, productId) => {
                 onInput={(e) => updateState('confirmPassword', e.target.value)}
               />
             </InputGroup>
-
             {state.error && (
             <Alert status="error" rounded="md" mt="16px">
               <AlertIcon />
               <AlertDescription mr={2}>
-                The email may not be valid, the passwords could be too weak or not match.
+                {i18n.t('createModal.error')}
               </AlertDescription>
             </Alert>
             )}
           </ModalBody>
           <ModalFooter>
-            <Button disabled={!state.email || !state.password || !state.confirmPassword} isLoading={state.isLoading} colorScheme="teal" onClick={handleSubmit}>Create Account</Button>
+            <Button disabled={!state.email || !state.password || !state.confirmPassword} isLoading={state.isLoading} colorScheme="teal" onClick={handleSubmit}>{i18n.t('createModal.createAccount')}</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

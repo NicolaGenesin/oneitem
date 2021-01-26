@@ -1,12 +1,15 @@
 import React, { useEffect } from 'react';
 import Router from 'next/router';
 import {
-  Box, Divider, Center, Link,
+  Box, Divider, Center, Link, Text,
 } from '@chakra-ui/react';
 import ProductPage from './product';
 import fire from '../config/fire-config';
+import usei18n from '../i18n/index';
 
 const PublicProductPage = (props) => {
+  const i18n = usei18n();
+
   useEffect(() => {
     if (!props.id) {
       Router.push('/404');
@@ -19,10 +22,16 @@ const PublicProductPage = (props) => {
       <Divider orientation="horizontal" />
       <Box backgroundColor="gray.900">
         <Center p="16px" color="white">
-          Page created with
-          <Link ml="8px" href="/">
-            one9.com
-          </Link>
+          <Center>
+            <Text mr="8px" fontSize="sm">
+              {i18n.t('publicProduct.footer')}
+            </Text>
+          </Center>
+          <Box bg="tomato" rounded="md">
+            <Link p="4px" href="/">
+              one9.com
+            </Link>
+          </Box>
         </Center>
       </Box>
     </Box>

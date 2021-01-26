@@ -48,6 +48,23 @@ const i18n = rosetta({
       createLink: 'Do you want to create your website? Click here',
       login: 'Login',
     },
+    createModal: {
+      title: 'Done!',
+      pageAvalTitle: 'Your website is now available at this address:',
+      whatsNext: 'What\'s next?',
+      alertInfo: 'If you want to be able to accept payments or edit your listing, please create an Account.',
+      email: 'Email',
+      password: 'Password (6 characters minumum)',
+      confirmPassword: 'Confirm Password',
+      showPassword: 'Show',
+      hidePassword: 'Hide',
+      createAccount: 'Create Account',
+      error: 'The email may not be valid, the passwords could be too weak or not match.',
+      copiedToClipboard: 'Copied to your clipboard!',
+    },
+    publicProduct: {
+      footer: 'Website created with',
+    },
     components: {
       leftColumn: {
         titleCreate: 'Create a new listing',
@@ -120,6 +137,23 @@ const i18n = rosetta({
       createLink: 'Vuoi invece creare il tuo sito? Clicca qui!',
       login: 'Accedi',
     },
+    createModal: {
+      title: 'Fatto!',
+      pageAvalTitle: 'Il tuo sito è ora raggiungibile a questo indirizzo:',
+      whatsNext: 'Ed ora?',
+      alertInfo: 'Se vuoi accettare pagamenti o modificare la pagina in futuro, sei invitato a creare un Account con noi!',
+      email: 'Email',
+      password: 'Password (deve avere minimo 6 caratteri)',
+      confirmPassword: 'Conferma la Password',
+      showPassword: 'Mostra',
+      hidePassword: 'Nascondi',
+      createAccount: 'Crea Account',
+      error: 'L\'email inserita potrebbe non essere valida, le passwords potrebbero essere troppo deboli o non coincidere tra di loro.',
+      copiedToClipboard: 'Copiato!',
+    },
+    publicProduct: {
+      footer: 'Sito creato grazie a',
+    },
     components: {
       leftColumn: {
         titleCreate: 'Crea il mio Sito',
@@ -146,7 +180,7 @@ const usei18n = () => {
   const router = useRouter();
   const { locale, defaultLocale } = router;
 
-  i18n.locale(locale || defaultLocale);
+  i18n.locale('it' || defaultLocale);
 
   return i18n;
 };

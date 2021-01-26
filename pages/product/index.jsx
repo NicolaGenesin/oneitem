@@ -50,7 +50,7 @@ export default function ProductPage({ product, preview }) {
                     {product.currency}
                     {product.price && product.price}
                   </Heading>
-                  <Button disabled colorScheme="teal" size="lg">{i18n.t('product.buy')}</Button>
+                  <Button disabled bg="activeButton" color="white" size="lg">{i18n.t('product.buy')}</Button>
                 </Center>
               </HStack>
             </Box>

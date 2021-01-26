@@ -30,9 +30,9 @@ function Main() {
   });
 
   return (
-    <Box bg="gray.50">
+    <Box bg="primary.50">
       <Header />
-      <Center mt="10%">
+      <Center mt="7%">
         <Box maxW="50%">
           <Heading align="center">
             {i18n.t('homeSignedOut.titlePartOne')}
@@ -45,22 +45,22 @@ function Main() {
             </Text>
             <List spacing={3} align="center" mt="48px">
               <ListItem>
-                <ListIcon as={MdCheckCircle} color="green.500" />
+                <ListIcon as={MdCheckCircle} color="primary.200" />
                 {i18n.t('homeSignedOut.listItem1')}
               </ListItem>
               <ListItem>
-                <ListIcon as={MdLink} color="green.500" />
+                <ListIcon as={MdLink} color="primary.200" />
                 {i18n.t('homeSignedOut.listItem2')}
               </ListItem>
               <ListItem>
-                <ListIcon as={MdExtension} color="green.500" />
+                <ListIcon as={MdExtension} color="primary.200" />
                 {i18n.t('homeSignedOut.listItem3')}
               </ListItem>
             </List>
           </Box>
           <Center mt="48px" mb="148px">
             <Link href="/editor/create">
-              <Button colorScheme="teal" size="lg">
+              <Button bg="activeButton" color="white" size="lg">
                 {i18n.t('homeSignedOut.buttonCreate')}
               </Button>
             </Link>

@@ -21,7 +21,7 @@ const Header = (props) => {
       align="center"
       wrap="wrap"
       padding="1.5rem"
-      bg="teal.900"
+      bg="primary.300"
       color="white"
       {...props}
     >
@@ -29,7 +29,7 @@ const Header = (props) => {
       <Box w="100%">
         <Center>
           <HStack
-            divider={<StackDivider borderColor="gray.200" />}
+            divider={<StackDivider borderColor="primary.200" />}
             spacing={10}
             align="stretch"
           >
@@ -46,7 +46,7 @@ const Header = (props) => {
                 {i18n.t('header.fees')}
               </Link>
             </Center>
-            <Button bg="transparent" border="1px" onClick={onOpen}>
+            <Button bg="transparent" border="1px" borderColor="activeButton" onClick={onOpen}>
               {i18n.t('header.manage')}
             </Button>
           </HStack>

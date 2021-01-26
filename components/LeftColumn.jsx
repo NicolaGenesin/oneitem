@@ -7,7 +7,7 @@ import {
   Link, InputLeftAddon,
 } from '@chakra-ui/react';
 import {
-  MdKeyboardBackspace,
+  MdClose,
 } from 'react-icons/md';
 import ImageUploading from 'react-images-uploading';
 import usei18n from '../i18n/index';
@@ -26,21 +26,20 @@ const LeftColumn = ({
     || !state.images.length;
 
   return (
-    <Box>
-      <VStack spacing="24px" mt="24px" mb="24px">
+    <Box bg="primary.100">
+      <VStack spacing="24px" pt="24px" pb="24px">
         <HStack w="380px">
-          <Link href={createMode ? '/' : '/home'}>
-            <IconButton
-              variant="ghost"
-              colorScheme="teal"
-              aria-label="Call Sage"
-              fontSize="20px"
-              icon={<MdKeyboardBackspace />}
-            />
-          </Link>
           <Heading as="h2" size="xl">
             {createMode ? i18n.t('components.leftColumn.titleCreate') : i18n.t('components.leftColumn.titleEdit')}
           </Heading>
+          <Link href={createMode ? '/' : '/home'}>
+            <IconButton
+              variant="ghost"
+              aria-label="Call Sage"
+              fontSize="20px"
+              icon={<MdClose />}
+            />
+          </Link>
         </HStack>
         <Box w="380px">
           <Text mb="8px">{i18n.t('components.leftColumn.storeName')}</Text>
@@ -73,7 +72,6 @@ const LeftColumn = ({
               <option value="£">£</option>
             </Select>
             <NumberInput
-              bg="white"
               defaultValue={20}
               min={1}
               max={50000}
@@ -82,6 +80,7 @@ const LeftColumn = ({
               w="100%"
             >
               <NumberInputField
+                bg="white"
                 onInput={(e) => updateState('price', e.target.value)}
                 value={product.price}
               />
@@ -119,7 +118,9 @@ const LeftColumn = ({
                 <Button
                   width="100px"
                   height="100px"
-                  colorScheme="teal"
+                  bg="primary.200"
+                  borderColor="primary.300"
+                  color="black"
                   variant="outline"
                   style={isDragging ? { color: 'red' } : undefined}
                   onClick={onImageUpload}
@@ -152,7 +153,8 @@ const LeftColumn = ({
                         Update
                       </Button> */}
                       <Button
-                        colorScheme="teal"
+                        bg="activeButton"
+                        color="white"
                         variant="outline"
                         onClick={() => onImageRemove(index)}
                       >
@@ -189,12 +191,15 @@ const LeftColumn = ({
             />
           </InputGroup>
         </Box>
-        <HStack>
+        <HStack w="380px">
           {createMode
            && (
            <Button
+             w="100%"
+             p="34px"
              disabled={isDisabled}
-             colorScheme="blue"
+             bg="activeButton"
+             color="white"
              onClick={handleSubmit}
            >
              {i18n.t('components.leftColumn.buttonCreate')}
@@ -203,8 +208,11 @@ const LeftColumn = ({
           {!createMode
            && (
            <Button
+             w="100%"
+             p="34px"
+             bg="activeButton"
+             color="white"
              disabled={isDisabled}
-             colorScheme="blue"
              onClick={handleSubmit}
            >
              {i18n.t('components.leftColumn.buttonUpdate')}

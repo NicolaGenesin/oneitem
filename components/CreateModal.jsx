@@ -152,7 +152,7 @@ const CreateModal = (isOpen, onOpen, onClose, hostname, productId) => {
             )}
           </ModalBody>
           <ModalFooter>
-            <Button disabled={!state.email || !state.password || !state.confirmPassword} isLoading={state.isLoading} colorScheme="teal" onClick={handleSubmit}>{i18n.t('createModal.createAccount')}</Button>
+            <Button disabled={!state.email || !state.password || !state.confirmPassword} isLoading={state.isLoading} bg="activeButton" color="white" onClick={handleSubmit}>{i18n.t('createModal.createAccount')}</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

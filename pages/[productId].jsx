@@ -20,7 +20,7 @@ const PublicProductPage = (props) => {
     <Box>
       <ProductPage preview={false} product={props} />
       <Divider orientation="horizontal" />
-      <Box backgroundColor="gray.900">
+      <Box backgroundColor="primary.300">
         <Center p="16px" color="white">
           <Center>
             <Text mr="8px" fontSize="sm">

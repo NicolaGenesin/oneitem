@@ -84,7 +84,7 @@ const LoginModal = (isOpen, onOpen, onClose) => {
                 type={show ? 'text' : 'password'}
               />
               <InputRightElement width="6rem">
-                <Button h="1.75rem" size="sm" onClick={handleClick}>
+                <Button bg="activeButton" color="white" h="1.75rem" size="sm" onClick={handleClick}>
                   {show ? i18n.t('loginModal.hidePassword') : i18n.t('loginModal.showPassword')}
                 </Button>
               </InputRightElement>
@@ -106,7 +106,7 @@ const LoginModal = (isOpen, onOpen, onClose) => {
             </Box>
           </ModalBody>
           <ModalFooter>
-            <Button disabled={!state.email || !state.password} isLoading={state.isLoading} colorScheme="teal" onClick={(e) => handleSubmit(e, state)}>{i18n.t('loginModal.login')}</Button>
+            <Button disabled={!state.email || !state.password} isLoading={state.isLoading} bg="activeButton" color="white" onClick={(e) => handleSubmit(e, state)}>{i18n.t('loginModal.login')}</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

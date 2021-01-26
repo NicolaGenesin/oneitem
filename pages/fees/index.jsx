@@ -10,9 +10,9 @@ function Main() {
   const i18n = usei18n();
 
   return (
-    <Box bg="gray.50" h="100vh">
+    <Box bg="primary.50" h="100vh">
       <Header />
-      <Center mt="5%">
+      <Center h="80vh">
         <Box maxW="60%">
           <Center mb="48px">
             <Heading>
@@ -21,11 +21,11 @@ function Main() {
           </Center>
           <List spacing={3} align="center">
             <ListItem>
-              <ListIcon as={MdCheckCircle} color="green.500" />
+              <ListIcon as={MdCheckCircle} color="primary.200" />
               {i18n.t('fees.listItem1')}
             </ListItem>
             <ListItem>
-              <ListIcon as={MdInfoOutline} color="green.500" />
+              <ListIcon as={MdInfoOutline} color="primary.200" />
               {i18n.t('fees.listItem2')}
               {' '}
               (
@@ -33,7 +33,7 @@ function Main() {
               ).
             </ListItem>
             <ListItem>
-              <ListIcon as={MdInfoOutline} color="green.500" />
+              <ListIcon as={MdInfoOutline} color="primary.200" />
               {i18n.t('fees.listItem3')}
             </ListItem>
           </List>

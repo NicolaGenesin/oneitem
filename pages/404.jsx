@@ -9,7 +9,7 @@ export default function FourOhFour() {
 
   return (
     <>
-      <Center bg="gray.50" h="100vh">
+      <Center bg="primary.50" h="100vh">
         <Box>
           <Heading as="h1" size="4xl">
             {i18n.t('fourOfFour.title')}
@@ -22,7 +22,8 @@ export default function FourOhFour() {
               <Link href="/">
                 <Button
                   mt="8px"
-                  colorScheme="teal"
+                  bg="activeButton"
+                  color="white"
                   variant="outline"
                 >
                   {i18n.t('fourOfFour.button')}

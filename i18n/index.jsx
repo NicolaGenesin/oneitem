@@ -18,7 +18,7 @@ const i18n = rosetta({
     homeSignedOut: {
       titlePartOne: 'Sell the One Product',
       titlePartTwo: 'that identifies yourself.',
-      description: 'One9 is an online store, where people come together to make, sell, buy and collect unique items. Unlike others, we only let you sell the one piece you think represents you the most.',
+      description: 'One9 is an online store, where people sell and buy unique items. Unlike others, we only let you sell the one piece you think represents you the most as a craftsman.',
       listItem1: 'It takes less than a minute to have your e-commerce up and running.',
       listItem2: 'You will be given a link you can share on your social platforms.',
       listItem3: 'You can decide to accept payments at any time.',

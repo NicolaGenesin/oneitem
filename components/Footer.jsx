@@ -5,15 +5,13 @@ import React from 'react';
 
 const Footer = () => (
   <div className="footer">
-    <Box>
+    <Box bg="primary.200" p="1rem">
       <Center>
         <HStack>
-          <Text>
-            ©
-            {' '}
+          <Text color="white">
             {new Date().getFullYear()}
             {' | '}
-            1911 Industries Limited
+            © 1911 Industries Limited
           </Text>
         </HStack>
       </Center>
@@ -21,8 +19,6 @@ const Footer = () => (
     <style jsx>
       {`
         .footer{
-            padding: 1rem;
-            background-color: rgb(235, 195, 64);
             position: absolute;
             bottom: 0;
             left: 0;

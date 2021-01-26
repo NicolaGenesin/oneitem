@@ -107,11 +107,11 @@ const LoggedInHome = ({ hostname }) => {
                   </Stat>
                 </VStack>
               </HStack>
-              <Button w="300px" leftIcon={<MdPayment />} bg="activeButton" onClick={acceptPayments}>{i18n.t('home.acceptPayments')}</Button>
-              <Button w="300px" leftIcon={<MdBuild />} bg="activeButton" onClick={editListing}>{i18n.t('home.editListing')}</Button>
-              {state.visible && <Button w="300px" leftIcon={<MdDelete />} bg="activeButton" onClick={(event) => { changeListingStatus(event, state, setState); }}>{i18n.t('home.hideListing')}</Button>}
-              {!state.visible && <Button w="300px" leftIcon={<AiOutlineEye />} bg="activeButton" onClick={(event) => { changeListingStatus(event, state, setState); }}>{i18n.t('home.publishListing')}</Button>}
-              <Button w="300px" mb="24px" leftIcon={<MdExitToApp />} bg="activeButton" onClick={logout}>{i18n.t('home.logout')}</Button>
+              <Button w="300px" leftIcon={<MdPayment />} bg="activeButton" color="white" onClick={acceptPayments}>{i18n.t('home.acceptPayments')}</Button>
+              <Button w="300px" leftIcon={<MdBuild />} bg="activeButton" color="white" onClick={editListing}>{i18n.t('home.editListing')}</Button>
+              {state.visible && <Button w="300px" leftIcon={<MdDelete />} bg="activeButton" color="white" onClick={(event) => { changeListingStatus(event, state, setState); }}>{i18n.t('home.hideListing')}</Button>}
+              {!state.visible && <Button w="300px" leftIcon={<AiOutlineEye />} bg="activeButton" color="white" onClick={(event) => { changeListingStatus(event, state, setState); }}>{i18n.t('home.publishListing')}</Button>}
+              <Button w="300px" mb="24px" leftIcon={<MdExitToApp />} bg="activeButton" color="white" onClick={logout}>{i18n.t('home.logout')}</Button>
               <Heading as="h2" size="xl">{i18n.t('home.share')}</Heading>
               <Box>
                 <HStack w="300px" mb="16px">

@@ -1,8 +1,10 @@
 const colors = {
-  activeButton: '#8eccf7',
-  gray: {
-    50: '#f7fafc',
-    900: '#1a202c',
+  activeButton: '#e63946',
+  primary: {
+    50: '#f1faee',
+    100: '#a8dadc',
+    200: '#457b9d',
+    300: '#1d3557',
   },
 };
 

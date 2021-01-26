@@ -4,7 +4,7 @@ import {
   Input, Text, Textarea, VStack, InputGroup,
   NumberInput, Select, Box, Image, Button,
   Heading, NumberInputField, HStack, IconButton,
-  Link, InputLeftAddon,
+  Link, InputLeftAddon, Spacer,
 } from '@chakra-ui/react';
 import {
   MdClose,
@@ -32,6 +32,7 @@ const LeftColumn = ({
           <Heading as="h2" size="xl">
             {createMode ? i18n.t('components.leftColumn.titleCreate') : i18n.t('components.leftColumn.titleEdit')}
           </Heading>
+          <Spacer />
           <Link href={createMode ? '/' : '/home'}>
             <IconButton
               variant="ghost"

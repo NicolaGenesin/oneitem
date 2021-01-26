@@ -20,7 +20,7 @@ export default function ProductPage({ product, preview }) {
         </Box>
       </Center>
       <Divider orientation="horizontal" />
-      <Center mt="10%">
+      <Center mt="5%">
         <Box>
           {product.author && (
           <Center>

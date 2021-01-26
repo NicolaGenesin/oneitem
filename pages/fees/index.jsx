@@ -10,7 +10,7 @@ function Main() {
   const i18n = usei18n();
 
   return (
-    <div>
+    <Box bg="gray.50" h="100vh">
       <Header />
       <Center mt="5%">
         <Box maxW="60%">
@@ -39,7 +39,7 @@ function Main() {
           </List>
         </Box>
       </Center>
-    </div>
+    </Box>
   );
 }
 

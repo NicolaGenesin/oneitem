@@ -30,7 +30,7 @@ function Main() {
   });
 
   return (
-    <Box>
+    <Box bg="gray.50">
       <Header />
       <Center mt="10%">
         <Box maxW="50%">

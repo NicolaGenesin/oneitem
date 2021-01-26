@@ -83,7 +83,7 @@ const LoginModal = (isOpen, onOpen, onClose) => {
                 pr="4.5rem"
                 type={show ? 'text' : 'password'}
               />
-              <InputRightElement width="6rem">
+              <InputRightElement width="4.5rem">
                 <Button bg="activeButton" color="white" h="1.75rem" size="sm" onClick={handleClick}>
                   {show ? i18n.t('loginModal.hidePassword') : i18n.t('loginModal.showPassword')}
                 </Button>

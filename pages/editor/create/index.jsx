@@ -124,7 +124,7 @@ const CreatePage = (props) => {
 
   return (
     <div>
-      {CreateModal(isOpen, onOpen, onClose, props.hostname, state.id)}
+      {CreateModal(isOpen, onOpen, onClose, state.id)}
       <div className="container">
         <div className="left">
           <LeftColumn
@@ -215,16 +215,6 @@ CreatePage.getInitialProps = async function ({ req }) {
   if (user) {
     initialProps = getProduct();
   }
-
-  if (req) {
-    const { host } = req.headers;
-
-    initialProps.hostname = host;
-  } else {
-    initialProps.hostname = 'error_refresh_page';
-  }
-
-  console.log(initialProps);
 
   return initialProps;
 };

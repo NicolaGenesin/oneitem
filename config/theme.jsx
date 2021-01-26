@@ -1,10 +1,10 @@
 const colors = {
-  activeButton: '#e63946',
+  activeButton: '#ffd6ba',
   primary: {
-    50: '#f1faee',
-    100: '#a8dadc',
-    200: '#457b9d',
-    300: '#1d3557',
+    50: '#bee3db',
+    100: '#89b0ae',
+    200: '#555b6e',
+    300: '#555b6e',
   },
 };
 

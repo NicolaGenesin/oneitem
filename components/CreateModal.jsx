@@ -16,7 +16,7 @@ import { isValidEmail } from '../utils/validation';
 import fire from '../config/fire-config';
 import usei18n from '../i18n/index';
 
-const CreateModal = (isOpen, onOpen, onClose, hostname, productId) => {
+const CreateModal = (isOpen, onOpen, onClose, productId) => {
   const i18n = usei18n();
   const initialRef = React.useRef();
   const [show, setShow] = React.useState(false);
@@ -76,7 +76,7 @@ const CreateModal = (isOpen, onOpen, onClose, hostname, productId) => {
     };
   }, []);
 
-  const pageUrl = `${hostname}/${productId}`;
+  const pageUrl = `oneitem.vercel.app/${productId}`;
 
   return (
     <>
@@ -128,7 +128,7 @@ const CreateModal = (isOpen, onOpen, onClose, hostname, productId) => {
                 type={show ? 'text' : 'password'}
                 onInput={(e) => updateState('password', e.target.value)}
               />
-              <InputRightElement width="5.5rem">
+              <InputRightElement width="4.5rem">
                 <Button h="1.75rem" size="sm" onClick={handleClick}>
                   {show ? i18n.t('createModal.hidePassword') : i18n.t('createModal.showPassword')}
                 </Button>

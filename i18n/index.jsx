@@ -65,6 +65,11 @@ const i18n = rosetta({
     publicProduct: {
       footer: 'Website created with',
     },
+    fourOfFour: {
+      title: 'Page Not Found',
+      description: 'The page you were looking for might have been unpublished or deleted.',
+      button: 'Return to Homepage',
+    },
     components: {
       leftColumn: {
         titleCreate: 'Create a new listing',
@@ -154,6 +159,11 @@ const i18n = rosetta({
     publicProduct: {
       footer: 'Sito creato grazie a',
     },
+    fourOfFour: {
+      title: 'Pagina non trovata',
+      description: 'La pagina che cercavi potrebbe esser stata nascosta od eliminata.',
+      button: 'Ritorna alla pagina principale',
+    },
     components: {
       leftColumn: {
         titleCreate: 'Crea il mio Sito',
@@ -180,7 +190,7 @@ const usei18n = () => {
   const router = useRouter();
   const { locale, defaultLocale } = router;
 
-  i18n.locale('it' || defaultLocale);
+  i18n.locale(locale || defaultLocale);
 
   return i18n;
 };

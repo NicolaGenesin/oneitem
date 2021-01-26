@@ -46,36 +46,48 @@ const LeftColumn = ({
           <Text mb="8px">{i18n.t('components.leftColumn.storeName')}</Text>
           <Input bg="white" onInput={(e) => updateState('storeName', e.target.value)} placeholder={placeholders.storeNamePlaceholder} value={product.storeName} />
         </Box>
-
         <Box w="380px">
           <Text mb="8px">{i18n.t('components.leftColumn.authorName')}</Text>
           <Input bg="white" onInput={(e) => updateState('author', e.target.value)} placeholder={placeholders.authorPlaceholder} value={product.author} />
         </Box>
-
         <Box w="380px">
           <Text mb="8px">{i18n.t('components.leftColumn.itemName')}</Text>
           <Input bg="white" onInput={(e) => updateState('name', e.target.value)} placeholder={placeholders.namePlaceholder} value={product.name} />
         </Box>
-
         <Box w="380px">
           <Text mb="8px">{i18n.t('components.leftColumn.itemDescription')}</Text>
           <Textarea bg="white" h="150px" onInput={(e) => updateState('description', e.target.value)} placeholder={placeholders.descriptionPlaceholder} value={product.description} />
         </Box>
-
         <Box w="380px">
           <Text mb="8px">{i18n.t('components.leftColumn.price')}</Text>
           <InputGroup>
-            <Select bg="white" value={product.currency} maxW="65px" mr="8px" onInput={(e) => updateState('currency', e.target.value)}>
+            <Select
+              bg="white"
+              value={product.currency}
+              maxW="65px"
+              mr="8px"
+              onInput={(e) => updateState('currency', e.target.value)}
+            >
               <option value="€">€</option>
               <option value="$">$</option>
               <option value="£">£</option>
             </Select>
-            <NumberInput bg="white" defaultValue={20} min={1} max={50000} precision={2} step={0.2} w="100%">
-              <NumberInputField onInput={(e) => updateState('price', e.target.value)} value={product.price} />
+            <NumberInput
+              bg="white"
+              defaultValue={20}
+              min={1}
+              max={50000}
+              precision={2}
+              step={0.2}
+              w="100%"
+            >
+              <NumberInputField
+                onInput={(e) => updateState('price', e.target.value)}
+                value={product.price}
+              />
             </NumberInput>
           </InputGroup>
         </Box>
-
         <Box w="380px">
           <Text mb="8px">{i18n.t('components.leftColumn.image')}</Text>
           {/* <Image
@@ -113,18 +125,39 @@ const LeftColumn = ({
                   onClick={onImageUpload}
                   {...dragProps}
                 >
-                  Click or
+                  {i18n.t('components.leftColumn.clickOr')}
                   <br />
-                  Drop here
+                  {i18n.t('components.leftColumn.dropHere')}
                 </Button>
                 )}
                 {/* <Button onClick={onImageRemoveAll}>Remove all images</Button> */}
                 {imageList.map((image, index) => (
                   <div key={index} className="image-item">
-                    <Image src={image.data_url} alt="Image to upload" width="100px" height="100px" rounded="md" objectFit="cover" mb="16px" />
+                    <Image
+                      src={image.data_url}
+                      alt="Image to upload"
+                      width="100px"
+                      height="100px"
+                      rounded="md"
+                      objectFit="cover"
+                      mb="16px"
+                    />
                     <div className="image-item__btn-wrapper">
-                      {/* <Button colorScheme="teal" variant="outline" mr="16px" onClick={() => onImageUpdate(index)}>Update</Button> */}
-                      <Button colorScheme="teal" variant="outline" onClick={() => onImageRemove(index)}>Remove</Button>
+                      {/* <Button
+                        colorScheme="teal"
+                        variant="outline"
+                        mr="16px"
+                        onClick={() => onImageUpdate(index)}
+                      >
+                        Update
+                      </Button> */}
+                      <Button
+                        colorScheme="teal"
+                        variant="outline"
+                        onClick={() => onImageRemove(index)}
+                      >
+                        {i18n.t('components.leftColumn.removeImage')}
+                      </Button>
                     </div>
                   </div>
                 ))}
@@ -132,12 +165,15 @@ const LeftColumn = ({
             )}
           </ImageUploading>
         </Box>
-
         <Box w="380px">
           <Text mb="8px">{i18n.t('components.leftColumn.contactEmail')}</Text>
-          <Input bg="white" placeholder={placeholders.contactPlaceholder} onInput={(e) => updateState('contact', e.target.value)} value={product.contact} />
+          <Input
+            bg="white"
+            placeholder={placeholders.contactPlaceholder}
+            onInput={(e) => updateState('contact', e.target.value)}
+            value={product.contact}
+          />
         </Box>
-
         <Box w="380px">
           <Text mb="8px">{i18n.t('components.leftColumn.addressHere')}</Text>
           <InputGroup>
@@ -153,10 +189,27 @@ const LeftColumn = ({
             />
           </InputGroup>
         </Box>
-
         <HStack>
-          {createMode && <Button disabled={isDisabled} colorScheme="blue" onClick={handleSubmit}>{i18n.t('components.leftColumn.buttonCreate')}</Button>}
-          {!createMode && <Button disabled={isDisabled} colorScheme="blue" onClick={handleSubmit}>{i18n.t('components.leftColumn.buttonUpdate')}</Button>}
+          {createMode
+           && (
+           <Button
+             disabled={isDisabled}
+             colorScheme="blue"
+             onClick={handleSubmit}
+           >
+             {i18n.t('components.leftColumn.buttonCreate')}
+           </Button>
+           )}
+          {!createMode
+           && (
+           <Button
+             disabled={isDisabled}
+             colorScheme="blue"
+             onClick={handleSubmit}
+           >
+             {i18n.t('components.leftColumn.buttonUpdate')}
+           </Button>
+           )}
         </HStack>
       </VStack>
     </Box>

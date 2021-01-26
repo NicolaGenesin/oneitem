@@ -15,6 +15,12 @@ const i18n = rosetta({
       logout: 'Logout',
       share: 'Share',
     },
+    product: {
+      preview: 'Preview',
+      buy: 'Buy',
+      author: 'brought to you by {{author}}',
+      contact: 'Contact: {{contact}}',
+    },
     components: {
       leftColumn: {
         titleCreate: 'Create a new listing',
@@ -29,6 +35,9 @@ const i18n = rosetta({
         addressHere: 'Your address on one9',
         buttonCreate: 'Create my Listing',
         buttonUpdate: 'Update my Listing',
+        clickOr: 'Click or',
+        dropHere: 'Drop here',
+        removeImage: 'Remove',
       },
     },
     // support(obj) {
@@ -51,6 +60,12 @@ const i18n = rosetta({
       logout: 'Esci',
       share: 'Condividi',
     },
+    product: {
+      preview: 'Anteprima',
+      buy: 'Acquista',
+      author: 'presentato da {{author}}',
+      contact: 'Contatto: {{contact}}',
+    },
     components: {
       leftColumn: {
         titleCreate: 'Crea una nuova inserzione',
@@ -65,6 +80,9 @@ const i18n = rosetta({
         addressHere: 'Il tuo indirizzo su questo sito',
         buttonCreate: 'Crea la mia inserzione',
         buttonUpdate: 'Aggiorna la mia inserzione',
+        clickOr: 'Clicca o',
+        dropHere: 'Rilascia',
+        removeImage: 'Rimuovi',
       },
     },
   },

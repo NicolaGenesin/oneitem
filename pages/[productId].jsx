@@ -3,7 +3,7 @@ import Router from 'next/router';
 import {
   Box, Divider, Center, Link,
 } from '@chakra-ui/react';
-import ProductPage from './product-page';
+import ProductPage from './product';
 import fire from '../config/fire-config';
 
 const PublicProductPage = (props) => {

@@ -7,6 +7,10 @@ const colors = {
     500: '#ffd6ba',
     600: '#f0c2a3',
   },
+  primaryImportantButton: {
+    500: '#555b6e',
+    600: '#555b6e',
+  },
   primary: {
     50: '#bee3db',
     100: '#89b0ae',

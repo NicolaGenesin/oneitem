@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Input, Text, Textarea, VStack, InputGroup,
+  Input, Center, Textarea, VStack, InputGroup,
   NumberInput, Select, Box, Image, Button,
   Heading, NumberInputField, HStack, IconButton,
   Link, InputLeftAddon, Spacer,
@@ -26,7 +26,7 @@ const LeftColumn = ({
     || !state.images.length;
 
   return (
-    <Box bg="primary.100">
+    <Box bg="primary.50">
       <VStack spacing="24px" pt="24px" pb="24px">
         <HStack w="380px">
           <Heading as="h2" size="xl">
@@ -43,23 +43,23 @@ const LeftColumn = ({
           </Link>
         </HStack>
         <Box w="380px">
-          <Text mb="8px">{i18n.t('components.leftColumn.storeName')}</Text>
+          <Heading as="h5" size="sm" mb="8px">{i18n.t('components.leftColumn.storeName')}</Heading>
           <Input bg="white" onInput={(e) => updateState('storeName', e.target.value)} placeholder={placeholders.storeNamePlaceholder} value={product.storeName} />
         </Box>
         <Box w="380px">
-          <Text mb="8px">{i18n.t('components.leftColumn.authorName')}</Text>
+          <Heading as="h5" size="sm" mb="8px">{i18n.t('components.leftColumn.authorName')}</Heading>
           <Input bg="white" onInput={(e) => updateState('author', e.target.value)} placeholder={placeholders.authorPlaceholder} value={product.author} />
         </Box>
         <Box w="380px">
-          <Text mb="8px">{i18n.t('components.leftColumn.itemName')}</Text>
+          <Heading as="h5" size="sm" mb="8px">{i18n.t('components.leftColumn.itemName')}</Heading>
           <Input bg="white" onInput={(e) => updateState('name', e.target.value)} placeholder={placeholders.namePlaceholder} value={product.name} />
         </Box>
         <Box w="380px">
-          <Text mb="8px">{i18n.t('components.leftColumn.itemDescription')}</Text>
+          <Heading as="h5" size="sm" mb="8px">{i18n.t('components.leftColumn.itemDescription')}</Heading>
           <Textarea bg="white" h="150px" onInput={(e) => updateState('description', e.target.value)} placeholder={placeholders.descriptionPlaceholder} value={product.description} />
         </Box>
         <Box w="380px">
-          <Text mb="8px">{i18n.t('components.leftColumn.price')}</Text>
+          <Heading as="h5" size="sm" mb="8px">{i18n.t('components.leftColumn.price')}</Heading>
           <InputGroup>
             <Select
               bg="white"
@@ -89,7 +89,7 @@ const LeftColumn = ({
           </InputGroup>
         </Box>
         <Box w="380px">
-          <Text mb="8px">{i18n.t('components.leftColumn.image')}</Text>
+          <Heading as="h5" size="sm" mb="8px">{i18n.t('components.leftColumn.image')}</Heading>
           {/* <Image
             fallbackSrc="https://via.placeholder.com/450"
             boxSize="100px"
@@ -117,9 +117,9 @@ const LeftColumn = ({
                 {!imageList.length
                 && (
                 <Button
-                  width="100px"
+                  width="100%"
                   height="100px"
-                  bg="primary.200"
+                  bg="primary.50"
                   borderColor="primary.300"
                   color="black"
                   variant="outline"
@@ -128,7 +128,7 @@ const LeftColumn = ({
                   {...dragProps}
                 >
                   {i18n.t('components.leftColumn.clickOr')}
-                  <br />
+                  {' '}
                   {i18n.t('components.leftColumn.dropHere')}
                 </Button>
                 )}
@@ -154,8 +154,8 @@ const LeftColumn = ({
                         Update
                       </Button> */}
                       <Button
-                        colorScheme="primaryButton"
-                        color="white"
+                        borderColor="primary.300"
+                        color="black"
                         variant="outline"
                         onClick={() => onImageRemove(index)}
                       >
@@ -169,7 +169,7 @@ const LeftColumn = ({
           </ImageUploading>
         </Box>
         <Box w="380px">
-          <Text mb="8px">{i18n.t('components.leftColumn.contactEmail')}</Text>
+          <Heading as="h5" size="sm" mb="8px">{i18n.t('components.leftColumn.contactEmail')}</Heading>
           <Input
             bg="white"
             placeholder={placeholders.contactPlaceholder}
@@ -178,7 +178,7 @@ const LeftColumn = ({
           />
         </Box>
         <Box w="380px">
-          <Text mb="8px">{i18n.t('components.leftColumn.addressHere')}</Text>
+          <Heading as="h5" size="sm" mb="8px">{i18n.t('components.leftColumn.addressHere')}</Heading>
           <InputGroup>
             <InputLeftAddon children="www.one9.com/" />
             <Input
@@ -192,14 +192,14 @@ const LeftColumn = ({
             />
           </InputGroup>
         </Box>
-        <HStack w="380px">
+        <HStack w="380px" pt="24px">
           {createMode
            && (
            <Button
              w="100%"
              p="34px"
              disabled={isDisabled}
-             colorScheme="primaryButton"
+             colorScheme="primaryImportantButton"
              color="white"
              onClick={handleSubmit}
            >
@@ -211,7 +211,7 @@ const LeftColumn = ({
            <Button
              w="100%"
              p="34px"
-             colorScheme="primaryButton"
+             colorScheme="primaryImportantButton"
              color="white"
              disabled={isDisabled}
              onClick={handleSubmit}

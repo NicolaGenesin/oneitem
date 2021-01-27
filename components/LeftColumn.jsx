@@ -154,7 +154,7 @@ const LeftColumn = ({
                         Update
                       </Button> */}
                       <Button
-                        bg="activeButton"
+                        colorScheme="primaryButton"
                         color="white"
                         variant="outline"
                         onClick={() => onImageRemove(index)}
@@ -199,7 +199,7 @@ const LeftColumn = ({
              w="100%"
              p="34px"
              disabled={isDisabled}
-             bg="activeButton"
+             colorScheme="primaryButton"
              color="white"
              onClick={handleSubmit}
            >
@@ -211,7 +211,7 @@ const LeftColumn = ({
            <Button
              w="100%"
              p="34px"
-             bg="activeButton"
+             colorScheme="primaryButton"
              color="white"
              disabled={isDisabled}
              onClick={handleSubmit}

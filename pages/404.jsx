@@ -22,7 +22,7 @@ export default function FourOhFour() {
               <Link href="/">
                 <Button
                   mt="8px"
-                  bg="activeButton"
+                  colorScheme="primaryButton"
                   color="white"
                   variant="outline"
                 >

@@ -46,7 +46,7 @@ const Header = (props) => {
                 {i18n.t('header.fees')}
               </Link>
             </Center>
-            <Button bg="transparent" border="1px" borderColor="activeButton" onClick={onOpen}>
+            <Button colorScheme="outlineButton" variant="outline" onClick={onOpen}>
               {i18n.t('header.manage')}
             </Button>
           </HStack>

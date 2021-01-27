@@ -111,7 +111,7 @@ const LoggedInHome = () => {
               </HStack>
               <Popover>
                 <PopoverTrigger>
-                  <Button w="300px" leftIcon={<MdPayment />} bg="activeButton" color="black">{i18n.t('home.acceptPayments')}</Button>
+                  <Button w="300px" leftIcon={<MdPayment />} colorScheme="primaryButton" color="black">{i18n.t('home.acceptPayments')}</Button>
                 </PopoverTrigger>
                 <PopoverContent>
                   <PopoverArrow />
@@ -123,10 +123,10 @@ const LoggedInHome = () => {
                   </PopoverBody>
                 </PopoverContent>
               </Popover>
-              <Button w="300px" leftIcon={<MdBuild />} bg="activeButton" color="black" onClick={editListing}>{i18n.t('home.editListing')}</Button>
-              {state.visible && <Button w="300px" leftIcon={<MdDelete />} bg="activeButton" color="black" onClick={(event) => { changeListingStatus(event, state, setState); }}>{i18n.t('home.hideListing')}</Button>}
-              {!state.visible && <Button w="300px" leftIcon={<AiOutlineEye />} bg="activeButton" color="black" onClick={(event) => { changeListingStatus(event, state, setState); }}>{i18n.t('home.publishListing')}</Button>}
-              <Button w="300px" mb="24px" leftIcon={<MdExitToApp />} bg="activeButton" color="black" onClick={logout}>{i18n.t('home.logout')}</Button>
+              <Button w="300px" leftIcon={<MdBuild />} colorScheme="primaryButton" color="black" onClick={editListing}>{i18n.t('home.editListing')}</Button>
+              {state.visible && <Button w="300px" leftIcon={<MdDelete />} colorScheme="primaryButton" color="black" onClick={(event) => { changeListingStatus(event, state, setState); }}>{i18n.t('home.hideListing')}</Button>}
+              {!state.visible && <Button w="300px" leftIcon={<AiOutlineEye />} colorScheme="primaryButton" color="black" onClick={(event) => { changeListingStatus(event, state, setState); }}>{i18n.t('home.publishListing')}</Button>}
+              <Button w="300px" mb="24px" leftIcon={<MdExitToApp />} colorScheme="primaryButton" color="black" onClick={logout}>{i18n.t('home.logout')}</Button>
               <Heading as="h2" size="xl">{i18n.t('home.share')}</Heading>
               <Box>
                 <HStack w="300px" mb="16px">
@@ -156,7 +156,7 @@ const LoggedInHome = () => {
                     // TODO check http://www.sharelinkgenerator.com/
                     /*
                     <IconButton
-                      bg="activeButton"
+                      colorScheme="primaryButton"
                       aria-label="Pinterest share"
                       icon={<FaPinterest />}
                     }

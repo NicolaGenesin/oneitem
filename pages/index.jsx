@@ -60,7 +60,7 @@ function Main() {
           </Box>
           <Center mt="48px" mb="148px">
             <Link href="/editor/create">
-              <Button bg="activeButton" color="black" size="lg">
+              <Button colorScheme="primaryButton" color="black" size="lg">
                 {i18n.t('homeSignedOut.buttonCreate')}
               </Button>
             </Link>

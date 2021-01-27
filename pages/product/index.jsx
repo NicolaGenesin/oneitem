@@ -34,13 +34,13 @@ export default function ProductPage({ product, preview }) {
           </Center>
           )}
           <HStack mt="48px">
-            <Box boxShadow="2xl" mr="48px">
+            <Box boxShadow="2xl" mr="48px" rounded="md">
               <Image
                 rounded="md"
                 boxSize="260px"
                 objectFit="cover"
                 src={product.images && product.images.length && product.images[0].data_url}
-                fallbackSrc="https://via.placeholder.com/1000"
+                fallbackSrc="https://via.placeholder.com/500?text=　"
               />
             </Box>
             <Box maxW="400px">

@@ -9,13 +9,13 @@ import LeftColumn from '../../../components/LeftColumn';
 import fire, { storage } from '../../../config/fire-config';
 
 const placeholders = {
-  storeNamePlaceholder: 'Your Store Name',
-  authorPlaceholder: 'Your Name',
-  contactPlaceholder: 'john@doe.com',
-  namePlaceholder: 'The item name',
+  storeNamePlaceholder: 'Bread Pitt',
+  authorPlaceholder: 'John',
+  contactPlaceholder: 'john@gmail.com',
+  namePlaceholder: 'Teapot',
   pricePlaceholder: 20,
   currencyPlaceholder: '€',
-  descriptionPlaceholder: 'A very long description',
+  descriptionPlaceholder: '',
 };
 
 const defaultProductState = {

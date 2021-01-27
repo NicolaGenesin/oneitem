@@ -72,8 +72,9 @@ const i18n = rosetta({
     },
     components: {
       leftColumn: {
-        titleCreate: 'Create a new listing',
-        titleEdit: 'Edit your Listing',
+        alertInfo: 'Fill every field on this column and see how your website will look like on your right! All fields are required.',
+        titleCreate: 'Create a new Website',
+        titleEdit: 'Edit your Website',
         storeName: 'Store Name',
         authorName: 'Author Name',
         itemName: 'Item Name',
@@ -82,8 +83,8 @@ const i18n = rosetta({
         image: 'Image',
         contactEmail: 'Contact Email',
         addressHere: 'Your address on one9',
-        buttonCreate: 'Create my Listing',
-        buttonUpdate: 'Update my Listing',
+        buttonCreate: 'Create my Website',
+        buttonUpdate: 'Update my Website',
         clickOr: 'Click or',
         dropHere: 'Drop here',
         removeImage: 'Remove',
@@ -166,6 +167,7 @@ const i18n = rosetta({
     },
     components: {
       leftColumn: {
+        alertInfo: 'Completa i campi in questa colonna e osserva l\'anteprima del tuo sito in tempo reale! Tutti i campi sono obbligatori.',
         titleCreate: 'Crea il mio Sito',
         titleEdit: 'Aggiorna il mio Sito',
         storeName: 'Nome attività',

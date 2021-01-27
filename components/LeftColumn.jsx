@@ -4,7 +4,7 @@ import {
   Input, Center, Textarea, VStack, InputGroup,
   NumberInput, Select, Box, Image, Button,
   Heading, NumberInputField, HStack, IconButton,
-  Link, InputLeftAddon, Spacer,
+  Link, InputLeftAddon, Spacer, Alert, AlertIcon,
 } from '@chakra-ui/react';
 import {
   MdClose,
@@ -42,6 +42,12 @@ const LeftColumn = ({
             />
           </Link>
         </HStack>
+        {createMode && (
+        <Alert status="info" bg="primary.100" rounded="md" w="380px">
+          <AlertIcon />
+          {i18n.t('components.leftColumn.alertInfo')}
+        </Alert>
+        )}
         <Box w="380px">
           <Heading as="h5" size="sm" mb="8px">{i18n.t('components.leftColumn.storeName')}</Heading>
           <Input bg="white" onInput={(e) => updateState('storeName', e.target.value)} placeholder={placeholders.storeNamePlaceholder} value={product.storeName} />
@@ -73,7 +79,6 @@ const LeftColumn = ({
               <option value="£">£</option>
             </Select>
             <NumberInput
-              defaultValue={20}
               min={1}
               max={50000}
               precision={2}
@@ -81,6 +86,7 @@ const LeftColumn = ({
               w="100%"
             >
               <NumberInputField
+                placeholder={20}
                 bg="white"
                 onInput={(e) => updateState('price', e.target.value)}
                 value={product.price}

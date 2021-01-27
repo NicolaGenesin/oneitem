@@ -19,14 +19,14 @@ const placeholders = {
 };
 
 const defaultProductState = {
-  storeName: placeholders.storeNamePlaceholder,
+  storeName: '',
   author: '',
-  contact: placeholders.contactPlaceholder,
-  name: placeholders.namePlaceholder,
-  price: placeholders.pricePlaceholder,
-  currency: placeholders.currencyPlaceholder,
+  contact: '',
+  name: '',
+  price: '',
+  currency: '',
   images: [],
-  description: placeholders.descriptionPlaceholder,
+  description: '',
 };
 
 const CreatePage = (props) => {

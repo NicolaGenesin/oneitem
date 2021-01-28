@@ -75,7 +75,7 @@ export default function Product({ product, preview }) {
               <Heading size="xl" mb="16px">
                 {product.name}
               </Heading>
-              <Text fontSize="md">{product.description}</Text>
+              <Text fontSize="md" whiteSpace="pre-line">{product.description}</Text>
               <HStack mt="24px">
                 <Center>
                   <Heading size="xl" mr="24px">

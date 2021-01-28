@@ -143,7 +143,7 @@ const CreatePage = (props) => {
               height: 100vh;
               overflow: hidden;
           }
-          
+
           .left {
               height: 100vh;
               overflow-y: scroll;
@@ -151,11 +151,12 @@ const CreatePage = (props) => {
               float: left;
               background: #f6fdfd;
           }
-          
+
           .right {
+              height: 100vh;
+              overflow-y: scroll;
               float: none;
               width: auto;
-              overflow: hidden;
           }
 
           /* width */
@@ -167,7 +168,7 @@ const CreatePage = (props) => {
           ::-webkit-scrollbar-track {
             background: #f1f1f1; 
           }
-          
+
           /* Handle */
           ::-webkit-scrollbar-thumb {
             background: #888; 

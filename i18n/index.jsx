@@ -88,6 +88,7 @@ const i18n = rosetta({
         clickOr: 'Click or',
         dropHere: 'Drop here',
         removeImage: 'Remove',
+        alertNoIdAvailabilityInfo: 'Please use a different address. The current one is already used by a different store.',
       },
     },
     // support(obj) {
@@ -183,6 +184,7 @@ const i18n = rosetta({
         clickOr: 'Clicca o',
         dropHere: 'Rilascia',
         removeImage: 'Rimuovi',
+        alertNoIdAvailabilityInfo: 'Si prega di utilizzare un indirizzo differente in quanto il presente é già occupato.',
       },
     },
   },

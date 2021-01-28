@@ -1,21 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
   Input, SimpleGrid, Textarea, VStack, InputGroup,
   NumberInput, Select, Box, Image, Button, Center,
   Heading, NumberInputField, HStack, IconButton,
-  Link, InputLeftAddon, Spacer, Alert, AlertIcon,
+  Link, InputLeftAddon, InputRightElement, Spacer,
+  Alert, AlertIcon, Text,
 } from '@chakra-ui/react';
 import {
-  MdClose,
+  MdClose, MdCheck,
 } from 'react-icons/md';
+import {
+  AiFillExclamationCircle,
+} from 'react-icons/ai';
 import ImageUploading from 'react-images-uploading';
 import usei18n from '../i18n/index';
+import fire from '../config/fire-config';
+
+const canUseThisId = async (id) => {
+  if (!id) {
+    return false;
+  }
+
+  const productRef = fire.firestore().collection('products').doc(id);
+  const doc = await productRef.get();
+
+  if (!doc.exists) {
+    return true;
+  }
+  return false;
+};
 
 const LeftColumn = ({
   placeholders, state, updateState, handleSubmit, createMode, product,
 }) => {
   const i18n = usei18n();
+
+  const [isIdAvailable, setIdAvailability] = React.useState(true);
 
   const isDisabled = !state.author
     || !state.contact
@@ -23,7 +44,8 @@ const LeftColumn = ({
     || !state.name
     || !state.storeName
     || !state.id
-    || !state.images.length;
+    || !state.images.length
+    || !isIdAvailable;
 
   const maxImages = 6;
 
@@ -47,7 +69,9 @@ const LeftColumn = ({
         {createMode && (
         <Alert status="info" bg="primary.100" rounded="md" w="380px">
           <AlertIcon />
-          {i18n.t('components.leftColumn.alertInfo')}
+          <Text fontSize="sm">
+            {i18n.t('components.leftColumn.alertInfo')}
+          </Text>
         </Alert>
         )}
         <Box w="380px">
@@ -174,17 +198,43 @@ const LeftColumn = ({
         <Box w="380px">
           <Heading as="h5" size="sm" mb="8px">{i18n.t('components.leftColumn.addressHere')}</Heading>
           <InputGroup>
-            <InputLeftAddon children="www.one9.com/" />
+            <InputLeftAddon children="one9.com/" />
             <Input
               bg="white"
               type="tel"
               placeholder="turtle-teapot"
               value={product.id}
-              onInput={(e) => {
-                updateState('id', e.target.value);
+              onInput={async (e) => {
+                const id = e.target.value.replace(/[^A-Z0-9]/ig, '-');
+
+                updateState('id', id);
+                setIdAvailability(await canUseThisId(id));
               }}
             />
+            {
+            state.id
+              && (
+              <InputRightElement
+                children={
+                !isIdAvailable
+                  ? <AiFillExclamationCircle color="green.500" />
+                  : <MdCheck color="green.500" />
+              }
+              />
+              )
+            }
           </InputGroup>
+          {!isIdAvailable
+          && (
+            <Alert status="error" rounded="md" mt="16px">
+              <AlertIcon />
+              <Box>
+                <Text fontSize="sm">
+                  {i18n.t('components.leftColumn.alertNoIdAvailabilityInfo')}
+                </Text>
+              </Box>
+            </Alert>
+          )}
         </Box>
         <HStack w="380px" pt="24px">
           {createMode

@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Input, Center, Textarea, VStack, InputGroup,
-  NumberInput, Select, Box, Image, Button,
+  Input, SimpleGrid, Textarea, VStack, InputGroup,
+  NumberInput, Select, Box, Image, Button, Center,
   Heading, NumberInputField, HStack, IconButton,
   Link, InputLeftAddon, Spacer, Alert, AlertIcon,
 } from '@chakra-ui/react';
@@ -24,6 +24,8 @@ const LeftColumn = ({
     || !state.storeName
     || !state.id
     || !state.images.length;
+
+  const maxImages = 6;
 
   return (
     <Box bg="primary.50">
@@ -106,7 +108,7 @@ const LeftColumn = ({
             multiple
             value={state.images}
             onChange={(imagesList) => updateState('images', imagesList)}
-            maxNumber={1}
+            maxNumber={maxImages}
             dataURLKey="data_url"
           >
             {({
@@ -120,7 +122,7 @@ const LeftColumn = ({
             }) => (
               // write your building UI
               <div className="upload__image-wrapper">
-                {!imageList.length
+                {imageList.length < maxImages
                 && (
                 <Button
                   width="100%"
@@ -139,26 +141,18 @@ const LeftColumn = ({
                 </Button>
                 )}
                 {/* <Button onClick={onImageRemoveAll}>Remove all images</Button> */}
-                {imageList.map((image, index) => (
-                  <div key={index} className="image-item">
-                    <Image
-                      src={image.data_url}
-                      alt="Image to upload"
-                      width="100px"
-                      height="100px"
-                      rounded="md"
-                      objectFit="cover"
-                      mb="16px"
-                    />
-                    <div className="image-item__btn-wrapper">
-                      {/* <Button
-                        colorScheme="teal"
-                        variant="outline"
-                        mr="16px"
-                        onClick={() => onImageUpdate(index)}
-                      >
-                        Update
-                      </Button> */}
+                <SimpleGrid columns={[2, null, 3]} spacing="16px" mt="16px" maxW="100%">
+                  {imageList.map((image, index) => (
+                    <VStack key={index}>
+                      <Image
+                        src={image.data_url}
+                        alt="Image to upload"
+                        width="100px"
+                        height="100px"
+                        rounded="md"
+                        objectFit="cover"
+
+                      />
                       <Button
                         borderColor="primary.300"
                         color="black"
@@ -167,9 +161,9 @@ const LeftColumn = ({
                       >
                         {i18n.t('components.leftColumn.removeImage')}
                       </Button>
-                    </div>
-                  </div>
-                ))}
+                    </VStack>
+                  ))}
+                </SimpleGrid>
               </div>
             )}
           </ImageUploading>

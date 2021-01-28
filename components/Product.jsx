@@ -5,9 +5,9 @@ import {
 } from '@chakra-ui/react';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
-import usei18n from '../../i18n/index';
+import usei18n from '../i18n/index';
 
-export default function ProductPage({ product, preview }) {
+export default function Product({ product, preview }) {
   const i18n = usei18n();
 
   if (!product) {
@@ -49,8 +49,9 @@ export default function ProductPage({ product, preview }) {
                 showIndicators
               >
                 {product.images && product.images.length
-                  ? product.images.map((image) => (
+                  ? product.images.map((image, index) => (
                     <Image
+                      key={`index-${index}`}
                       bg="white"
                       rounded="md"
                       boxSize="300px"

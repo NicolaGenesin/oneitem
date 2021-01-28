@@ -3,11 +3,11 @@ import Router from 'next/router';
 import {
   Box, Divider, Center, Link, Text,
 } from '@chakra-ui/react';
-import ProductPage from './product';
+import Product from '../components/Product';
 import fire from '../config/fire-config';
 import usei18n from '../i18n/index';
 
-const PublicProductPage = (props) => {
+const ProductPage = (props) => {
   const i18n = usei18n();
 
   useEffect(() => {
@@ -18,7 +18,7 @@ const PublicProductPage = (props) => {
 
   return (
     <Box>
-      <ProductPage preview={false} product={props} />
+      <Product preview={false} product={props} />
       <Divider orientation="horizontal" />
       <Box backgroundColor="primary.300">
         <Center p="16px" color="white">
@@ -38,7 +38,7 @@ const PublicProductPage = (props) => {
   );
 };
 
-PublicProductPage.getInitialProps = async function ({ query }) {
+ProductPage.getInitialProps = async function ({ query }) {
   const productReference = fire.firestore()
     .collection('products')
     .doc(query.productId);
@@ -60,4 +60,4 @@ PublicProductPage.getInitialProps = async function ({ query }) {
   return {};
 };
 
-export default PublicProductPage;
+export default ProductPage;

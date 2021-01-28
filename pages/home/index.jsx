@@ -43,7 +43,7 @@ const acceptPayments = (event) => {
 const editListing = (event) => {
   event.preventDefault();
 
-  Router.push('/editor/create');
+  Router.push('/editor');
 };
 
 const changeListingStatus = (event, state, setState) => {

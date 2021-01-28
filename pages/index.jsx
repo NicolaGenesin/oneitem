@@ -59,7 +59,7 @@ function Main() {
             </List>
           </Box>
           <Center mt="48px" mb="148px">
-            <Link href="/editor/create">
+            <Link href="/editor">
               <Button colorScheme="primaryButton" color="black" size="lg">
                 {i18n.t('homeSignedOut.buttonCreate')}
               </Button>

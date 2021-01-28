@@ -52,24 +52,25 @@ const LeftColumn = ({
         )}
         <Box w="380px">
           <Heading as="h5" size="sm" mb="8px">{i18n.t('components.leftColumn.storeName')}</Heading>
-          <Input bg="white" onInput={(e) => updateState('storeName', e.target.value)} placeholder={placeholders.storeNamePlaceholder} value={product.storeName} />
+          <Input bg="white" onChange={() => {}} onInput={(e) => updateState('storeName', e.target.value)} placeholder={placeholders.storeNamePlaceholder} value={product.storeName} />
         </Box>
         <Box w="380px">
           <Heading as="h5" size="sm" mb="8px">{i18n.t('components.leftColumn.authorName')}</Heading>
-          <Input bg="white" onInput={(e) => updateState('author', e.target.value)} placeholder={placeholders.authorPlaceholder} value={product.author} />
+          <Input bg="white" onChange={() => {}} onInput={(e) => updateState('author', e.target.value)} placeholder={placeholders.authorPlaceholder} value={product.author} />
         </Box>
         <Box w="380px">
           <Heading as="h5" size="sm" mb="8px">{i18n.t('components.leftColumn.itemName')}</Heading>
-          <Input bg="white" onInput={(e) => updateState('name', e.target.value)} placeholder={placeholders.namePlaceholder} value={product.name} />
+          <Input bg="white" onChange={() => {}} onInput={(e) => updateState('name', e.target.value)} placeholder={placeholders.namePlaceholder} value={product.name} />
         </Box>
         <Box w="380px">
           <Heading as="h5" size="sm" mb="8px">{i18n.t('components.leftColumn.itemDescription')}</Heading>
-          <Textarea bg="white" h="150px" onInput={(e) => updateState('description', e.target.value)} placeholder={placeholders.descriptionPlaceholder} value={product.description} />
+          <Textarea bg="white" h="150px" onChange={() => {}} onInput={(e) => updateState('description', e.target.value)} placeholder={placeholders.descriptionPlaceholder} value={product.description} />
         </Box>
         <Box w="380px">
           <Heading as="h5" size="sm" mb="8px">{i18n.t('components.leftColumn.price')}</Heading>
           <InputGroup>
             <Select
+              onChange={() => {}}
               bg="white"
               value={product.currency}
               maxW="65px"
@@ -98,12 +99,6 @@ const LeftColumn = ({
         </Box>
         <Box w="380px">
           <Heading as="h5" size="sm" mb="8px">{i18n.t('components.leftColumn.image')}</Heading>
-          {/* <Image
-            fallbackSrc="https://via.placeholder.com/450"
-            boxSize="100px"
-            objectFit="cover"
-            src="https://assets.catawiki.nl/assets/2019/12/16/a/8/c/a8ccba43-31ee-4d24-a509-6d36ee2d7e35.jpg"
-          /> */}
           <ImageUploading
             multiple
             value={state.images}
@@ -120,7 +115,6 @@ const LeftColumn = ({
               isDragging,
               dragProps,
             }) => (
-              // write your building UI
               <div className="upload__image-wrapper">
                 {imageList.length < maxImages
                 && (
@@ -151,7 +145,6 @@ const LeftColumn = ({
                         height="100px"
                         rounded="md"
                         objectFit="cover"
-
                       />
                       <Button
                         borderColor="primary.300"
@@ -174,6 +167,7 @@ const LeftColumn = ({
             bg="white"
             placeholder={placeholders.contactPlaceholder}
             onInput={(e) => updateState('contact', e.target.value)}
+            onChange={() => {}}
             value={product.contact}
           />
         </Box>

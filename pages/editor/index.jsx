@@ -3,11 +3,11 @@ import Router from 'next/router';
 import {
   useDisclosure,
 } from '@chakra-ui/react';
-import ProductPage from '../../product';
-import CreateModal from '../../../components/CreateModal';
-import LeftColumn from '../../../components/LeftColumn';
-import fire, { storage } from '../../../config/fire-config';
-import uuidv4 from '../../../utils/random';
+import Product from '../../components/Product';
+import CreateModal from '../../components/CreateModal';
+import LeftColumn from '../../components/LeftColumn';
+import fire, { storage } from '../../config/fire-config';
+import uuidv4 from '../../utils/random';
 
 const placeholders = {
   storeNamePlaceholder: 'Bread Pitt',
@@ -134,7 +134,7 @@ const CreatePage = (props) => {
           />
         </div>
         <div className="right">
-          <ProductPage mt="24px" preview product={state} />
+          <Product mt="24px" preview product={state} />
         </div>
       </div>
       <style jsx>

@@ -7,6 +7,7 @@ import ProductPage from '../../product';
 import CreateModal from '../../../components/CreateModal';
 import LeftColumn from '../../../components/LeftColumn';
 import fire, { storage } from '../../../config/fire-config';
+import uuidv4 from '../../../utils/random';
 
 const placeholders = {
   storeNamePlaceholder: 'Bread Pitt',
@@ -56,15 +57,7 @@ const CreatePage = (props) => {
       data.userId = fire.auth().currentUser.uid;
     }
 
-    if (state.images[0].data_url.startsWith('https')) {
-      fire.firestore()
-        .collection('products')
-        .doc(state.id)
-        .set({ ...data, images: state.images })
-        .catch((e) => {
-          console.log(e);
-        });
-
+    const checkIfIdHasChanged = () => {
       if (props.id !== state.id) {
         fire.firestore()
           .collection('products')
@@ -78,15 +71,32 @@ const CreatePage = (props) => {
             .set({ productId: state.id });
         }
       }
-    } else {
+    };
+
+    const imagesAlreadyUploaded = state.images.filter((image) => image.data_url.startsWith('https'));
+
+    // store text infos before uploading images, keeping the old images already uploaded
+    fire.firestore()
+      .collection('products')
+      .doc(state.id)
+      .set({ ...data, images: imagesAlreadyUploaded })
+      .catch((e) => {
+        console.log(e);
+      });
+
+    checkIfIdHasChanged();
+
+    const imagesToUpload = state.images.filter((image) => !image.data_url.startsWith('https'));
+
+    imagesToUpload.forEach((image) => {
       const uploadTask = storage
         .ref(`/${state.id}`)
-        .child('product_image')
-        .putString(state.images[0].data_url.split(',')[1], 'base64', { contentType: 'image/jpg' });
+        .child(`product_image_${uuidv4()}`)
+        .putString(image.data_url.split(',')[1], 'base64', { contentType: 'image/jpg' });
 
-      uploadTask.on('state_changed', // or 'state_changed'
-        (snapshot) => {
-        }, (error) => {
+      uploadTask.on('state_changed',
+        () => {},
+        (error) => {
           console.log(error);
         }, async () => {
           const data_url = await uploadTask.snapshot.ref.getDownloadURL();
@@ -94,26 +104,13 @@ const CreatePage = (props) => {
           fire.firestore()
             .collection('products')
             .doc(state.id)
-            .set({ ...data, images: [{ data_url }] })
+            .update({ images: fire.firestore.FieldValue.arrayUnion({ data_url }) })
+            .then(() => console.log('Image Uploaded'))
             .catch((e) => {
               console.log(e);
             });
-
-          if (props.id !== state.id) {
-            fire.firestore()
-              .collection('products')
-              .doc(props.id)
-              .delete();
-
-            if (data.userId) {
-              fire.firestore()
-                .collection('users')
-                .doc(data.userId)
-                .set({ productId: state.id });
-            }
-          }
         });
-    }
+    });
 
     if (state.createMode) {
       onOpen();

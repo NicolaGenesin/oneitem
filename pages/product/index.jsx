@@ -3,6 +3,8 @@ import {
   Text, VStack, Box, Image, Button, Heading,
   Divider, HStack, Center, Badge,
 } from '@chakra-ui/react';
+import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
+import { Carousel } from 'react-responsive-carousel';
 import usei18n from '../../i18n/index';
 
 export default function ProductPage({ product, preview }) {
@@ -34,14 +36,30 @@ export default function ProductPage({ product, preview }) {
           </Center>
           )}
           <HStack mt="48px">
-            <Box boxShadow="2xl" mr="48px" rounded="md">
-              <Image
-                rounded="md"
-                boxSize="260px"
-                objectFit="cover"
-                src={product.images && product.images.length && product.images[0].data_url}
-                fallbackSrc="https://via.placeholder.com/500?text=　"
-              />
+            <Box boxShadow="2xl" mr="48px" rounded="md" maxW="300px">
+              <Carousel
+                showArrows={false}
+                autoPlay
+                swipeable
+                infiniteLoop
+                stopOnHover
+                interval={3000}
+                showStatus={false}
+                showThumbs={false}
+                showIndicators
+              >
+                {product.images
+                && product.images.map((image) => (
+                  <Image
+                    bg="white"
+                    rounded="md"
+                    boxSize="300px"
+                    objectFit="cover"
+                    src={image.data_url}
+                    fallbackSrc="https://via.placeholder.com/500?text=　"
+                  />
+                ))}
+              </Carousel>
             </Box>
             <Box maxW="400px">
               <Heading size="xl" mb="16px">

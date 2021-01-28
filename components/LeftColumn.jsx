@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import {
   Input, SimpleGrid, Textarea, VStack, InputGroup,
@@ -36,7 +36,11 @@ const LeftColumn = ({
 }) => {
   const i18n = usei18n();
 
-  const [isIdAvailable, setIdAvailability] = React.useState(true);
+  const [isIdAvailable, setIdAvailability] = useState(true);
+  const [currentSearch, setCurrentSearch] = useState('');
+  const stateRef = useRef();
+
+  stateRef.current = { id: state.id, isIdAvailable, currentSearch };
 
   const isDisabled = !state.author
     || !state.contact
@@ -48,6 +52,19 @@ const LeftColumn = ({
     || !isIdAvailable;
 
   const maxImages = 6;
+
+  useEffect(() => {
+    const interval = setInterval(async () => {
+      if (stateRef.current.id
+        && stateRef.current.currentSearch !== ''
+        && stateRef.current.currentSearch !== stateRef.current.id) {
+        setIdAvailability(await canUseThisId(stateRef.current.id));
+      }
+
+      setCurrentSearch(stateRef.current.id);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <Box bg="primary.50">
@@ -208,7 +225,6 @@ const LeftColumn = ({
                 const id = e.target.value.replace(/[^A-Z0-9]/ig, '-');
 
                 updateState('id', id);
-                setIdAvailability(await canUseThisId(id));
               }}
             />
             {

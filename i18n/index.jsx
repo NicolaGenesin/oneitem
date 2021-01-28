@@ -101,13 +101,13 @@ const i18n = rosetta({
   it: {
     home: {
       hi: 'Ciao {{email}}!',
-      title: 'La tua inserzione',
+      title: 'Il tuo sito',
       itemsSold: 'Unità vendute',
       pageViews: 'Visite pagina',
       acceptPayments: 'Accetta Pagamenti',
-      editListing: 'Modifica l\'inserzione',
-      hideListing: 'Nascondi Inserzione',
-      publishListing: 'Pubblica Inserzione',
+      editListing: 'Modifica il sito',
+      hideListing: 'Nascondi il sito',
+      publishListing: 'Ripubblica il sito',
       logout: 'Esci',
       share: 'Condividi',
     },

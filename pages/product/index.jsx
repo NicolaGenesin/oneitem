@@ -48,17 +48,26 @@ export default function ProductPage({ product, preview }) {
                 showThumbs={false}
                 showIndicators
               >
-                {product.images
-                && product.images.map((image) => (
-                  <Image
-                    bg="white"
-                    rounded="md"
-                    boxSize="300px"
-                    objectFit="cover"
-                    src={image.data_url}
-                    fallbackSrc="https://via.placeholder.com/500?text=　"
-                  />
-                ))}
+                {product.images && product.images.length
+                  ? product.images.map((image) => (
+                    <Image
+                      bg="white"
+                      rounded="md"
+                      boxSize="300px"
+                      objectFit="cover"
+                      src={image.data_url}
+                      fallbackSrc="https://via.placeholder.com/500?text=　"
+                    />
+                  ))
+                  : (
+                    <Image
+                      bg="white"
+                      rounded="md"
+                      boxSize="300px"
+                      objectFit="cover"
+                      src="https://via.placeholder.com/500?text=　"
+                    />
+                  )}
               </Carousel>
             </Box>
             <Box maxW="400px">

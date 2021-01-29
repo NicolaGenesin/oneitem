@@ -38,6 +38,7 @@ const LeftColumn = ({
 
   const [isIdAvailable, setIdAvailability] = useState(true);
   const [currentSearch, setCurrentSearch] = useState('');
+  const [originalId, setoriginalId] = useState(state.id);
   const stateRef = useRef();
 
   stateRef.current = { id: state.id, isIdAvailable, currentSearch };
@@ -55,6 +56,11 @@ const LeftColumn = ({
 
   useEffect(() => {
     const interval = setInterval(async () => {
+      if (originalId === stateRef.current.id) {
+        setIdAvailability(true);
+        return;
+      }
+
       if (stateRef.current.id
         && stateRef.current.currentSearch !== ''
         && stateRef.current.currentSearch !== stateRef.current.id) {

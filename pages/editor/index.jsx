@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import Router from 'next/router';
 import {
-  useDisclosure,
+  useDisclosure, Box,
 } from '@chakra-ui/react';
+import { isMobile } from 'react-device-detect';
 import Product from '../../components/Product';
 import CreateModal from '../../components/CreateModal';
 import LeftColumn from '../../components/LeftColumn';
@@ -119,8 +120,10 @@ const CreatePage = (props) => {
     }
   };
 
+  console.log(isMobile);
+
   return (
-    <div>
+    <Box>
       {CreateModal(isOpen, onOpen, onClose, state.id)}
       <div className="container">
         <div className="left">
@@ -131,11 +134,15 @@ const CreatePage = (props) => {
             updateState={updateState}
             handleSubmit={handleSubmit}
             createMode={state.createMode}
+            isMobile
           />
         </div>
-        <div className="right">
-          <Product mt="24px" preview product={state} />
-        </div>
+        {!isMobile
+          && (
+          <div className="right">
+            <Product mt="24px" preview product={state} />
+          </div>
+          )}
       </div>
       <style jsx>
         {`
@@ -147,7 +154,7 @@ const CreatePage = (props) => {
           .left {
               height: 100vh;
               overflow-y: scroll;
-              width: 420px;
+              width: 375px;
               float: left;
               background: #f6fdfd;
           }
@@ -180,7 +187,7 @@ const CreatePage = (props) => {
           }
         `}
       </style>
-    </div>
+    </Box>
   );
 };
 

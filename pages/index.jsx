@@ -33,7 +33,7 @@ function Main() {
     <Box bg="primary.50">
       <Header />
       <Center mt="7%">
-        <Box maxW="50%">
+        <Box maxW={[300, 600, 800]}>
           <Heading align="center">
             {i18n.t('homeSignedOut.titlePartOne')}
             <br />

@@ -32,7 +32,7 @@ const canUseThisId = async (id) => {
 };
 
 const LeftColumn = ({
-  placeholders, state, updateState, handleSubmit, createMode, product,
+  placeholders, state, updateState, handleSubmit, createMode, product, isMobile,
 }) => {
   const i18n = usei18n();
 
@@ -75,8 +75,8 @@ const LeftColumn = ({
   return (
     <Box bg="primary.50">
       <VStack spacing="24px" pt="24px" pb="24px">
-        <HStack w="380px">
-          <Heading as="h2" size="xl">
+        <HStack w="340px">
+          <Heading as="h3" size="lg">
             {createMode ? i18n.t('components.leftColumn.titleCreate') : i18n.t('components.leftColumn.titleEdit')}
           </Heading>
           <Spacer />
@@ -89,31 +89,31 @@ const LeftColumn = ({
             />
           </Link>
         </HStack>
-        {createMode && (
-        <Alert status="info" bg="primary.100" rounded="md" w="380px">
+        {(createMode && !isMobile) && (
+        <Alert status="info" bg="primary.100" rounded="md" w="340px">
           <AlertIcon />
           <Text fontSize="sm">
             {i18n.t('components.leftColumn.alertInfo')}
           </Text>
         </Alert>
         )}
-        <Box w="380px">
+        <Box w="340px">
           <Heading as="h5" size="sm" mb="8px">{i18n.t('components.leftColumn.storeName')}</Heading>
           <Input bg="white" onChange={() => {}} onInput={(e) => updateState('storeName', e.target.value)} placeholder={placeholders.storeNamePlaceholder} value={product.storeName} />
         </Box>
-        <Box w="380px">
+        <Box w="340px">
           <Heading as="h5" size="sm" mb="8px">{i18n.t('components.leftColumn.authorName')}</Heading>
           <Input bg="white" onChange={() => {}} onInput={(e) => updateState('author', e.target.value)} placeholder={placeholders.authorPlaceholder} value={product.author} />
         </Box>
-        <Box w="380px">
+        <Box w="340px">
           <Heading as="h5" size="sm" mb="8px">{i18n.t('components.leftColumn.itemName')}</Heading>
           <Input bg="white" onChange={() => {}} onInput={(e) => updateState('name', e.target.value)} placeholder={placeholders.namePlaceholder} value={product.name} />
         </Box>
-        <Box w="380px">
+        <Box w="340px">
           <Heading as="h5" size="sm" mb="8px">{i18n.t('components.leftColumn.itemDescription')}</Heading>
           <Textarea bg="white" h="150px" onChange={() => {}} onInput={(e) => updateState('description', e.target.value)} placeholder={placeholders.descriptionPlaceholder} value={product.description} />
         </Box>
-        <Box w="380px">
+        <Box w="340px">
           <Heading as="h5" size="sm" mb="8px">{i18n.t('components.leftColumn.price')}</Heading>
           <InputGroup>
             <Select
@@ -144,7 +144,7 @@ const LeftColumn = ({
             </NumberInput>
           </InputGroup>
         </Box>
-        <Box w="380px">
+        <Box w="340px">
           <Heading as="h5" size="sm" mb="8px">{i18n.t('components.leftColumn.image')}</Heading>
           <ImageUploading
             multiple
@@ -208,7 +208,7 @@ const LeftColumn = ({
             )}
           </ImageUploading>
         </Box>
-        <Box w="380px">
+        <Box w="340px">
           <Heading as="h5" size="sm" mb="8px">{i18n.t('components.leftColumn.contactEmail')}</Heading>
           <Input
             bg="white"
@@ -218,7 +218,7 @@ const LeftColumn = ({
             value={product.contact}
           />
         </Box>
-        <Box w="380px">
+        <Box w="340px">
           <Heading as="h5" size="sm" mb="8px">{i18n.t('components.leftColumn.addressHere')}</Heading>
           <InputGroup>
             <InputLeftAddon children="one9.com/" />
@@ -258,7 +258,7 @@ const LeftColumn = ({
             </Alert>
           )}
         </Box>
-        <HStack w="380px" pt="24px">
+        <HStack w="340px" pt="24px">
           {createMode
            && (
            <Button

@@ -63,10 +63,16 @@ const LoginModal = (isOpen, onOpen, onClose) => {
   return (
     <>
       <Modal
-        size="xl"
+        // size="xl"
         initialFocusRef={initialRef}
         isOpen={isOpen}
         onClose={onClose}
+        m={0}
+        p={0}
+        h="100%"
+        w="100%"
+        // size="full"
+        // blockScrollOnMount
       >
         <ModalOverlay />
         <ModalContent>

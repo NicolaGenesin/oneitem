@@ -120,8 +120,6 @@ const CreatePage = (props) => {
     }
   };
 
-  console.log(isMobile);
-
   return (
     <Box>
       {CreateModal(isOpen, onOpen, onClose, state.id)}

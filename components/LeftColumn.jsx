@@ -224,7 +224,7 @@ const LeftColumn = ({
             <InputLeftAddon children="one9.com/" />
             <Input
               bg="white"
-              type="tel"
+              type="text"
               placeholder="turtle-teapot"
               value={product.id}
               onInput={async (e) => {

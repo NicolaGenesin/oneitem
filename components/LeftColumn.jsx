@@ -221,7 +221,7 @@ const LeftColumn = ({
         <Box w="340px">
           <Heading as="h5" size="sm" mb="8px">{i18n.t('components.leftColumn.addressHere')}</Heading>
           <InputGroup>
-            <InputLeftAddon children="one9.com/" />
+            <InputLeftAddon children="ezyou.shop/" />
             <Input
               bg="white"
               type="text"

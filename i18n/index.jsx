@@ -18,7 +18,7 @@ const i18n = rosetta({
     homeSignedOut: {
       titlePartOne: 'Sell the One Product',
       titlePartTwo: 'that identifies yourself.',
-      description: 'One9 is an online store, where people sell and buy unique items. Unlike others, we only let you sell the one piece you think represents you the most as a craftsman.',
+      description: 'ezYou is an online store, where people sell and buy unique items. Unlike others, we only let you sell the one piece you think represents you the most as a craftsman.',
       listItem1: 'It takes less than a minute to have your e-commerce up and running.',
       listItem2: 'You will be given a link you can share on your social platforms.',
       listItem3: 'You can decide to accept payments at any time.',
@@ -36,7 +36,7 @@ const i18n = rosetta({
     },
     fees: {
       title: 'Fees',
-      listItem1: 'There are no monthly costs associated with One9.',
+      listItem1: 'There are no monthly costs associated with ezYou.',
       listItem2: 'Each transaction has a standard 2.9% + ~0.3$ fee set by the payment processor',
       listItem3: 'If you\'ve created your website after January 1st 2022, our commission will be 1% on the products you will sell. If your website has been created before that date, we will never take any commission from you.',
     },
@@ -82,7 +82,7 @@ const i18n = rosetta({
         price: 'Price (including VAT and shipment)',
         image: 'Images',
         contactEmail: 'Contact Email',
-        addressHere: 'Your address on one9',
+        addressHere: 'Your address on ezYou',
         buttonCreate: 'Create my Website',
         buttonUpdate: 'Update my Website',
         clickOr: 'Click or',
@@ -114,7 +114,7 @@ const i18n = rosetta({
     homeSignedOut: {
       titlePartOne: 'Vendi il prodotto',
       titlePartTwo: 'che ti identifica.',
-      description: 'One9 è un e-commerce minimale dove le persone possono vendere e comprare prodotti unici. Al contrario di altre piattaforme, potrai vendere il solo oggetto che più pensi rappresenti la tua attività di artigiano.',
+      description: 'ezYou è un e-commerce minimale dove le persone possono vendere e comprare prodotti unici. Al contrario di altre piattaforme, potrai vendere il solo oggetto che più pensi rappresenti la tua attività di artigiano.',
       listItem1: 'Serve meno di un minuto per avere il tuo e-commerce online.',
       listItem2: 'Ti sarà dato un indirizzo internet che potrai condividere attraverso i tuoi social.',
       listItem3: 'Potrai decidere di accettare i pagamenti in un qualsiasi momento.',

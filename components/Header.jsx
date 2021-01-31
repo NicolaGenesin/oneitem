@@ -35,7 +35,7 @@ const Header = (props) => {
           >
             <Link href="/">
               <Heading as="h1" size="lg" letterSpacing="-.1rem">
-                One9
+                ezYou
               </Heading>
             </Link>
             {/* <Link href="/about">

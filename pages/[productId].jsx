@@ -29,7 +29,7 @@ const ProductPage = (props) => {
           </Center>
           <Box bg="tomato" rounded="md">
             <Link p="4px" href="/">
-              one9.com
+              ezyou.shop
             </Link>
           </Box>
         </Center>

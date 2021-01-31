@@ -15,7 +15,7 @@ export default class CustomApp extends App {
       <ChakraProvider theme={theme}>
         <AppWrapper>
           <Head>
-            <title>One9</title>
+            <title>ezYou</title>
             <link rel="icon" href="/favicon.ico" />
           </Head>
           <Component {...pageProps} />

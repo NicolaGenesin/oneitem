@@ -76,7 +76,7 @@ const CreateModal = (isOpen, onOpen, onClose, productId) => {
     };
   }, []);
 
-  const pageUrl = `oneitem.vercel.app/${productId}`;
+  const pageUrl = `ezyou.shop/${productId}`;
 
   return (
     <>

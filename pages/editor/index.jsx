@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import {
   useDisclosure, Box,
 } from '@chakra-ui/react';
@@ -11,13 +11,13 @@ import fire, { storage } from '../../config/fire-config';
 import uuidv4 from '../../utils/random';
 
 const placeholders = {
-  storeNamePlaceholder: 'Bread Pitt',
-  authorPlaceholder: 'John',
-  contactPlaceholder: 'john@gmail.com',
-  namePlaceholder: 'Teapot',
-  pricePlaceholder: 20,
+  storeNamePlaceholder: 'Vincent Lab',
+  authorPlaceholder: 'Giulia Pera',
+  contactPlaceholder: 'hello@vincent.com',
+  namePlaceholder: 'Zaino',
+  pricePlaceholder: 35,
   currencyPlaceholder: '€',
-  descriptionPlaceholder: '',
+  descriptionPlaceholder: 'Zaino mini. Foderato internamente e tasca con zip Base in ecopelle. Bretelle regolabili. Chiusura a sacca con coulisse e patta con asola e bottone. Può starci: l\'essenziale',
 };
 
 const defaultProductState = {
@@ -32,9 +32,27 @@ const defaultProductState = {
 };
 
 const CreatePage = (props) => {
-  const [state, setState] = useState(props);
+  const router = useRouter();
+  const storeName = router.query.name;
+  const [state, setState] = useState({
+    ...props,
+    storeName,
+    storeId: storeName.replace(/[^A-Z0-9]/ig, '-').toLowerCase(),
+  });
+
   const updateState = (target, value) => {
-    setState({ ...state, [target]: value });
+    if (target === 'name') {
+      setState({
+        ...state,
+        [target]: value,
+        id: `${value.replace(/[^A-Z0-9]/ig, '-').toLowerCase()}-${Math.floor(Math.random() * 10000000)}`,
+      });
+    } else {
+      setState({
+        ...state,
+        [target]: value,
+      });
+    }
   };
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -43,6 +61,7 @@ const CreatePage = (props) => {
 
     const data = {
       id: state.id,
+      storeId: state.storeId,
       author: state.author,
       contact: state.contact,
       currency: state.currency,
@@ -58,40 +77,48 @@ const CreatePage = (props) => {
       data.userId = fire.auth().currentUser.uid;
     }
 
-    const checkIfIdHasChanged = () => {
-      if (props.id !== state.id) {
-        fire.firestore()
-          .collection('products')
-          .doc(props.id)
-          .delete();
+    // const checkIfIdHasChanged = () => {
+    //   if (props.id !== state.id) {
+    //     fire.firestore()
+    //       .collection('products')
+    //       .doc(props.id)
+    //       .delete();
 
-        if (data.userId) {
-          fire.firestore()
-            .collection('users')
-            .doc(data.userId)
-            .set({ productId: state.id });
-        }
-      }
-    };
+    //     if (data.userId) {
+    //       fire.firestore()
+    //         .collection('users')
+    //         .doc(data.userId)
+    //         .set({ productId: state.id });
+    //     }
+    //   }
+    // };
 
     const imagesAlreadyUploaded = state.images.filter((image) => image.data_url.startsWith('https'));
 
     // store text infos before uploading images, keeping the old images already uploaded
     fire.firestore()
       .collection('products')
-      .doc(state.id)
+      .doc(data.id)
       .set({ ...data, images: imagesAlreadyUploaded })
       .catch((e) => {
         console.log(e);
       });
 
-    checkIfIdHasChanged();
+    fire.firestore()
+      .collection('stores')
+      .doc(data.storeId)
+      .set({ productIds: [data.id], name: data.storeName })
+      .catch((e) => {
+        console.log(e);
+      });
+
+    // checkIfIdHasChanged();
 
     const imagesToUpload = state.images.filter((image) => !image.data_url.startsWith('https'));
 
     imagesToUpload.forEach((image) => {
       const uploadTask = storage
-        .ref(`/${state.id}`)
+        .ref(`/${state.storeId}/${state.id}`)
         .child(`product_image_${uuidv4()}`)
         .putString(image.data_url.split(',')[1], 'base64', { contentType: 'image/jpg' });
 
@@ -122,7 +149,7 @@ const CreatePage = (props) => {
 
   return (
     <Box>
-      {CreateModal(isOpen, onOpen, onClose, state.id)}
+      {CreateModal(isOpen, onOpen, onClose, state.storeId, state.id)}
       <div className="container">
         <div className="left">
           <LeftColumn
@@ -154,7 +181,6 @@ const CreatePage = (props) => {
               overflow-y: scroll;
               width: 375px;
               float: left;
-              background: #f6fdfd;
           }
 
           .right {

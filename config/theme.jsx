@@ -1,24 +1,25 @@
 const colors = {
+  header: {
+    100: '#1a535c',
+  },
   outlineButton: {
-    100: '#ffd6ba',
-    600: '#fff',
+    100: '#1a535c',
+    600: '#1a535c',
   },
   primaryButton: {
-    500: '#ffd6ba',
-    600: '#f0c2a3',
+    500: '#206a75',
+    600: '#1a535c',
   },
   primaryImportantButton: {
-    500: '#555b6e',
-    600: '#555b6e',
+    500: '#206a75',
+    600: '#1a535c',
   },
   primary: {
-    50: '#bee3db',
-    100: '#89b0ae',
-    200: '#555b6e',
-    300: '#555b6e',
+    50: '#f7fff7',
+    100: '#4ecdc4',
   },
   textColor: {
-    900: '#f0f', // not used yet
+    50: '#1a535c',
   },
 };
 

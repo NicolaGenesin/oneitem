@@ -47,10 +47,10 @@ const LeftColumn = ({
     || !state.contact
     || !state.description
     || !state.name
-    || !state.storeName
-    || !state.id
-    || !state.images.length
-    || !isIdAvailable;
+    // || !state.storeName
+    // || !state.id
+    || !state.images.length;
+    // || !isIdAvailable;
 
   const maxImages = 6;
 
@@ -74,7 +74,7 @@ const LeftColumn = ({
 
   return (
     <Box bg="primary.50">
-      <VStack spacing="24px" pt="24px" pb="24px">
+      <VStack spacing="24px" pt="24px" pb="24px" color="textColor.50">
         <HStack w="340px">
           <Heading as="h3" size="lg">
             {createMode ? i18n.t('components.leftColumn.titleCreate') : i18n.t('components.leftColumn.titleEdit')}
@@ -90,31 +90,31 @@ const LeftColumn = ({
           </Link>
         </HStack>
         {(createMode && !isMobile) && (
-        <Alert status="info" bg="primary.100" rounded="md" w="340px">
+        <Alert status="info" bg="primary.50" rounded="md" w="340px">
           <AlertIcon />
           <Text fontSize="sm">
             {i18n.t('components.leftColumn.alertInfo')}
           </Text>
         </Alert>
         )}
-        <Box w="340px">
-          <Heading as="h5" size="sm" mb="8px">{i18n.t('components.leftColumn.storeName')}</Heading>
+        {/* <Box w="340px">
+          <Heading size="xs" mb="8px">{i18n.t('components.leftColumn.storeName')}</Heading>
           <Input bg="white" onChange={() => {}} onInput={(e) => updateState('storeName', e.target.value)} placeholder={placeholders.storeNamePlaceholder} value={product.storeName} />
-        </Box>
+        </Box> */}
         <Box w="340px">
-          <Heading as="h5" size="sm" mb="8px">{i18n.t('components.leftColumn.authorName')}</Heading>
+          <Heading size="xs" mb="8px">{i18n.t('components.leftColumn.authorName')}</Heading>
           <Input bg="white" onChange={() => {}} onInput={(e) => updateState('author', e.target.value)} placeholder={placeholders.authorPlaceholder} value={product.author} />
         </Box>
         <Box w="340px">
-          <Heading as="h5" size="sm" mb="8px">{i18n.t('components.leftColumn.itemName')}</Heading>
+          <Heading size="xs" mb="8px">{i18n.t('components.leftColumn.itemName')}</Heading>
           <Input bg="white" onChange={() => {}} onInput={(e) => updateState('name', e.target.value)} placeholder={placeholders.namePlaceholder} value={product.name} />
         </Box>
         <Box w="340px">
-          <Heading as="h5" size="sm" mb="8px">{i18n.t('components.leftColumn.itemDescription')}</Heading>
+          <Heading size="xs" mb="8px">{i18n.t('components.leftColumn.itemDescription')}</Heading>
           <Textarea bg="white" h="150px" onChange={() => {}} onInput={(e) => updateState('description', e.target.value)} placeholder={placeholders.descriptionPlaceholder} value={product.description} />
         </Box>
         <Box w="340px">
-          <Heading as="h5" size="sm" mb="8px">{i18n.t('components.leftColumn.price')}</Heading>
+          <Heading size="xs" mb="8px">{i18n.t('components.leftColumn.price')}</Heading>
           <InputGroup>
             <Select
               onChange={() => {}}
@@ -136,7 +136,7 @@ const LeftColumn = ({
               w="100%"
             >
               <NumberInputField
-                placeholder={20}
+                placeholder={placeholders.pricePlaceholder}
                 bg="white"
                 onInput={(e) => updateState('price', e.target.value)}
                 value={product.price}
@@ -145,7 +145,17 @@ const LeftColumn = ({
           </InputGroup>
         </Box>
         <Box w="340px">
-          <Heading as="h5" size="sm" mb="8px">{i18n.t('components.leftColumn.image')}</Heading>
+          <Heading size="xs" mb="8px">{i18n.t('components.leftColumn.contactEmail')}</Heading>
+          <Input
+            bg="white"
+            placeholder={placeholders.contactPlaceholder}
+            onInput={(e) => updateState('contact', e.target.value)}
+            onChange={() => {}}
+            value={product.contact}
+          />
+        </Box>
+        <Box w="340px">
+          <Heading size="xs" mb="8px">{i18n.t('components.leftColumn.image')}</Heading>
           <ImageUploading
             multiple
             value={state.images}
@@ -168,8 +178,8 @@ const LeftColumn = ({
                 <Button
                   width="100%"
                   height="100px"
-                  bg="primary.50"
-                  borderColor="primary.300"
+                  bg="white"
+                  borderColor="primary.100"
                   color="black"
                   variant="outline"
                   style={isDragging ? { color: 'red' } : undefined}
@@ -194,7 +204,7 @@ const LeftColumn = ({
                         objectFit="cover"
                       />
                       <Button
-                        borderColor="primary.300"
+                        borderColor="primary.100"
                         color="black"
                         variant="outline"
                         onClick={() => onImageRemove(index)}
@@ -208,18 +218,8 @@ const LeftColumn = ({
             )}
           </ImageUploading>
         </Box>
-        <Box w="340px">
-          <Heading as="h5" size="sm" mb="8px">{i18n.t('components.leftColumn.contactEmail')}</Heading>
-          <Input
-            bg="white"
-            placeholder={placeholders.contactPlaceholder}
-            onInput={(e) => updateState('contact', e.target.value)}
-            onChange={() => {}}
-            value={product.contact}
-          />
-        </Box>
-        <Box w="340px">
-          <Heading as="h5" size="sm" mb="8px">{i18n.t('components.leftColumn.addressHere')}</Heading>
+        {/* <Box w="340px">
+          <Heading size="xs" mb="8px">{i18n.t('components.leftColumn.addressHere')}</Heading>
           <InputGroup>
             <InputLeftAddon children="ezyou.shop/" />
             <Input
@@ -257,8 +257,8 @@ const LeftColumn = ({
               </Box>
             </Alert>
           )}
-        </Box>
-        <HStack w="340px" pt="24px">
+        </Box> */}
+        <HStack w="340px">
           {createMode
            && (
            <Button

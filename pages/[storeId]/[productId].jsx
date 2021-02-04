@@ -3,9 +3,9 @@ import Router from 'next/router';
 import {
   Box, Divider, Center, Link, Text,
 } from '@chakra-ui/react';
-import Product from '../components/Product';
-import fire from '../config/fire-config';
-import usei18n from '../i18n/index';
+import Product from '../../components/Product';
+import fire from '../../config/fire-config';
+import usei18n from '../../i18n/index';
 
 const ProductPage = (props) => {
   const i18n = usei18n();
@@ -20,7 +20,7 @@ const ProductPage = (props) => {
     <Box>
       <Product preview={false} product={props} />
       <Divider orientation="horizontal" />
-      <Box backgroundColor="primary.300">
+      <Box backgroundColor="primary.100">
         <Center p="16px" color="white">
           <Center>
             <Text mr="8px" fontSize="sm">
@@ -29,7 +29,7 @@ const ProductPage = (props) => {
           </Center>
           <Box bg="tomato" rounded="md">
             <Link p="4px" href="/">
-              ezyou.shop
+              ezyou
             </Link>
           </Box>
         </Center>

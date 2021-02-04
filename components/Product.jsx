@@ -30,7 +30,7 @@ export default function Product({ product, preview }) {
         <Box>
           <Center>
             <Text>
-              {i18n.t('product.author', { author: product.author || 'Giulia Perin' })}
+              {i18n.t('product.author', { author: product.author || 'Giulia Pera' })}
             </Text>
           </Center>
           <HStack mt="48px">
@@ -51,7 +51,6 @@ export default function Product({ product, preview }) {
                     <Image
                       key={`index-${index}`}
                       bg="white"
-                      rounded="md"
                       boxSize="300px"
                       objectFit="cover"
                       src={image.data_url}
@@ -61,7 +60,6 @@ export default function Product({ product, preview }) {
                   : (
                     <Image
                       bg="white"
-                      rounded="md"
                       boxSize="300px"
                       objectFit="cover"
                       src="https://via.placeholder.com/500?text=　"

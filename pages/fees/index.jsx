@@ -21,11 +21,11 @@ function Main() {
           </Center>
           <List spacing={3} align="center">
             <ListItem>
-              <ListIcon as={MdCheckCircle} color="primary.200" />
+              <ListIcon as={MdCheckCircle} color="primary.100" />
               {i18n.t('fees.listItem1')}
             </ListItem>
             <ListItem>
-              <ListIcon as={MdInfoOutline} color="primary.200" />
+              <ListIcon as={MdInfoOutline} color="primary.100" />
               {i18n.t('fees.listItem2')}
               {' '}
               (
@@ -33,7 +33,7 @@ function Main() {
               ).
             </ListItem>
             <ListItem>
-              <ListIcon as={MdInfoOutline} color="primary.200" />
+              <ListIcon as={MdInfoOutline} color="primary.100" />
               {i18n.t('fees.listItem3')}
             </ListItem>
           </List>

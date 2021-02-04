@@ -16,7 +16,7 @@ import { isValidEmail } from '../utils/validation';
 import fire from '../config/fire-config';
 import usei18n from '../i18n/index';
 
-const CreateModal = (isOpen, onOpen, onClose, productId) => {
+const CreateModal = (isOpen, onOpen, onClose, storeId, productId) => {
   const i18n = usei18n();
   const initialRef = React.useRef();
   const [show, setShow] = React.useState(false);
@@ -25,7 +25,7 @@ const CreateModal = (isOpen, onOpen, onClose, productId) => {
   const [state, setState] = useState({ isLoading: false });
   const stateRef = useRef();
 
-  stateRef.current = { ...state, productId };
+  stateRef.current = { ...state, storeId, productId };
 
   const updateState = (target, value) => {
     setState({ ...state, [target]: value });
@@ -47,7 +47,7 @@ const CreateModal = (isOpen, onOpen, onClose, productId) => {
         fire.firestore()
           .collection('users')
           .doc(response.user.uid)
-          .set({ productId: newState.productId });
+          .set({ storeId: newState.storeId });
 
         setTimeout(() => {
           onClose();
@@ -76,7 +76,7 @@ const CreateModal = (isOpen, onOpen, onClose, productId) => {
     };
   }, []);
 
-  const pageUrl = `ezyou.shop/${productId}`;
+  const pageUrl = `ezyou.shop/${storeId}/${productId}`;
 
   return (
     <>

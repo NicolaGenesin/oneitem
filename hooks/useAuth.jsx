@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import fire from '../config/fire-config';
 
 const useAuth = () => {
-  const [authState, setAuthState] = useState({
+  const [loggedInState, setLoggedInState] = useState({
     isSignedIn: false,
     pending: true,
     user: null,
@@ -13,7 +13,7 @@ const useAuth = () => {
     const unregisterAuthObserver = fire.auth()
       .onAuthStateChanged((user) => {
         if (user) {
-          const getProduct = async () => {
+          const getProducts = async () => {
             const userResponse = await fire.firestore()
               .collection('users')
               .doc(user.uid)
@@ -21,23 +21,38 @@ const useAuth = () => {
 
             if (userResponse.exists) {
               const data = userResponse.data();
-              const productResponse = await fire.firestore()
-                .collection('products')
-                .doc(data.productId)
+              const storeResponse = await fire.firestore()
+                .collection('stores')
+                .doc(data.storeId)
                 .get();
 
-              if (productResponse.exists) {
-                setAuthState({
+              if (storeResponse.exists) {
+                const store = storeResponse.data();
+
+                store.products = [];
+
+                await Promise.all(store.productIds.map(async (productId) => {
+                  const productResponse = await fire.firestore()
+                    .collection('products')
+                    .doc(productId)
+                    .get();
+
+                  if (productResponse.exists) {
+                    store.products.push(productResponse.data());
+                  }
+                }));
+
+                setLoggedInState({
                   user,
                   pending: false,
                   isSignedIn: !!user,
-                  product: productResponse.data(),
+                  store,
                 });
               }
             }
           };
 
-          getProduct();
+          getProducts();
         } else {
           Router.push('/');
         }
@@ -45,7 +60,7 @@ const useAuth = () => {
     return () => unregisterAuthObserver();
   }, []);
 
-  return { auth: fire.auth, ...authState };
+  return { auth: fire.auth, loggedInState, setLoggedInState };
 };
 
 export default useAuth;

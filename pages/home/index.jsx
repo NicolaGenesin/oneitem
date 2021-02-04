@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Router from 'next/router';
 import {
-  Box,
+  Box, Image, Spacer, Badge,
   Button, Text, HStack, VStack, Stat, StatNumber,
   Heading, StatLabel, Center, IconButton, Input,
   Popover, PopoverTrigger, PopoverContent, PopoverHeader,
@@ -9,6 +9,7 @@ import {
 } from '@chakra-ui/react';
 import {
   MdBuild, MdDelete, MdPayment, MdExitToApp, MdLink,
+  MdAddCircleOutline, MdPermIdentity,
 } from 'react-icons/md';
 import {
   FaFacebook, FaInstagram, FaTwitter,
@@ -16,6 +17,9 @@ import {
 import {
   AiOutlineEye,
 } from 'react-icons/ai';
+import {
+  HiOutlineExternalLink,
+} from 'react-icons/hi';
 import { copyToClipboard } from '../../utils/document';
 import fire from '../../config/fire-config';
 import useAuth from '../../hooks/useAuth';
@@ -46,131 +50,158 @@ const editListing = (event) => {
   Router.push('/editor');
 };
 
-const changeListingStatus = (event, state, setState) => {
+const seeListing = (path) => {
+  Router.push(path);
+};
+
+const changeListingStatus = (event, product, loggedInState, setLoggedInState) => {
   event.preventDefault();
 
   const productReference = fire.firestore()
     .collection('products')
-    .doc(state.id);
+    .doc(product.id);
 
   productReference.update({
-    visible: !state.visible,
+    visible: !product.visible,
   });
 
-  setState({ ...state, visible: !state.visible });
+  const newLoggedInState = Object.assign(loggedInState, {});
+
+  const itemToUpdate = newLoggedInState.store.products
+    .find((x) => x.id === product.id);
+
+  itemToUpdate.visible = !itemToUpdate.visible;
+
+  setLoggedInState({ ...newLoggedInState });
 };
 
 const LoggedInHome = () => {
   const i18n = usei18n();
-
-  const {
-    pending,
-    user,
-    product,
-  } = useAuth();
-
-  const [state, setState] = useState({});
-
-  useEffect(() => {
-    if (product) {
-      setState(product);
-    }
-  }, [product]);
+  const auth = useAuth();
+  const { setLoggedInState } = auth;
+  const { loggedInState } = auth;
+  const { pending, store } = loggedInState;
 
   if (pending) {
     return <Loader />;
   }
 
-  const pageUrl = `oneitem.vercel.app/${state.id}`;
-
   return (
     <div>
       <div className="svgBg">
-        <Center h="100vh" bg="primary.100">
-          <Box bg="white" p="16px" rounded="md" boxShadow="2xl">
-            <VStack>
-              <Text mb="16px">
-                {i18n.t('home.hi', { email: user.email })}
-              </Text>
-              <Heading as="h2" size="xl">
-                {i18n.t('home.title')}
-              </Heading>
-              <HStack spacing="48px" mb="16px">
-                <VStack>
-                  <Stat>
-                    <StatLabel>{i18n.t('home.itemsSold')}</StatLabel>
-                    <StatNumber align="center">0</StatNumber>
-                  </Stat>
-                </VStack>
-                <VStack>
-                  <Stat>
-                    <StatLabel>{i18n.t('home.pageViews')}</StatLabel>
-                    <StatNumber align="center">{ state.views }</StatNumber>
-                  </Stat>
-                </VStack>
-              </HStack>
-              <Popover>
-                <PopoverTrigger>
-                  <Button w="300px" leftIcon={<MdPayment />} colorScheme="primaryButton" color="black">{i18n.t('home.acceptPayments')}</Button>
-                </PopoverTrigger>
-                <PopoverContent>
-                  <PopoverArrow />
-                  <PopoverCloseButton />
-                  <PopoverHeader>Not implemented / Non implementato</PopoverHeader>
-                  <PopoverBody>
-                    From here you will create an account with Stripe so you can receive money.
-                    After this is done, people will be able to buy your product.
-                  </PopoverBody>
-                </PopoverContent>
-              </Popover>
-              <Button w="300px" leftIcon={<MdBuild />} colorScheme="primaryButton" color="black" onClick={editListing}>{i18n.t('home.editListing')}</Button>
-              {state.visible && <Button w="300px" leftIcon={<MdDelete />} colorScheme="primaryButton" color="black" onClick={(event) => { changeListingStatus(event, state, setState); }}>{i18n.t('home.hideListing')}</Button>}
-              {!state.visible && <Button w="300px" leftIcon={<AiOutlineEye />} colorScheme="primaryButton" color="black" onClick={(event) => { changeListingStatus(event, state, setState); }}>{i18n.t('home.publishListing')}</Button>}
-              <Button w="300px" mb="24px" leftIcon={<MdExitToApp />} colorScheme="primaryButton" color="black" onClick={logout}>{i18n.t('home.logout')}</Button>
-              <Heading as="h2" size="xl">{i18n.t('home.share')}</Heading>
-              <Box>
-                <HStack w="300px" mb="16px">
-                  <Input variant="filled" value={pageUrl} onChange={() => {}} />
-                  <IconButton
-                    colorScheme="pink"
-                    aria-label="Link share"
-                    icon={<MdLink />}
-                    onClick={() => { copyToClipboard(pageUrl); }}
-                  />
+        <Center h="100%" bg="primary.50">
+          <VStack mt="5%" mb="5%" w={[340, 400, 560]}>
+            <Heading size="lg" mb="16px">
+              {i18n.t('home.hi', { storeName: store.name })}
+            </Heading>
+            <Box bg="white" p="16px" rounded="md" boxShadow="2xl" mb="16px" w="100%">
+              <VStack>
+                <HStack spacing="48px">
+                  <VStack>
+                    <Stat>
+                      <StatLabel>{i18n.t('home.itemsSold')}</StatLabel>
+                      <StatNumber align="center">0</StatNumber>
+                    </Stat>
+                  </VStack>
+                  <VStack>
+                    <Stat>
+                      <StatLabel>{i18n.t('home.pageViews')}</StatLabel>
+                      <StatNumber align="center">
+                        {
+                        store.products
+                          .map((product) => product.views)
+                          .reduce((prev, curr) => prev + curr, 0)
+                      }
+                      </StatNumber>
+                    </Stat>
+                  </VStack>
                 </HStack>
-                <Center>
-                  <HStack>
-                    <IconButton
-                      colorScheme="facebook"
-                      aria-label="Facebook share"
-                      icon={<FaFacebook />}
-                      onClick={() => { shareToFacebookHandler(pageUrl); }}
-                    />
-                    <IconButton
-                      colorScheme="twitter"
-                      aria-label="Twitter share"
-                      icon={<FaTwitter />}
-                      onClick={() => { shareToTwitterHandler(pageUrl); }}
-                    />
-                    {
-                    // TODO check http://www.sharelinkgenerator.com/
-                    /*
-                    <IconButton
-                      colorScheme="primaryButton"
-                      aria-label="Pinterest share"
-                      icon={<FaPinterest />}
-                    }
-                    <IconButton
-                      colorScheme="red"
-                      aria-label="Instagram share"
-                      icon={<FaInstagram />}/>
-                    */
-                    }
-                  </HStack>
-                </Center>
-              </Box>
-            </VStack>
-          </Box>
+                <Popover>
+                  <PopoverTrigger>
+                    <Button w="100%" leftIcon={<MdPayment />} colorScheme="primaryButton">{i18n.t('home.acceptPayments')}</Button>
+                  </PopoverTrigger>
+                  <PopoverContent>
+                    <PopoverArrow />
+                    <PopoverCloseButton />
+                    <PopoverHeader>Not implemented / Non implementato</PopoverHeader>
+                    <PopoverBody>
+                      From here you will create an account with Stripe so you can receive money.
+                      After this is done, people will be able to buy your product.
+                    </PopoverBody>
+                  </PopoverContent>
+                </Popover>
+                <Button w="100%" leftIcon={<MdAddCircleOutline />} colorScheme="primaryButton">{i18n.t('home.createNewListing')}</Button>
+                {/* <Button w="100%" leftIcon={<MdPermIdentity />} colorScheme="primaryButton" color="black">{i18n.t('home.changeStoreName')}</Button> */}
+              </VStack>
+            </Box>
+            <Heading size="lg" mb="16px">
+              {i18n.t('home.title')}
+            </Heading>
+            {store.products.map((product, index) => {
+              const pageUrl = `ezyou.shop/${product.storeId}/${product.id}`;
+
+              return (
+                <Box key={index} borderWidth="1px" borderRadius="lg" overflow="hidden" bg="white" boxShadow="2xl" mb="24px">
+                  <Image objectFit="cover" h="190px" w="100%" src={product.images[0].data_url} />
+                  <Box p="5">
+                    <Box d="flex" alignItems="baseline">
+                      <Badge borderRadius="md" colorScheme="teal">
+                        PUBLISHED
+                      </Badge>
+                      <Box
+                        color="gray.500"
+                        fontWeight="semibold"
+                        letterSpacing="wide"
+                        fontSize="xs"
+                        textTransform="uppercase"
+                        ml="2"
+                      >
+                        updated on 13/02/2021
+                      </Box>
+                    </Box>
+                    <Box
+                      mb="8px"
+                      mt="16px"
+                      fontWeight="bold"
+                      fontSize="lg"
+                      lineHeight="tight"
+                    >
+                      {product.name}
+                    </Box>
+                    <HStack>
+                      <Input p="8px" variant="filled" value={pageUrl} onChange={() => {}} />
+                      <IconButton
+                        colorScheme="pink"
+                        aria-label="Link share"
+                        icon={<MdLink />}
+                        onClick={() => { copyToClipboard(pageUrl); }}
+                      />
+                      <IconButton
+                        colorScheme="facebook"
+                        aria-label="Facebook share"
+                        icon={<FaFacebook />}
+                        onClick={() => { shareToFacebookHandler(pageUrl); }}
+                      />
+                      <IconButton
+                        colorScheme="twitter"
+                        aria-label="Twitter share"
+                        icon={<FaTwitter />}
+                        onClick={() => { shareToTwitterHandler(pageUrl); }}
+                      />
+                    </HStack>
+                    <HStack mt="16px">
+                      <Button variant="outline" size="xs" leftIcon={<HiOutlineExternalLink />} colorScheme="primaryButton" color="black" onClick={(event) => { seeListing(`${product.storeId}/${product.id}`); }}>{i18n.t('home.seeListing')}</Button>
+                      <Spacer />
+                      {product.visible && <Button variant="outline" size="xs" leftIcon={<MdDelete />} colorScheme="primaryButton" color="black" onClick={(event) => { changeListingStatus(event, product, loggedInState, setLoggedInState); }}>{i18n.t('home.hideListing')}</Button>}
+                      {!product.visible && <Button variant="outline" size="xs" leftIcon={<AiOutlineEye />} colorScheme="primaryButton" color="black" onClick={(event) => { changeListingStatus(event, product, loggedInState, setLoggedInState); }}>{i18n.t('home.publishListing')}</Button>}
+                      <Button variant="outline" size="xs" leftIcon={<MdBuild />} colorScheme="primaryButton" color="black" onClick={editListing}>{i18n.t('home.editListing')}</Button>
+                    </HStack>
+                  </Box>
+                </Box>
+              );
+            })}
+            <Button colorScheme="primaryButton" variant="outline" leftIcon={<MdExitToApp />} onClick={logout}>{i18n.t('home.logout')}</Button>
+          </VStack>
         </Center>
       </div>
       <style jsx>
@@ -184,10 +215,6 @@ const LoggedInHome = () => {
       </style>
     </div>
   );
-};
-
-LoggedInHome.getInitialProps = async function ({ req }) {
-  return {};
 };
 
 export default LoggedInHome;

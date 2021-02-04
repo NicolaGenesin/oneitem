@@ -1,15 +1,11 @@
 import React from 'react';
 import {
-  Box, Heading, Flex, Text, Button, Center, Link, HStack, StackDivider, useDisclosure,
+  Flex, Button, Center, Link,
+  HStack, useDisclosure, Spacer,
 } from '@chakra-ui/react';
 import usei18n from '../i18n/index';
 import LoginModal from './LoginModal';
-
-const MenuItems = ({ children }) => (
-  <Text mt={{ base: 4, md: 0 }} mr={6} display="block">
-    {children}
-  </Text>
-);
+import Logo from './Logo';
 
 const Header = (props) => {
   const i18n = usei18n();
@@ -20,38 +16,55 @@ const Header = (props) => {
       as="nav"
       align="center"
       wrap="wrap"
-      padding="1.5rem"
-      bg="primary.300"
+      pt="1.5rem"
+      pb="1.5rem"
+      pl="5%"
+      pr="5%"
+      bg="primary.50"
       color="white"
       {...props}
     >
       {LoginModal(isOpen, onOpen, onClose)}
-      <Box w="100%">
+      <HStack w="100%">
+        <Link href="/">
+          <Logo />
+        </Link>
+        <Spacer />
         <Center>
           <HStack
-            divider={<StackDivider borderColor="primary.200" />}
             spacing={10}
             align="stretch"
           >
-            <Link href="/">
-              <Heading as="h1" size="lg" letterSpacing="-.1rem">
-                ezYou
-              </Heading>
-            </Link>
-            {/* <Link href="/about">
-            Examples
-          </Link> */}
             <Center>
-              <Link href="/fees">
+              <Link
+                color="black"
+                href="/fees"
+                fontWeight="semibold"
+                letterSpacing="wide"
+              >
                 {i18n.t('header.fees')}
               </Link>
             </Center>
-            <Button colorScheme="outlineButton" variant="outline" onClick={onOpen}>
+            <Center>
+              <Link
+                color="black"
+                href="/fees"
+                fontWeight="semibold"
+                letterSpacing="wide"
+              >
+                {i18n.t('header.aboutus')}
+              </Link>
+            </Center>
+            <Button
+              letterSpacing="wide"
+              colorScheme="primaryImportantButton"
+              onClick={onOpen}
+            >
               {i18n.t('header.manage')}
             </Button>
           </HStack>
         </Center>
-      </Box>
+      </HStack>
     </Flex>
   );
 };

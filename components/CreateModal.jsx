@@ -18,8 +18,7 @@ import usei18n from '../i18n/index';
 
 const CreateModal = (isOpen, onOpen, onClose, storeId, productId) => {
   const i18n = usei18n();
-  const initialRef = React.useRef();
-  const [show, setShow] = React.useState(false);
+  const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
 
   const [state, setState] = useState({ isLoading: false });
@@ -82,7 +81,6 @@ const CreateModal = (isOpen, onOpen, onClose, storeId, productId) => {
     <>
       <Modal
         size="xl"
-        initialFocusRef={initialRef}
         isOpen={isOpen}
         onClose={onClose}
       >
@@ -119,7 +117,7 @@ const CreateModal = (isOpen, onOpen, onClose, storeId, productId) => {
             </Alert>
             <FormControl>
               <FormLabel mt="16px">{i18n.t('createModal.email')}</FormLabel>
-              <Input ref={initialRef} placeholder="john@gmail.com" onInput={(e) => updateState('email', e.target.value)} />
+              <Input placeholder="john@gmail.com" onInput={(e) => updateState('email', e.target.value)} />
             </FormControl>
             <FormLabel mt="16px">{i18n.t('createModal.password')}</FormLabel>
             <InputGroup size="md">

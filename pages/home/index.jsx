@@ -56,6 +56,12 @@ const seeListing = (event, path) => {
   Router.push(path);
 };
 
+const createNewProduct = (event) => {
+  event.preventDefault();
+
+  Router.push('/editor/');
+};
+
 const changeListingStatus = (event, product, loggedInState, setLoggedInState) => {
   event.preventDefault();
 
@@ -132,76 +138,89 @@ const LoggedInHome = () => {
                     </PopoverBody>
                   </PopoverContent>
                 </Popover>
-                <Button w="100%" leftIcon={<MdAddCircleOutline />} colorScheme="primaryButton">{i18n.t('home.createNewListing')}</Button>
+                <Button
+                  w="100%"
+                  leftIcon={<MdAddCircleOutline />}
+                  colorScheme="primaryButton"
+                  onClick={(event) => { createNewProduct(event); }}
+                >
+                  {i18n.t('home.createNewListing')}
+                </Button>
                 {/* <Button w="100%" leftIcon={<MdPermIdentity />} colorScheme="primaryButton" color="black">{i18n.t('home.changeStoreName')}</Button> */}
               </VStack>
             </Box>
             <Heading size="lg" mb="16px">
               {i18n.t('home.title')}
             </Heading>
-            {store.products.map((product, index) => {
-              const pageUrl = `ezyou.shop/${product.storeId}/${product.id}`;
+            {store.products
+              .sort((a, b) => b.updatedAt - a.updatedAt)
+              .map((product, index) => {
+                const pageUrl = `ezyou.shop/${product.storeId}/${product.id}`;
 
-              return (
-                <Box key={index} borderWidth="1px" borderRadius="lg" overflow="hidden" bg="white" boxShadow="2xl" mb="24px">
-                  <Image objectFit="cover" h="190px" w="100%" src={product.images[0].data_url} />
-                  <Box p="5">
-                    <Box d="flex" alignItems="baseline">
-                      <Badge borderRadius="md" colorScheme="teal">
-                        PUBLISHED
-                      </Badge>
-                      <Box
-                        color="gray.500"
-                        fontWeight="semibold"
-                        letterSpacing="wide"
-                        fontSize="xs"
-                        textTransform="uppercase"
-                        ml="2"
-                      >
-                        updated on 13/02/2021
+                return (
+                  <Box key={index} borderWidth="1px" borderRadius="lg" overflow="hidden" bg="white" boxShadow="2xl" mb="24px">
+                    <Image objectFit="cover" h="190px" w="100%" src={product.images[0].data_url} />
+                    <Box p="5">
+                      <Box d="flex" alignItems="baseline">
+                        <Badge borderRadius="md" colorScheme={product.visible ? 'teal' : 'yellow'}>
+                          {product.visible ? 'published' : 'unpublished'}
+                        </Badge>
+                        <Box
+                          color="gray.500"
+                          fontWeight="semibold"
+                          letterSpacing="wide"
+                          fontSize="xs"
+                          textTransform="uppercase"
+                          ml="2"
+                        >
+                          updated on
+                          {' '}
+                          {new Date(product.updatedAt * 1000).toLocaleString('us').slice(0, 10)}
+                        </Box>
                       </Box>
+                      <Box
+                        mb="8px"
+                        mt="16px"
+                        fontWeight="bold"
+                        fontSize="lg"
+                        lineHeight="tight"
+                      >
+                        {product.name}
+                      </Box>
+                      {product.visible && (
+                      <HStack>
+                        <Input p="8px" variant="filled" value={pageUrl} onChange={() => {}} />
+                        <IconButton
+                          colorScheme="pink"
+                          aria-label="Link share"
+                          icon={<MdLink />}
+                          onClick={() => { copyToClipboard(pageUrl); }}
+                        />
+                        <IconButton
+                          colorScheme="facebook"
+                          aria-label="Facebook share"
+                          icon={<FaFacebook />}
+                          onClick={() => { shareToFacebookHandler(pageUrl); }}
+                        />
+                        <IconButton
+                          colorScheme="twitter"
+                          aria-label="Twitter share"
+                          icon={<FaTwitter />}
+                          onClick={() => { shareToTwitterHandler(pageUrl); }}
+                        />
+                      </HStack>
+                      )}
+                      <HStack mt="16px">
+                        <Button variant="outline" size="xs" leftIcon={<HiOutlineExternalLink />} colorScheme="primaryButton" color="black" onClick={(event) => { seeListing(event, `${product.storeId}/${product.id}`); }}>{i18n.t('home.seeListing')}</Button>
+                        <Spacer />
+                        {product.visible && <Button variant="outline" size="xs" leftIcon={<MdDelete />} colorScheme="primaryButton" color="black" onClick={(event) => { changeListingStatus(event, product, loggedInState, setLoggedInState); }}>{i18n.t('home.hideListing')}</Button>}
+                        {!product.visible && <Button variant="outline" size="xs" leftIcon={<AiOutlineEye />} colorScheme="primaryButton" color="black" onClick={(event) => { changeListingStatus(event, product, loggedInState, setLoggedInState); }}>{i18n.t('home.publishListing')}</Button>}
+                        <Button variant="outline" size="xs" leftIcon={<MdBuild />} colorScheme="primaryButton" color="black" onClick={(event) => { editListing(event, product.id); }}>{i18n.t('home.editListing')}</Button>
+                      </HStack>
                     </Box>
-                    <Box
-                      mb="8px"
-                      mt="16px"
-                      fontWeight="bold"
-                      fontSize="lg"
-                      lineHeight="tight"
-                    >
-                      {product.name}
-                    </Box>
-                    <HStack>
-                      <Input p="8px" variant="filled" value={pageUrl} onChange={() => {}} />
-                      <IconButton
-                        colorScheme="pink"
-                        aria-label="Link share"
-                        icon={<MdLink />}
-                        onClick={() => { copyToClipboard(pageUrl); }}
-                      />
-                      <IconButton
-                        colorScheme="facebook"
-                        aria-label="Facebook share"
-                        icon={<FaFacebook />}
-                        onClick={() => { shareToFacebookHandler(pageUrl); }}
-                      />
-                      <IconButton
-                        colorScheme="twitter"
-                        aria-label="Twitter share"
-                        icon={<FaTwitter />}
-                        onClick={() => { shareToTwitterHandler(pageUrl); }}
-                      />
-                    </HStack>
-                    <HStack mt="16px">
-                      <Button variant="outline" size="xs" leftIcon={<HiOutlineExternalLink />} colorScheme="primaryButton" color="black" onClick={(event) => { seeListing(event, `${product.storeId}/${product.id}`); }}>{i18n.t('home.seeListing')}</Button>
-                      <Spacer />
-                      {product.visible && <Button variant="outline" size="xs" leftIcon={<MdDelete />} colorScheme="primaryButton" color="black" onClick={(event) => { changeListingStatus(event, product, loggedInState, setLoggedInState); }}>{i18n.t('home.hideListing')}</Button>}
-                      {!product.visible && <Button variant="outline" size="xs" leftIcon={<AiOutlineEye />} colorScheme="primaryButton" color="black" onClick={(event) => { changeListingStatus(event, product, loggedInState, setLoggedInState); }}>{i18n.t('home.publishListing')}</Button>}
-                      <Button variant="outline" size="xs" leftIcon={<MdBuild />} colorScheme="primaryButton" color="black" onClick={(event) => { editListing(event, product.id); }}>{i18n.t('home.editListing')}</Button>
-                    </HStack>
                   </Box>
-                </Box>
-              );
-            })}
+                );
+              })}
             <Button colorScheme="primaryButton" variant="outline" leftIcon={<MdExitToApp />} onClick={logout}>{i18n.t('home.logout')}</Button>
           </VStack>
         </Center>

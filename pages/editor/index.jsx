@@ -23,19 +23,19 @@ const placeholders = {
 };
 
 const CreatePage = () => {
-  const router = useRouter();
-  const storeName = router.query.name;
-  const { productId } = router.query;
-  const createMode = !productId && storeName;
   const auth = useAuth();
   const { setLoggedInState, loggedInState } = auth;
   const { pending, store, isSignedIn } = loggedInState;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [state, setState] = useState({});
+  const router = useRouter();
+  const storeName = router.query.name || (store && store.name);
+  const { productId } = router.query;
+  const createMode = !productId;
 
   useEffect(() => {
-    if (createMode && !isSignedIn) {
-      // new user
+    if ((createMode && !isSignedIn) || (createMode && isSignedIn)) {
+      // new user or existing user - add product
       setState({
         author: '',
         contact: '',
@@ -46,13 +46,11 @@ const CreatePage = () => {
         description: '',
         createMode,
         storeName,
-        storeId: storeName.replace(/[^A-Z0-9]/ig, '-').toLowerCase(),
+        storeId: storeName && storeName.replace(/[^A-Z0-9]/ig, '-').toLowerCase(),
       });
     } else if (!createMode && isSignedIn) {
       // update product
       setState(store.products.find((product) => product.id === productId));
-    } else if (createMode && isSignedIn) {
-      // existing user, add product
     } else {
       console.log('error');
     }
@@ -126,18 +124,32 @@ const CreatePage = () => {
     fire.firestore()
       .collection('products')
       .doc(data.id)
-      .set({ ...data, images: imagesAlreadyUploaded })
+      .set({
+        ...data,
+        images: imagesAlreadyUploaded,
+        updatedAt: Math.round(+new Date() / 1000),
+      })
       .catch((e) => {
         console.log(e);
       });
 
-    fire.firestore()
-      .collection('stores')
-      .doc(data.storeId)
-      .set({ productIds: [data.id], name: data.storeName })
-      .catch((e) => {
-        console.log(e);
-      });
+    if (isSignedIn) {
+      fire.firestore()
+        .collection('stores')
+        .doc(data.storeId)
+        .update({ productIds: fire.firestore.FieldValue.arrayUnion(data.id) })
+        .catch((e) => {
+          console.log(e);
+        });
+    } else {
+      fire.firestore()
+        .collection('stores')
+        .doc(data.storeId)
+        .set({ productIds: [data.id], name: data.storeName })
+        .catch((e) => {
+          console.log(e);
+        });
+    }
 
     // checkIfIdHasChanged();
 
@@ -167,7 +179,7 @@ const CreatePage = () => {
         });
     });
 
-    if (createMode) {
+    if (createMode && !isSignedIn) {
       onOpen();
     } else {
       Router.push('/home');

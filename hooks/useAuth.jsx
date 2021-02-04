@@ -53,16 +53,14 @@ const useAuth = (redirectToLandingPage) => {
           };
 
           getProducts();
+        } else if (redirectToLandingPage) {
+          Router.push('/');
         } else {
           setLoggedInState({
             user: undefined,
             pending: false,
             isSignedIn: !!user,
           });
-
-          if (redirectToLandingPage) {
-            Router.push('/');
-          }
         }
       });
     return () => unregisterAuthObserver();

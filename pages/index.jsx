@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { isMobile } from 'react-device-detect';
 import Router from 'next/router';
 import Link from 'next/link';
 import {
@@ -37,7 +38,7 @@ function Main() {
     <Box bg="primary.50">
       <Header />
       <HStack>
-        <Box w="55%" minH="100vh" pl="5%" pr="5%" pt="8%">
+        <Box w={isMobile ? '100%' : '55%'} minH="100vh" pl="5%" pr="5%" pt="8%">
           <Box>
             <Heading size="2xl" color="textColor.50">
               {i18n.t('homeSignedOut.titlePartOne')}
@@ -64,7 +65,7 @@ function Main() {
               </List>
             </Box>
             <Box mt="48px">
-              <VStack w="80%">
+              <VStack w={isMobile ? '100%' : '80%'}>
                 <InputGroup size="lg">
                   <InputLeftAddon
                     children="Your Shop Name"
@@ -94,6 +95,7 @@ function Main() {
             </Box>
           </Box>
         </Box>
+        {!isMobile && (
         <Box w="45%">
           <Image
             src="https://image.shutterstock.com/z/stock-photo-portrait-of-female-artisan-smiling-at-camera-while-working-with-leather-in-workshop-copy-space-1384220549.jpg"
@@ -101,6 +103,7 @@ function Main() {
             height="100vh"
           />
         </Box>
+        )}
       </HStack>
       <Footer />
     </Box>

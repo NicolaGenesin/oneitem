@@ -35,7 +35,7 @@ const i18n = rosetta({
     header: {
       fees: 'Fees',
       manage: 'Sign In',
-      aboutus: 'About Us',
+      aboutus: 'About',
     },
     fees: {
       title: 'Fees',

@@ -32,7 +32,7 @@ const Header = (props) => {
         <Spacer />
         <Center>
           <HStack
-            spacing={10}
+            spacing={5}
             align="stretch"
           >
             <Center>

@@ -39,7 +39,7 @@ function Main() {
       <Header />
       <HStack>
         <Box
-          w={isMobile ? '100%' : '55%'}
+          flex="1"
           textAlign={isMobile ? 'center' : 'left'}
           minH="100vh"
           pl="5%"
@@ -72,7 +72,7 @@ function Main() {
               </List>
             </Box>
             <Box mt="48px">
-              <VStack w={isMobile ? '100%' : '80%'}>
+              <VStack w="100%">
                 <InputGroup size="lg">
                   <InputLeftAddon
                     children="Your Shop Name"
@@ -103,7 +103,7 @@ function Main() {
           </Box>
         </Box>
         {!isMobile && (
-        <Box w="45%">
+        <Box flex="1">
           <Image
             src="https://image.shutterstock.com/z/stock-photo-portrait-of-female-artisan-smiling-at-camera-while-working-with-leather-in-workshop-copy-space-1384220549.jpg"
             objectFit="cover"

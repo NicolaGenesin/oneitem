@@ -38,7 +38,14 @@ function Main() {
     <Box bg="primary.50">
       <Header />
       <HStack>
-        <Box w={isMobile ? '100%' : '55%'} minH="100vh" pl="5%" pr="5%" pt="8%">
+        <Box
+          w={isMobile ? '100%' : '55%'}
+          textAlign={isMobile ? 'center' : 'left'}
+          minH="100vh"
+          pl="5%"
+          pr="5%"
+          pt="8%"
+        >
           <Box>
             <Heading size="2xl" color="textColor.50">
               {i18n.t('homeSignedOut.titlePartOne')}

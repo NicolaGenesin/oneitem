@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Router, { useRouter } from 'next/router';
 import {
   useDisclosure, Box,
@@ -7,8 +7,10 @@ import { isMobile } from 'react-device-detect';
 import Product from '../../components/Product';
 import CreateModal from '../../components/CreateModal';
 import LeftColumn from '../../components/LeftColumn';
+import Loader from '../../components/Loader';
 import fire, { storage } from '../../config/fire-config';
 import uuidv4 from '../../utils/random';
+import useAuth from '../../hooks/useAuth';
 
 const placeholders = {
   storeNamePlaceholder: 'Vincent Lab',
@@ -20,25 +22,51 @@ const placeholders = {
   descriptionPlaceholder: 'Zaino mini. Foderato internamente e tasca con zip Base in ecopelle. Bretelle regolabili. Chiusura a sacca con coulisse e patta con asola e bottone. Può starci: l\'essenziale',
 };
 
-const defaultProductState = {
-  storeName: '',
-  author: '',
-  contact: '',
-  name: '',
-  price: '',
-  currency: '',
-  images: [],
-  description: '',
-};
-
-const CreatePage = (props) => {
+const CreatePage = () => {
   const router = useRouter();
   const storeName = router.query.name;
-  const [state, setState] = useState({
-    ...props,
-    storeName,
-    storeId: storeName.replace(/[^A-Z0-9]/ig, '-').toLowerCase(),
-  });
+  const { productId } = router.query;
+  const createMode = !productId && storeName;
+  const auth = useAuth();
+  const { setLoggedInState, loggedInState } = auth;
+  const { pending, store, isSignedIn } = loggedInState;
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [state, setState] = useState({});
+
+  useEffect(() => {
+    if (createMode && !isSignedIn) {
+      // new user
+      setState({
+        author: '',
+        contact: '',
+        name: '',
+        price: '',
+        currency: '',
+        images: [],
+        description: '',
+        createMode,
+        storeName,
+        storeId: storeName.replace(/[^A-Z0-9]/ig, '-').toLowerCase(),
+      });
+    } else if (!createMode && isSignedIn) {
+      // update product
+      setState(store.products.find((product) => product.id === productId));
+    } else if (createMode && isSignedIn) {
+      // existing user, add product
+    } else {
+      console.log('error');
+    }
+  }, [createMode, isSignedIn]);
+
+  if (pending) {
+    // check if there's a user
+    return (
+      <Box>
+        {CreateModal(isOpen, onOpen, onClose, state.storeId, state.id)}
+        <Loader />
+      </Box>
+    );
+  }
 
   const updateState = (target, value) => {
     if (target === 'name') {
@@ -55,7 +83,6 @@ const CreatePage = (props) => {
     }
   };
 
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -140,7 +167,7 @@ const CreatePage = (props) => {
         });
     });
 
-    if (state.createMode) {
+    if (createMode) {
       onOpen();
     } else {
       Router.push('/home');
@@ -158,7 +185,7 @@ const CreatePage = (props) => {
             state={state}
             updateState={updateState}
             handleSubmit={handleSubmit}
-            createMode={state.createMode}
+            createMode={createMode}
             isMobile
           />
         </div>
@@ -213,39 +240,6 @@ const CreatePage = (props) => {
       </style>
     </Box>
   );
-};
-
-CreatePage.getInitialProps = async function ({ req }) {
-  const user = fire.auth().currentUser;
-
-  const getProduct = async () => {
-    const userResponse = await fire.firestore()
-      .collection('users')
-      .doc(user.uid)
-      .get();
-
-    if (userResponse.exists) {
-      const data = userResponse.data();
-      const productResponse = await fire.firestore()
-        .collection('products')
-        .doc(data.productId)
-        .get();
-
-      if (productResponse.exists) {
-        return { ...productResponse.data(), createMode: false };
-      }
-    }
-
-    return { createMode: true };
-  };
-
-  let initialProps = { createMode: true, ...defaultProductState };
-
-  if (user) {
-    initialProps = getProduct();
-  }
-
-  return initialProps;
 };
 
 export default CreatePage;

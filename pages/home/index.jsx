@@ -44,13 +44,15 @@ const acceptPayments = (event) => {
   event.preventDefault();
 };
 
-const editListing = (event) => {
+const editListing = (event, productId) => {
   event.preventDefault();
 
-  Router.push('/editor');
+  Router.push(`/editor/?productId=${productId}`);
 };
 
-const seeListing = (path) => {
+const seeListing = (event, path) => {
+  event.preventDefault();
+
   Router.push(path);
 };
 
@@ -190,11 +192,11 @@ const LoggedInHome = () => {
                       />
                     </HStack>
                     <HStack mt="16px">
-                      <Button variant="outline" size="xs" leftIcon={<HiOutlineExternalLink />} colorScheme="primaryButton" color="black" onClick={(event) => { seeListing(`${product.storeId}/${product.id}`); }}>{i18n.t('home.seeListing')}</Button>
+                      <Button variant="outline" size="xs" leftIcon={<HiOutlineExternalLink />} colorScheme="primaryButton" color="black" onClick={(event) => { seeListing(event, `${product.storeId}/${product.id}`); }}>{i18n.t('home.seeListing')}</Button>
                       <Spacer />
                       {product.visible && <Button variant="outline" size="xs" leftIcon={<MdDelete />} colorScheme="primaryButton" color="black" onClick={(event) => { changeListingStatus(event, product, loggedInState, setLoggedInState); }}>{i18n.t('home.hideListing')}</Button>}
                       {!product.visible && <Button variant="outline" size="xs" leftIcon={<AiOutlineEye />} colorScheme="primaryButton" color="black" onClick={(event) => { changeListingStatus(event, product, loggedInState, setLoggedInState); }}>{i18n.t('home.publishListing')}</Button>}
-                      <Button variant="outline" size="xs" leftIcon={<MdBuild />} colorScheme="primaryButton" color="black" onClick={editListing}>{i18n.t('home.editListing')}</Button>
+                      <Button variant="outline" size="xs" leftIcon={<MdBuild />} colorScheme="primaryButton" color="black" onClick={(event) => { editListing(event, product.id); }}>{i18n.t('home.editListing')}</Button>
                     </HStack>
                   </Box>
                 </Box>

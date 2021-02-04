@@ -2,7 +2,7 @@ import Router from 'next/router';
 import { useState, useEffect } from 'react';
 import fire from '../config/fire-config';
 
-const useAuth = () => {
+const useAuth = (redirectToLandingPage) => {
   const [loggedInState, setLoggedInState] = useState({
     isSignedIn: false,
     pending: true,
@@ -54,7 +54,15 @@ const useAuth = () => {
 
           getProducts();
         } else {
-          Router.push('/');
+          setLoggedInState({
+            user: undefined,
+            pending: false,
+            isSignedIn: !!user,
+          });
+
+          if (redirectToLandingPage) {
+            Router.push('/');
+          }
         }
       });
     return () => unregisterAuthObserver();

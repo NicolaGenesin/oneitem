@@ -71,6 +71,7 @@ function Main() {
                     fontWeight="semibold"
                   />
                   <Input
+                    ref={(input) => input && input.focus()}
                     isInvalid={isInvalid}
                     placeholder="Vincent Lab"
                     bg="white"

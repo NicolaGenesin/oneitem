@@ -3,11 +3,11 @@ import { isMobile } from 'react-device-detect';
 import Router from 'next/router';
 import Link from 'next/link';
 import {
-  Box, Center, Heading, Button, Input, List, ListItem,
+  Box, Heading, Button, Input, List, ListItem,
   ListIcon, HStack, Image, VStack, InputGroup, InputLeftAddon,
 } from '@chakra-ui/react';
 import {
-  MdCheckCircle, MdExtension, MdGroup, MdLink,
+  MdExtension, MdLink,
 } from 'react-icons/md';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -40,27 +40,20 @@ function Main() {
       <HStack>
         <Box
           flex="1"
-          textAlign={isMobile ? 'center' : 'left'}
-          minH="100vh"
+          textAlign={['center', 'left']}
+          minH="100%"
           pl="5%"
           pr="5%"
-          pt="8%"
+          pb="20%"
         >
-          <Box>
+          <Box pt={['8%', '10%']}>
             <Heading size="2xl" color="textColor.50">
               {i18n.t('homeSignedOut.titlePartOne')}
               <br />
               {i18n.t('homeSignedOut.titlePartTwo')}
             </Heading>
             <Box mt="48px" color="textColor.50">
-              {/* <Text align="center">
-                {i18n.t('homeSignedOut.description')}
-              </Text> */}
               <List spacing={3} mt="48px">
-                {/* <ListItem>
-                  <ListIcon as={MdCheckCircle} color="primary.100" />
-                  {i18n.t('homeSignedOut.listItem1')}
-                </ListItem> */}
                 <ListItem>
                   <ListIcon as={MdLink} color="textColor.50" />
                   {i18n.t('homeSignedOut.listItem2')}
@@ -72,7 +65,7 @@ function Main() {
               </List>
             </Box>
             <Box mt="48px">
-              <VStack w="100%">
+              <VStack w={['100%', '80%']}>
                 <InputGroup size="lg">
                   <InputLeftAddon
                     children="Your Shop Name"

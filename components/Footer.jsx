@@ -5,10 +5,15 @@ import React from 'react';
 
 const Footer = () => (
   <div className="footer">
-    <Box bg="primary.200" p="1rem">
+    <Box bg="primary.200" p="8px">
       <Center>
         <HStack>
-          <Text color="white">
+          <Text
+            color="white"
+            letterSpacing="wide"
+            fontWeight="semibold"
+            fontSize="xs"
+          >
             {new Date().getFullYear()}
             {' | '}
             © 1911 Industries Limited

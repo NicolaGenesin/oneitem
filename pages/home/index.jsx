@@ -79,7 +79,7 @@ const changeListingStatus = (event, product, loggedInState, setLoggedInState) =>
 
 const LoggedInHome = () => {
   const i18n = usei18n();
-  const auth = useAuth();
+  const auth = useAuth(true);
   const { setLoggedInState } = auth;
   const { loggedInState } = auth;
   const { pending, store } = loggedInState;

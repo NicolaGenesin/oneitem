@@ -39,8 +39,8 @@ export default function Product({ product, preview }) {
               boxShadow="2xl"
               mr={['0px', '48px']}
               rounded="md"
-              w={['340px', '500px']}
-              h={['340px', '500px']}
+              w={['340px', '400px']}
+              h={['340px', '400px']}
             >
               <Carousel
                 showArrows={false}
@@ -58,7 +58,7 @@ export default function Product({ product, preview }) {
                     <Image
                       key={`index-${index}`}
                       bg="white"
-                      boxSize={['340px', '500px']}
+                      boxSize={['340px', '400px']}
                       objectFit="cover"
                       src={image.data_url}
                       fallbackSrc="https://via.placeholder.com/500?text=　"
@@ -67,7 +67,7 @@ export default function Product({ product, preview }) {
                   : (
                     <Image
                       bg="white"
-                      boxSize={['340px', '500px']}
+                      boxSize={['340px', '400px']}
                       objectFit="cover"
                       src="https://via.placeholder.com/500?text=　"
                       // src="https://image.shutterstock.com/image-photo/sky-blue-handbag-purse-beautiful-600w-1174206280.jpg"
@@ -75,7 +75,7 @@ export default function Product({ product, preview }) {
                   )}
               </Carousel>
             </Box>
-            <Box maxW="400px">
+            <Box w={['340px', '400px']}>
               <Heading size="xl" mb="16px" mt={['24px', '0px']}>
                 {product.name || 'Zaino'}
               </Heading>

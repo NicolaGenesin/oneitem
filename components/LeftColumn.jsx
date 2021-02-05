@@ -2,17 +2,14 @@ import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import {
   Input, SimpleGrid, Textarea, VStack, InputGroup,
-  NumberInput, Select, Box, Image, Button, Center,
+  NumberInput, Select, Box, Image, Button,
   Heading, NumberInputField, HStack, IconButton,
-  Link, InputLeftAddon, InputRightElement, Spacer,
+  Link, Spacer,
   Alert, AlertIcon, Text,
 } from '@chakra-ui/react';
 import {
-  MdClose, MdCheck,
+  MdClose,
 } from 'react-icons/md';
-import {
-  AiFillExclamationCircle,
-} from 'react-icons/ai';
 import ImageUploading from 'react-images-uploading';
 import usei18n from '../i18n/index';
 import fire from '../config/fire-config';
@@ -32,7 +29,7 @@ const canUseThisId = async (id) => {
 };
 
 const LeftColumn = ({
-  placeholders, state, updateState, handleSubmit, createMode, product, isMobile,
+  placeholders, state, updateState, handleSubmit, createMode, product, isMobile, isLoading,
 }) => {
   const i18n = usei18n();
 
@@ -47,10 +44,8 @@ const LeftColumn = ({
     || !state.contact
     || !state.description
     || !state.name
-    // || !state.storeName
-    // || !state.id
-    || !state.images.length;
-    // || !isIdAvailable;
+    || !state.images.length
+    || isLoading;
 
   const maxImages = 6;
 
@@ -97,24 +92,59 @@ const LeftColumn = ({
           </Text>
         </Alert>
         )}
-        {/* <Box w="340px">
-          <Heading size="xs" mb="8px">{i18n.t('components.leftColumn.storeName')}</Heading>
-          <Input bg="white" onChange={() => {}} onInput={(e) => updateState('storeName', e.target.value)} placeholder={placeholders.storeNamePlaceholder} value={product.storeName} />
-        </Box> */}
         <Box w="340px">
-          <Heading size="xs" mb="8px">{i18n.t('components.leftColumn.authorName')}</Heading>
-          <Input bg="white" onChange={() => {}} onInput={(e) => updateState('author', e.target.value)} placeholder={placeholders.authorPlaceholder} value={product.author} />
+          <Heading
+            size="xs"
+            mb="8px"
+          >
+            {i18n.t('components.leftColumn.authorName')}
+          </Heading>
+          <Input
+            bg="white"
+            onChange={() => {}}
+            onInput={(e) => updateState('author', e.target.value)}
+            placeholder={placeholders.authorPlaceholder}
+            value={product.author}
+          />
         </Box>
         <Box w="340px">
-          <Heading size="xs" mb="8px">{i18n.t('components.leftColumn.itemName')}</Heading>
-          <Input bg="white" onChange={() => {}} onInput={(e) => updateState('name', e.target.value)} placeholder={placeholders.namePlaceholder} value={product.name} />
+          <Heading
+            size="xs"
+            mb="8px"
+          >
+            {i18n.t('components.leftColumn.itemName')}
+          </Heading>
+          <Input
+            bg="white"
+            onChange={() => {}}
+            onInput={(e) => updateState('name', e.target.value)}
+            placeholder={placeholders.namePlaceholder}
+            value={product.name}
+          />
         </Box>
         <Box w="340px">
-          <Heading size="xs" mb="8px">{i18n.t('components.leftColumn.itemDescription')}</Heading>
-          <Textarea bg="white" h="150px" onChange={() => {}} onInput={(e) => updateState('description', e.target.value)} placeholder={placeholders.descriptionPlaceholder} value={product.description} />
+          <Heading
+            size="xs"
+            mb="8px"
+          >
+            {i18n.t('components.leftColumn.itemDescription')}
+          </Heading>
+          <Textarea
+            bg="white"
+            h="150px"
+            onChange={() => {}}
+            onInput={(e) => updateState('description', e.target.value)}
+            placeholder={placeholders.descriptionPlaceholder}
+            value={product.description}
+          />
         </Box>
         <Box w="340px">
-          <Heading size="xs" mb="8px">{i18n.t('components.leftColumn.price')}</Heading>
+          <Heading
+            size="xs"
+            mb="8px"
+          >
+            {i18n.t('components.leftColumn.price')}
+          </Heading>
           <InputGroup>
             <Select
               onChange={() => {}}
@@ -218,46 +248,6 @@ const LeftColumn = ({
             )}
           </ImageUploading>
         </Box>
-        {/* <Box w="340px">
-          <Heading size="xs" mb="8px">{i18n.t('components.leftColumn.addressHere')}</Heading>
-          <InputGroup>
-            <InputLeftAddon children="ezyou.shop/" />
-            <Input
-              bg="white"
-              type="text"
-              placeholder="turtle-teapot"
-              value={product.id}
-              onInput={async (e) => {
-                const id = e.target.value.replace(/[^A-Z0-9]/ig, '-');
-
-                updateState('id', id);
-              }}
-            />
-            {
-            state.id
-              && (
-              <InputRightElement
-                children={
-                !isIdAvailable
-                  ? <AiFillExclamationCircle color="green.500" />
-                  : <MdCheck color="green.500" />
-              }
-              />
-              )
-            }
-          </InputGroup>
-          {!isIdAvailable
-          && (
-            <Alert status="error" rounded="md" mt="16px">
-              <AlertIcon />
-              <Box>
-                <Text fontSize="sm">
-                  {i18n.t('components.leftColumn.alertNoIdAvailabilityInfo')}
-                </Text>
-              </Box>
-            </Alert>
-          )}
-        </Box> */}
         <HStack w="340px">
           {createMode
            && (
@@ -268,6 +258,8 @@ const LeftColumn = ({
              colorScheme="primaryImportantButton"
              color="white"
              onClick={handleSubmit}
+             isLoading={isLoading}
+             loadingText="TODO"
            >
              {i18n.t('components.leftColumn.buttonCreate')}
            </Button>
@@ -281,6 +273,8 @@ const LeftColumn = ({
              color="white"
              disabled={isDisabled}
              onClick={handleSubmit}
+             isLoading={isLoading}
+             loadingText="TODO"
            >
              {i18n.t('components.leftColumn.buttonUpdate')}
            </Button>

@@ -11,6 +11,7 @@ import Loader from '../../components/Loader';
 import fire, { storage } from '../../config/fire-config';
 import uuidv4 from '../../utils/random';
 import useAuth from '../../hooks/useAuth';
+import { uploadImages } from '../../utils/upload';
 
 const placeholders = {
   storeNamePlaceholder: 'Vincent Lab',
@@ -24,10 +25,11 @@ const placeholders = {
 
 const CreatePage = () => {
   const auth = useAuth();
-  const { setLoggedInState, loggedInState } = auth;
+  const { loggedInState } = auth;
   const { pending, store, isSignedIn } = loggedInState;
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [state, setState] = useState({});
+  const [isLoading, setSavingState] = useState(false);
   const router = useRouter();
   const storeName = router.query.name || (store && store.name);
   const { productId } = router.query;
@@ -57,7 +59,7 @@ const CreatePage = () => {
   }, [createMode, isSignedIn]);
 
   if (pending) {
-    // check if there's a user
+    // add loader while we check if there's a user
     return (
       <Box>
         {CreateModal(isOpen, onOpen, onClose, state.storeId, state.id)}
@@ -81,8 +83,10 @@ const CreatePage = () => {
     }
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
+
+    setSavingState(true);
 
     const data = {
       id: state.id,
@@ -101,22 +105,6 @@ const CreatePage = () => {
     if (fire.auth().currentUser) {
       data.userId = fire.auth().currentUser.uid;
     }
-
-    // const checkIfIdHasChanged = () => {
-    //   if (props.id !== state.id) {
-    //     fire.firestore()
-    //       .collection('products')
-    //       .doc(props.id)
-    //       .delete();
-
-    //     if (data.userId) {
-    //       fire.firestore()
-    //         .collection('users')
-    //         .doc(data.userId)
-    //         .set({ productId: state.id });
-    //     }
-    //   }
-    // };
 
     const imagesAlreadyUploaded = state.images.filter((image) => image.data_url.startsWith('https'));
 
@@ -151,33 +139,11 @@ const CreatePage = () => {
         });
     }
 
-    // checkIfIdHasChanged();
-
     const imagesToUpload = state.images.filter((image) => !image.data_url.startsWith('https'));
 
-    imagesToUpload.forEach((image) => {
-      const uploadTask = storage
-        .ref(`/${state.storeId}/${state.id}`)
-        .child(`product_image_${uuidv4()}`)
-        .putString(image.data_url.split(',')[1], 'base64', { contentType: 'image/jpg' });
+    await uploadImages(imagesToUpload, state.storeId, state.id);
 
-      uploadTask.on('state_changed',
-        () => {},
-        (error) => {
-          console.log(error);
-        }, async () => {
-          const data_url = await uploadTask.snapshot.ref.getDownloadURL();
-
-          fire.firestore()
-            .collection('products')
-            .doc(state.id)
-            .update({ images: fire.firestore.FieldValue.arrayUnion({ data_url }) })
-            .then(() => console.log('Image Uploaded'))
-            .catch((e) => {
-              console.log(e);
-            });
-        });
-    });
+    setSavingState(false);
 
     if (createMode && !isSignedIn) {
       onOpen();
@@ -198,7 +164,8 @@ const CreatePage = () => {
             updateState={updateState}
             handleSubmit={handleSubmit}
             createMode={createMode}
-            isMobile
+            isMobile={isMobile}
+            isLoading={isLoading}
           />
         </div>
         {!isMobile

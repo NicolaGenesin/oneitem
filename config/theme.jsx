@@ -17,6 +17,7 @@ const colors = {
   primary: {
     50: '#f7fff7',
     100: '#4ecdc4',
+    200: '#1a535c',
   },
   textColor: {
     50: '#1a535c',

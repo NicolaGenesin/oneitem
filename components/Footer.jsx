@@ -5,7 +5,7 @@ import React from 'react';
 
 const Footer = () => (
   <div className="footer">
-    <Box bg="primary.100" p="8px">
+    <Box bg="primary.200" p="16px">
       <Center>
         <HStack>
           <Text

@@ -164,12 +164,13 @@ const LeftColumn = ({
               precision={2}
               step={0.2}
               w="100%"
+              value={product.price}
+              onChange={() => {}}
             >
               <NumberInputField
                 placeholder={placeholders.pricePlaceholder}
                 bg="white"
                 onInput={(e) => updateState('price', e.target.value)}
-                value={product.price}
               />
             </NumberInput>
           </InputGroup>

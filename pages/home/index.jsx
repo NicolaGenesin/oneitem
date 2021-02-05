@@ -97,12 +97,19 @@ const LoggedInHome = () => {
   return (
     <div>
       <div className="svgBg">
-        <Center h="100%" bg="primary.50">
+        <Center bg="primary.50" pb="10%">
           <VStack mt="5%" mb="5%" w={[340, 400, 560]}>
             <Heading size="lg" mb="16px">
               {i18n.t('home.hi', { storeName: store.name })}
             </Heading>
-            <Box bg="white" p="16px" rounded="md" boxShadow="2xl" mb="16px" w="100%">
+            <Box
+              bg="white"
+              p="16px"
+              rounded="md"
+              boxShadow="2xl"
+              mb="16px"
+              w="100%"
+            >
               <VStack>
                 <HStack spacing="48px">
                   <VStack>
@@ -126,7 +133,13 @@ const LoggedInHome = () => {
                 </HStack>
                 <Popover>
                   <PopoverTrigger>
-                    <Button w="100%" leftIcon={<MdPayment />} colorScheme="primaryButton">{i18n.t('home.acceptPayments')}</Button>
+                    <Button
+                      w="100%"
+                      leftIcon={<MdPayment />}
+                      colorScheme="primaryButton"
+                    >
+                      {i18n.t('home.acceptPayments')}
+                    </Button>
                   </PopoverTrigger>
                   <PopoverContent>
                     <PopoverArrow />
@@ -158,7 +171,16 @@ const LoggedInHome = () => {
                 const pageUrl = `ezyou.shop/${product.storeId}/${product.id}`;
 
                 return (
-                  <Box key={index} borderWidth="1px" borderRadius="lg" overflow="hidden" bg="white" boxShadow="2xl" mb="24px" w="100%">
+                  <Box
+                    key={index}
+                    borderWidth="1px"
+                    borderRadius="lg"
+                    overflow="hidden"
+                    bg="white"
+                    boxShadow="2xl"
+                    mb="24px"
+                    w="100%"
+                  >
                     <Image
                       bg="placeholder.50"
                       objectFit="cover"
@@ -166,9 +188,17 @@ const LoggedInHome = () => {
                       w="100%"
                       src={product.images[0].data_url}
                     />
-                    <Box p="5">
-                      <Box d="flex" alignItems="baseline">
-                        <Badge borderRadius="md" colorScheme={product.visible ? 'teal' : 'yellow'}>
+                    <Box
+                      p="5"
+                    >
+                      <Box
+                        d="flex"
+                        alignItems="baseline"
+                      >
+                        <Badge
+                          borderRadius="md"
+                          colorScheme={product.visible ? 'teal' : 'yellow'}
+                        >
                           {product.visible ? 'published' : 'unpublished'}
                         </Badge>
                         <Box
@@ -195,7 +225,12 @@ const LoggedInHome = () => {
                       </Box>
                       {product.visible && (
                       <HStack>
-                        <Input p="8px" variant="filled" value={pageUrl} onChange={() => {}} />
+                        <Input
+                          p="8px"
+                          variant="filled"
+                          value={pageUrl}
+                          onChange={() => {}}
+                        />
                         <IconButton
                           colorScheme="pink"
                           aria-label="Link share"
@@ -217,11 +252,61 @@ const LoggedInHome = () => {
                       </HStack>
                       )}
                       <HStack mt="16px">
-                        <Button variant="outline" size="xs" leftIcon={<HiOutlineExternalLink />} colorScheme="primaryButton" color="black" onClick={(event) => { seeListing(event, `${product.storeId}/${product.id}`); }}>{i18n.t('home.seeListing')}</Button>
+                        <Button
+                          variant="outline"
+                          size="xs"
+                          leftIcon={<HiOutlineExternalLink />}
+                          colorScheme="primaryButton"
+                          color="black"
+                          onClick={(event) => { seeListing(event, `${product.storeId}/${product.id}`); }}
+                        >
+                          {i18n.t('home.seeListing')}
+                        </Button>
                         <Spacer />
-                        {product.visible && <Button variant="outline" size="xs" leftIcon={<MdDelete />} colorScheme="primaryButton" color="black" onClick={(event) => { changeListingStatus(event, product, loggedInState, setLoggedInState); }}>{i18n.t('home.hideListing')}</Button>}
-                        {!product.visible && <Button variant="outline" size="xs" leftIcon={<AiOutlineEye />} colorScheme="primaryButton" color="black" onClick={(event) => { changeListingStatus(event, product, loggedInState, setLoggedInState); }}>{i18n.t('home.publishListing')}</Button>}
-                        <Button variant="outline" size="xs" leftIcon={<MdBuild />} colorScheme="primaryButton" color="black" onClick={(event) => { editListing(event, product.id); }}>{i18n.t('home.editListing')}</Button>
+                        {product.visible && (
+                        <Button
+                          variant="outline"
+                          size="xs"
+                          leftIcon={<MdDelete />}
+                          colorScheme="primaryButton"
+                          color="black"
+                          onClick={(event) => {
+                            changeListingStatus(event,
+                              product,
+                              loggedInState,
+                              setLoggedInState);
+                          }}
+                        >
+                          {i18n.t('home.hideListing')}
+                        </Button>
+                        )}
+                        {!product.visible && (
+                        <Button
+                          variant="outline"
+                          size="xs"
+                          leftIcon={<AiOutlineEye />}
+                          colorScheme="primaryButton"
+                          color="black"
+                          onClick={(event) => {
+                            changeListingStatus(event,
+                              product,
+                              loggedInState,
+                              setLoggedInState);
+                          }}
+                        >
+                          {i18n.t('home.publishListing')}
+                        </Button>
+                        )}
+                        <Button
+                          variant="outline"
+                          size="xs"
+                          leftIcon={<MdBuild />}
+                          colorScheme="primaryButton"
+                          color="black"
+                          onClick={(event) => { editListing(event, product.id); }}
+                        >
+                          {i18n.t('home.editListing')}
+                        </Button>
                       </HStack>
                     </Box>
                   </Box>

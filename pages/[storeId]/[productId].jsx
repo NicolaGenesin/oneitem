@@ -26,8 +26,9 @@ const ProductPage = (props) => {
         <meta property="og:title" content="ezyou online shop" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://ezyou.shop" />
-        <meta property="og:image" content={props.images[0].data_url} />
-        <meta property="og:image:type" content="image/jpeg" />
+        {/* <meta property="og:image" content={props.images[0].data_url} /> */}
+        <meta property="og:image" content="https://cdn.obag.filoblu.com/media/catalog/product/cache/25162cc576cf81151d28507649e6339b/c/d/cd152e31ae9716767c433ab9fd7f71b5.png" />
+        {/* <meta property="og:image:type" content="image/jpeg" /> */}
         <meta property="og:image:width" content="200" />
         <meta property="og:image:height" content="200" />
         <meta property="og:description" content="Site description" />

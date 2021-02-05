@@ -3,6 +3,7 @@ import Router from 'next/router';
 import {
   Box, Center, Link, Text, VStack, Spacer,
 } from '@chakra-ui/react';
+import Head from 'next/head';
 import Product from '../../components/Product';
 import fire from '../../config/fire-config';
 import usei18n from '../../i18n/index';
@@ -18,21 +19,35 @@ const ProductPage = (props) => {
   }, [props]);
 
   return (
-    <VStack>
-      <Product preview={false} product={props} />
-      <Box>
-        <Center p="16px" color="white">
-          <Center>
-            <Text mr="8px" fontSize="sm" color="black">
-              {i18n.t('publicProduct.footer')}
-            </Text>
+    <Box>
+      <Head>
+        <title>ezyou</title>
+        <link rel="icon" href="/favicon.ico" />
+        <meta property="og:title" content="ezyou online shop" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://ezyou.shop" />
+        <meta property="og:image" content={props.images[0].data_url} />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:width" content="200" />
+        <meta property="og:image:height" content="200" />
+        <meta property="og:description" content="Site description" />
+      </Head>
+      <VStack>
+        <Product preview={false} product={props} />
+        <Box>
+          <Center p="16px" color="white">
+            <Center>
+              <Text mr="8px" fontSize="sm" color="black">
+                {i18n.t('publicProduct.footer')}
+              </Text>
+            </Center>
+            <Link p="4px" href="/">
+              <Logo width="60px" height="20px" />
+            </Link>
           </Center>
-          <Link p="4px" href="/">
-            <Logo width="60px" height="20px" />
-          </Link>
-        </Center>
-      </Box>
-    </VStack>
+        </Box>
+      </VStack>
+    </Box>
   );
 };
 

@@ -11,9 +11,12 @@ export default class CustomApp extends App {
   render() {
     const { Component, pageProps } = this.props;
 
+    console.log();
+
     return (
       <ChakraProvider theme={theme}>
         <AppWrapper>
+          {this.props.router.pathname !== '/[storeId]/[productId]' && (
           <Head>
             <title>ezyou</title>
             <link rel="icon" href="/favicon.ico" />
@@ -26,6 +29,7 @@ export default class CustomApp extends App {
             <meta property="og:image:height" content="200" />
             <meta property="og:description" content="Site description" />
           </Head>
+          )}
           <Component {...pageProps} />
         </AppWrapper>
         <style global jsx>

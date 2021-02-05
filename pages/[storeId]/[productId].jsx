@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import Router from 'next/router';
 import {
-  Box, Divider, Center, Link, Text,
+  Box, Center, Link, Text, VStack, Spacer,
 } from '@chakra-ui/react';
 import Product from '../../components/Product';
 import fire from '../../config/fire-config';
 import usei18n from '../../i18n/index';
+import Logo from '../../components/Logo';
 
 const ProductPage = (props) => {
   const i18n = usei18n();
@@ -17,24 +18,21 @@ const ProductPage = (props) => {
   }, [props]);
 
   return (
-    <Box>
+    <VStack>
       <Product preview={false} product={props} />
-      <Divider orientation="horizontal" />
-      <Box backgroundColor="primary.100">
+      <Box>
         <Center p="16px" color="white">
           <Center>
-            <Text mr="8px" fontSize="sm">
+            <Text mr="8px" fontSize="sm" color="black">
               {i18n.t('publicProduct.footer')}
             </Text>
           </Center>
-          <Box bg="tomato" rounded="md">
-            <Link p="4px" href="/">
-              ezyou
-            </Link>
-          </Box>
+          <Link p="4px" href="/">
+            <Logo width="60px" height="20px" />
+          </Link>
         </Center>
       </Box>
-    </Box>
+    </VStack>
   );
 };
 

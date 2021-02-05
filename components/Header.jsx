@@ -27,7 +27,7 @@ const Header = (props) => {
       {LoginModal(isOpen, onOpen, onClose)}
       <HStack w="100%">
         <Link href="/">
-          <Logo />
+          <Logo width="100px" height="40px" />
         </Link>
         <Spacer />
         <Center>

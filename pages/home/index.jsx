@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Router from 'next/router';
 import {
-  Box, Image, Spacer, Badge,
+  Box, Image, Spacer, Badge, Wrap, WrapItem,
   Button, Text, HStack, VStack, Stat, StatNumber,
   Heading, StatLabel, Center, IconButton, Input,
   Popover, PopoverTrigger, PopoverContent, PopoverHeader,
@@ -9,31 +9,26 @@ import {
 } from '@chakra-ui/react';
 import {
   MdBuild, MdDelete, MdPayment, MdExitToApp, MdLink,
-  MdAddCircleOutline, MdPermIdentity,
+  MdAddCircleOutline,
 } from 'react-icons/md';
-import {
-  FaFacebook, FaInstagram, FaTwitter,
-} from 'react-icons/fa';
 import {
   AiOutlineEye,
 } from 'react-icons/ai';
 import {
   HiOutlineExternalLink,
 } from 'react-icons/hi';
+import {
+  EmailShareButton, FacebookShareButton, LinkedinShareButton,
+  PinterestShareButton, RedditShareButton, TelegramShareButton,
+  TumblrShareButton, TwitterShareButton, WhatsappShareButton,
+  FacebookIcon, TwitterIcon, LinkedinIcon, PinterestIcon, TelegramIcon,
+  WhatsappIcon, RedditIcon, TumblrIcon, EmailIcon,
+} from 'react-share';
 import { copyToClipboard } from '../../utils/document';
 import fire from '../../config/fire-config';
 import useAuth from '../../hooks/useAuth';
 import Loader from '../../components/Loader';
 import usei18n from '../../i18n/index';
-
-const shareToFacebookHandler = (url) => {
-  window.open(`https://www.facebook.com/sharer/sharer.php?u=${url}`);
-};
-
-const shareToTwitterHandler = (url) => {
-  const text = escape(`Hi! Come check out our unique item at ${url}`);
-  window.open(`https://twitter.com/intent/tweet?text=${text}`);
-};
 
 const logout = (event) => {
   event.preventDefault();
@@ -168,7 +163,7 @@ const LoggedInHome = () => {
             {store.products
               .sort((a, b) => b.updatedAt - a.updatedAt)
               .map((product, index) => {
-                const pageUrl = `ezyou.shop/${product.storeId}/${product.id}`;
+                const pageUrl = `https://ezyou.shop/${product.storeId}/${product.id}`;
 
                 return (
                   <Box
@@ -223,41 +218,13 @@ const LoggedInHome = () => {
                       >
                         {product.name}
                       </Box>
-                      {product.visible && (
-                      <HStack>
-                        <Input
-                          p="8px"
-                          variant="filled"
-                          value={pageUrl}
-                          onChange={() => {}}
-                        />
-                        <IconButton
-                          colorScheme="pink"
-                          aria-label="Link share"
-                          icon={<MdLink />}
-                          onClick={() => { copyToClipboard(pageUrl); }}
-                        />
-                        <IconButton
-                          colorScheme="facebook"
-                          aria-label="Facebook share"
-                          icon={<FaFacebook />}
-                          onClick={() => { shareToFacebookHandler(pageUrl); }}
-                        />
-                        <IconButton
-                          colorScheme="twitter"
-                          aria-label="Twitter share"
-                          icon={<FaTwitter />}
-                          onClick={() => { shareToTwitterHandler(pageUrl); }}
-                        />
-                      </HStack>
-                      )}
-                      <HStack mt="16px">
+                      <HStack mt="16px" mb="16px">
                         <Button
-                          variant="outline"
-                          size="xs"
+                          variant="solid"
+                          size="sm"
                           leftIcon={<HiOutlineExternalLink />}
                           colorScheme="primaryButton"
-                          color="black"
+                          color="white"
                           onClick={(event) => { seeListing(event, `${product.storeId}/${product.id}`); }}
                         >
                           {i18n.t('home.seeListing')}
@@ -265,11 +232,11 @@ const LoggedInHome = () => {
                         <Spacer />
                         {product.visible && (
                         <Button
-                          variant="outline"
-                          size="xs"
+                          variant="solid"
+                          size="sm"
                           leftIcon={<MdDelete />}
-                          colorScheme="primaryButton"
-                          color="black"
+                          colorScheme="primaryImportantButton"
+                          color="white"
                           onClick={(event) => {
                             changeListingStatus(event,
                               product,
@@ -282,11 +249,11 @@ const LoggedInHome = () => {
                         )}
                         {!product.visible && (
                         <Button
-                          variant="outline"
-                          size="xs"
+                          variant="solid"
+                          size="sm"
                           leftIcon={<AiOutlineEye />}
                           colorScheme="primaryButton"
-                          color="black"
+                          color="white"
                           onClick={(event) => {
                             changeListingStatus(event,
                               product,
@@ -298,16 +265,114 @@ const LoggedInHome = () => {
                         </Button>
                         )}
                         <Button
-                          variant="outline"
-                          size="xs"
+                          variant="solid"
+                          size="sm"
                           leftIcon={<MdBuild />}
                           colorScheme="primaryButton"
-                          color="black"
+                          color="white"
                           onClick={(event) => { editListing(event, product.id); }}
                         >
                           {i18n.t('home.editListing')}
                         </Button>
                       </HStack>
+                      {product.visible && (
+                        <VStack>
+                          <Text
+                            w="100%"
+                            fontWeight="semibold"
+                            fontSize="sm"
+                            mb="8px"
+                          >
+                            Share:
+                          </Text>
+                          <HStack w="100%" mb="8px">
+                            <Input
+                              p="8px"
+                              variant="filled"
+                              value={pageUrl}
+                              onChange={() => {}}
+                            />
+                            <IconButton
+                              colorScheme="pink"
+                              aria-label="Link share"
+                              icon={<MdLink />}
+                              onClick={() => { copyToClipboard(pageUrl); }}
+                            />
+                          </HStack>
+                          <Wrap spacing="12px">
+                            <WrapItem>
+                              <FacebookShareButton
+                                url={pageUrl}
+                              >
+                                <FacebookIcon size={40} borderRadius="8px" />
+                              </FacebookShareButton>
+                            </WrapItem>
+                            <WrapItem>
+                              <TwitterShareButton
+                                url={pageUrl}
+                              >
+                                <TwitterIcon size={40} borderRadius="8px" />
+                              </TwitterShareButton>
+                            </WrapItem>
+                            <WrapItem>
+                              <WhatsappShareButton
+                                url={pageUrl}
+                              >
+                                <WhatsappIcon size={40} borderRadius="8px" />
+                              </WhatsappShareButton>
+                            </WrapItem>
+                            <WrapItem>
+                              <TelegramShareButton
+                                url={pageUrl}
+                              >
+                                <TelegramIcon size={40} borderRadius="8px" />
+                              </TelegramShareButton>
+                            </WrapItem>
+                            <WrapItem>
+                              <PinterestShareButton
+                                url={pageUrl}
+                                media={product.images[0].data_url}
+                              >
+                                <PinterestIcon size={40} borderRadius="8px" />
+                              </PinterestShareButton>
+                            </WrapItem>
+                            <WrapItem>
+                              <RedditShareButton
+                                url={pageUrl}
+                                title={product.name}
+                                windowWidth={660}
+                                windowHeight={460}
+                              >
+                                <RedditIcon size={40} borderRadius="8px" />
+                              </RedditShareButton>
+                            </WrapItem>
+                            <WrapItem>
+                              <TumblrShareButton
+                                url={pageUrl}
+                                title={product.name}
+                              >
+                                <TumblrIcon size={40} borderRadius="8px" />
+                              </TumblrShareButton>
+                            </WrapItem>
+                            <WrapItem>
+                              <LinkedinShareButton
+                                url={pageUrl}
+                              >
+                                <LinkedinIcon size={40} borderRadius="8px" />
+                              </LinkedinShareButton>
+                            </WrapItem>
+                            <WrapItem>
+                              <EmailShareButton
+                                url={pageUrl}
+                                subject={product.name}
+                                body="body"
+                              >
+                                <EmailIcon size={40} borderRadius="8px" />
+                              </EmailShareButton>
+                            </WrapItem>
+                          </Wrap>
+                        </VStack>
+                      )}
                     </Box>
                   </Box>
                 );

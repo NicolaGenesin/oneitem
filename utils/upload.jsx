@@ -1,3 +1,6 @@
+import fire, { storage } from '../config/fire-config';
+import uuidv4 from './random';
+
 const uploadImage = (image, storeId, id) => new Promise((resolve, reject) => {
   const uploadTask = storage
     .ref(`/${storeId}/${id}`)

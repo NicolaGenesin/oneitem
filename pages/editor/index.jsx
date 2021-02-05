@@ -8,8 +8,7 @@ import Product from '../../components/Product';
 import CreateModal from '../../components/CreateModal';
 import LeftColumn from '../../components/LeftColumn';
 import Loader from '../../components/Loader';
-import fire, { storage } from '../../config/fire-config';
-import uuidv4 from '../../utils/random';
+import fire from '../../config/fire-config';
 import useAuth from '../../hooks/useAuth';
 import { uploadImages } from '../../utils/upload';
 
@@ -54,7 +53,7 @@ const CreatePage = () => {
       // update product
       setState(store.products.find((product) => product.id === productId));
     } else {
-      console.log('error');
+      console.log('Loading...');
     }
   }, [createMode, isSignedIn]);
 

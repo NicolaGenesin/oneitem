@@ -15,7 +15,7 @@ export default function Product({ product, preview }) {
   }
 
   return (
-    <Box>
+    <Box h="100%">
       <Center>
         <Box m="24px">
           <Heading as="h2" size="xl">
@@ -28,13 +28,20 @@ export default function Product({ product, preview }) {
       <Divider orientation="horizontal" />
       <Center mt="5%">
         <Box>
-          <Center>
+          <Center mb="3%">
             <Text>
               {i18n.t('product.author', { author: product.author || 'Giulia Pera' })}
             </Text>
           </Center>
-          <HStack mt="48px">
-            <Box boxShadow="2xl" mr="48px" rounded="md" maxW="300px">
+          <Box p={4} display={{ md: 'flex' }}>
+            <Box
+              flexShrink={0}
+              boxShadow="2xl"
+              mr={['0px', '48px']}
+              rounded="md"
+              w={['340px', '500px']}
+              h={['340px', '500px']}
+            >
               <Carousel
                 showArrows={false}
                 autoPlay
@@ -51,7 +58,7 @@ export default function Product({ product, preview }) {
                     <Image
                       key={`index-${index}`}
                       bg="white"
-                      boxSize="300px"
+                      boxSize={['340px', '500px']}
                       objectFit="cover"
                       src={image.data_url}
                       fallbackSrc="https://via.placeholder.com/500?text=　"
@@ -60,7 +67,7 @@ export default function Product({ product, preview }) {
                   : (
                     <Image
                       bg="white"
-                      boxSize="300px"
+                      boxSize={['340px', '500px']}
                       objectFit="cover"
                       src="https://via.placeholder.com/500?text=　"
                       // src="https://image.shutterstock.com/image-photo/sky-blue-handbag-purse-beautiful-600w-1174206280.jpg"
@@ -69,29 +76,47 @@ export default function Product({ product, preview }) {
               </Carousel>
             </Box>
             <Box maxW="400px">
-              <Heading size="xl" mb="16px">
+              <Heading size="xl" mb="16px" mt={['24px', '0px']}>
                 {product.name || 'Zaino'}
               </Heading>
+              <Text
+                w="100%"
+                mb="16px"
+                fontWeight="bold"
+              >
+                Description
+              </Text>
               <Text fontSize="md" whiteSpace="pre-line">{product.description || 'Zaino mini. Foderato internamente e tasca con zip Base in ecopelle. Bretelle regolabili. Chiusura a sacca con coulisse e patta con asola e bottone. Può starci: l\'essenziale'}</Text>
-              <HStack mt="24px">
-                <Center>
-                  <Heading size="xl" mr="24px">
-                    {product.currency || '€'}
-                    {(product.price && product.price) || '35'}
-                  </Heading>
-                  <Button disabled colorScheme="primaryButton" color="white" size="lg">{i18n.t('product.buy')}</Button>
-                </Center>
-              </HStack>
+              <VStack mt="24px">
+                <Heading
+                  size="xl"
+                  w="100%"
+                >
+                  {product.currency || '€'}
+                  {(product.price && product.price) || '35'}
+                </Heading>
+                <Text
+                  w="100%"
+                  mb="16px"
+                  fontSize="xs"
+                >
+                  VAT included, postage included
+                </Text>
+                <Button
+                  w="100%"
+                  disabled
+                  colorScheme="primaryButton"
+                  color="white"
+                  size="lg"
+                >
+                  {i18n.t('product.buy')}
+
+                </Button>
+              </VStack>
             </Box>
-          </HStack>
+          </Box>
           <Center mt="48px" mb="64px">
             <VStack maxW="400px">
-              {/* <Heading as="h3" size="lg">
-                About us
-              </Heading>
-              <Text align="center">
-                One of the world's premier watchmakers, Movado Group, Inc. (MGI) designs, manufactures and distributes watches from nine of the most recognized and respected names in time: our wholly owned Movado, Concord and EBEL brands along with our Coach, HUGO BOSS, Juicy Couture, Lacoste, Tommy Hilfiger and Scuderia Ferrari licensed watch brands.
-              </Text> */}
               <Text>
                 {i18n.t('product.contact', { contact: product.contact || 'hello@vincent.com' })}
               </Text>

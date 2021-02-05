@@ -158,8 +158,14 @@ const LoggedInHome = () => {
                 const pageUrl = `ezyou.shop/${product.storeId}/${product.id}`;
 
                 return (
-                  <Box key={index} borderWidth="1px" borderRadius="lg" overflow="hidden" bg="white" boxShadow="2xl" mb="24px">
-                    <Image objectFit="cover" h="190px" w="100%" src={product.images[0].data_url} />
+                  <Box key={index} borderWidth="1px" borderRadius="lg" overflow="hidden" bg="white" boxShadow="2xl" mb="24px" w="100%">
+                    <Image
+                      bg="placeholder.50"
+                      objectFit="cover"
+                      h="190px"
+                      w="100%"
+                      src={product.images[0].data_url}
+                    />
                     <Box p="5">
                       <Box d="flex" alignItems="baseline">
                         <Badge borderRadius="md" colorScheme={product.visible ? 'teal' : 'yellow'}>

@@ -22,6 +22,9 @@ const colors = {
   textColor: {
     50: '#1a535c',
   },
+  placeholder: {
+    50: '#aab5ad',
+  },
 };
 
 export default colors;

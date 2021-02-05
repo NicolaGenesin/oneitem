@@ -20,6 +20,13 @@ export default class CustomApp extends App {
           </Head>
           <Component {...pageProps} />
         </AppWrapper>
+        <style global jsx>
+          {`
+            html, body {
+              background: #f7fff7;
+            }
+          `}
+        </style>
       </ChakraProvider>
     );
   }

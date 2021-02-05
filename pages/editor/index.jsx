@@ -41,7 +41,7 @@ const CreatePage = () => {
         contact: '',
         name: '',
         price: '',
-        currency: '',
+        currency: '€',
         images: [],
         description: '',
         createMode,

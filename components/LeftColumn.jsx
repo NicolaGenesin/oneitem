@@ -68,8 +68,16 @@ const LeftColumn = ({
   }, []);
 
   return (
-    <Box bg="primary.50">
-      <VStack spacing="24px" pt="24px" pb="24px" color="textColor.50">
+    <Box
+      bg="primary.50"
+      h="100%"
+    >
+      <VStack
+        spacing="24px"
+        pt="24px"
+        pb="24px"
+        color="textColor.50"
+      >
         <HStack w="340px">
           <Heading as="h3" size="lg">
             {createMode ? i18n.t('components.leftColumn.titleCreate') : i18n.t('components.leftColumn.titleEdit')}

@@ -21,14 +21,14 @@ const ProductPage = (props) => {
   return (
     <Box>
       <Head>
-        <title>ezyou</title>
+        <title>
+          {`ezyou - ${props.name}`}
+        </title>
         <link rel="icon" href="/favicon.ico" />
         <meta property="og:title" content="ezyou online shop" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://ezyou.shop" />
-        {/* <meta property="og:image" content={props.images[0].data_url} /> */}
         <meta property="og:image" content={props.images[0].data_url} />
-        {/* <meta property="og:image:type" content="image/jpeg" /> */}
         <meta property="og:image:width" content="200" />
         <meta property="og:image:height" content="200" />
         <meta property="og:description" content="Site description" />

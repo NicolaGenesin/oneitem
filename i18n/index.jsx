@@ -66,7 +66,7 @@ const i18n = rosetta({
       copiedToClipboard: 'Copied to your clipboard!',
     },
     publicProduct: {
-      footer: 'Website created with',
+      footer: 'Created with',
     },
     fourOfFour: {
       title: 'Page Not Found',

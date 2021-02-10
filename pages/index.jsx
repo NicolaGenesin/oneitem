@@ -9,6 +9,9 @@ import {
 import {
   MdExtension, MdLink,
 } from 'react-icons/md';
+import {
+  IoShapesSharp,
+} from 'react-icons/io5';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import fire from '../config/fire-config';
@@ -54,6 +57,10 @@ function Main() {
             </Heading>
             <Box mt="48px" color="textColor.50">
               <List spacing={3} mt="48px">
+                <ListItem>
+                  <ListIcon as={IoShapesSharp} color="textColor.50" />
+                  {i18n.t('homeSignedOut.listItem1')}
+                </ListItem>
                 <ListItem>
                   <ListIcon as={MdLink} color="textColor.50" />
                   {i18n.t('homeSignedOut.listItem2')}

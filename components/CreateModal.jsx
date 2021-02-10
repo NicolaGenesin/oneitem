@@ -111,7 +111,7 @@ const CreateModal = (isOpen, onOpen, onClose, storeId, productId) => {
               </HStack>
             </VStack>
             <Heading size="md" mt="16px" mb="16px">{i18n.t('createModal.whatsNext')}</Heading>
-            <Alert status="info" rounded="md">
+            <Alert status="success" rounded="md">
               <AlertIcon />
               {i18n.t('createModal.alertInfo')}
             </Alert>

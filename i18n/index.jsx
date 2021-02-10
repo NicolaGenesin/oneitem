@@ -20,6 +20,7 @@ const i18n = rosetta({
     homeSignedOut: {
       titlePartOne: 'Create your online',
       titlePartTwo: 'shop — in a minute',
+      inputLeftAddon: 'Your Store Name',
       description: 'ezyou is an online store, where people sell and buy unique items. Unlike others, we only let you sell the one piece you think represents you the most as a craftsman.',
       listItem1: 'It takes less than a minute to have your e-commerce up and running.',
       listItem2: 'Share your products through links we\'ll create for you.',

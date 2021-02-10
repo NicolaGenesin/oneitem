@@ -68,7 +68,7 @@ function Main() {
               <VStack w={['100%', '80%']}>
                 <InputGroup size="lg">
                   <InputLeftAddon
-                    children="Your Shop Name"
+                    children={i18n.t('homeSignedOut.inputLeftAddon')}
                     fontWeight="semibold"
                   />
                   <Input

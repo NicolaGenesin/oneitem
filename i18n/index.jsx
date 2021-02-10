@@ -33,15 +33,19 @@ const i18n = rosetta({
       contact: 'Contact: {{contact}}',
     },
     header: {
-      fees: 'Fees',
+      pricing: 'Pricing',
       manage: 'Sign In',
       aboutus: 'About',
     },
-    fees: {
-      title: 'Fees',
-      listItem1: 'There are no monthly costs associated with ezyou.',
-      listItem2: 'Each transaction has a standard 2.9% + ~0.3$ fee set by the payment processor',
-      listItem3: 'If you\'ve created your website after January 1st 2022, our commission will be 1% on the products you will sell. If your website has been created before that date, we will never take any commission from you.',
+    pricing: {
+      zero: '$0',
+      every: 'every month',
+      listItem1: 'No listing fees',
+      listItem2: '2.9% + ~$0.3 fee per transaction set by our payment processor',
+      listItem3: 'Full access to the platform',
+      listItem4: 'Unlimited shareable product links',
+      footer1: 'If you\'ve created your ezyou shop after January 1st 2022, our commission will be 1% on each transaction. If your ezyou shop has been created before that date, this won\'t apply to you.',
+      button: 'Get Started',
     },
     loginModal: {
       title: 'Welcome Back!',
@@ -132,10 +136,10 @@ const i18n = rosetta({
       contact: 'Contatto: {{contact}}',
     },
     header: {
-      fees: 'Costi',
+      pricing: 'Costi',
       manage: 'Accedi',
     },
-    fees: {
+    pricing: {
       title: 'Costi',
       listItem1: 'Non ci sono costi mensili ricorrenti ne costi legati alla creazione del vostro sito.',
       listItem2: 'Ogni transazione ha un costo fisso del 2.9% + ~0.25€ definito dal sistema di pagamento.',

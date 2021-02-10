@@ -38,17 +38,17 @@ const Header = (props) => {
             <Center>
               <Link
                 color="black"
-                href="/fees"
+                href="/pricing"
                 fontWeight="semibold"
                 letterSpacing="wide"
               >
-                {i18n.t('header.fees')}
+                {i18n.t('header.pricing')}
               </Link>
             </Center>
             <Center>
               <Link
                 color="black"
-                href="/fees"
+                href="/pricing"
                 fontWeight="semibold"
                 letterSpacing="wide"
               >

@@ -152,7 +152,7 @@ const CreatePage = () => {
   };
 
   return (
-    <Box>
+    <Box bg="white">
       {CreateModal(isOpen, onOpen, onClose, state.storeId, state.id)}
       <div className="container">
         <div className="left">

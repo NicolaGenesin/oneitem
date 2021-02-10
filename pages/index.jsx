@@ -79,7 +79,7 @@ function Main() {
                     onChange={(e) => { setState({ storeName: e.target.value, clicked: true }); }}
                   />
                 </InputGroup>
-                <Link href={state.storeName ? `/editor/?name=${state.storeName}` : ''} boxShadow="2xl">
+                <Link href={state.storeName ? `/editor/?name=${state.storeName}` : ''}>
                   <Button
                     boxShadow="dark-lg"
                     letterSpacing="wide"

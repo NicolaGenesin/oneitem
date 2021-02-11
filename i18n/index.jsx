@@ -212,7 +212,7 @@ const usei18n = () => {
   const router = useRouter();
   const { locale, defaultLocale } = router;
 
-  i18n.locale(locale || defaultLocale);
+  i18n.locale('en' || defaultLocale);
 
   return i18n;
 };

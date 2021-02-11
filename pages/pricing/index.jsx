@@ -47,7 +47,7 @@ function Main() {
                 {' '}
                 (
                 <a href="https://stripe.com/pricing" target="_blank" rel="noreferrer">Stripe</a>
-                ) *
+                )
               </ListItem>
               <ListItem>
                 {i18n.t('pricing.listItem3')}
@@ -57,14 +57,14 @@ function Main() {
               </ListItem>
             </UnorderedList>
           </Box>
-          <Text
+          {/* <Text
             fontSize="xs"
             mb="24px"
           >
             *
             {' '}
             {i18n.t('pricing.footer1')}
-          </Text>
+          </Text> */}
           <Link href="/">
             <Button
               boxShadow="2xl"

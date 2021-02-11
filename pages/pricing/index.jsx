@@ -14,7 +14,10 @@ function Main() {
     <Box bg="primary.50" h="100vh">
       <Header />
       <Center h="80vh">
-        <VStack>
+        <VStack
+          mr="16px"
+          ml="16px"
+        >
           <Box
             bg="white"
             p="16px"
@@ -54,7 +57,10 @@ function Main() {
               </ListItem>
             </UnorderedList>
           </Box>
-          <Text fontSize="xs" mb="48px" w={['80%', '60%']}>
+          <Text
+            fontSize="xs"
+            mb="24px"
+          >
             *
             {' '}
             {i18n.t('pricing.footer1')}

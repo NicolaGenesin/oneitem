@@ -23,7 +23,7 @@ export default class CustomApp extends App {
             <meta property="og:title" content="ezyou online shop" />
             <meta property="og:type" content="website" />
             <meta property="og:url" content="https://ezyou.shop" />
-            <meta property="og:image" content="https://www.telotrovo.it/wp-content/uploads/2016/02/siteimage.jpg" />
+            <meta property="og:image" content="https://ezyou.shop/assets/og-01.png" />
             <meta property="og:image:type" content="image/jpeg" />
             <meta property="og:image:width" content="200" />
             <meta property="og:image:height" content="200" />

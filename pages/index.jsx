@@ -105,7 +105,7 @@ function Main() {
         {!isMobile && (
         <Box flex="1">
           <Image
-            src="https://image.shutterstock.com/z/stock-photo-portrait-of-female-artisan-smiling-at-camera-while-working-with-leather-in-workshop-copy-space-1384220549.jpg"
+            src="assets/home-01.jpg"
             objectFit="cover"
             height="100vh"
           />

@@ -48,7 +48,7 @@ const Header = (props) => {
             <Center>
               <Link
                 color="black"
-                href="/pricing"
+                href="/about"
                 fontWeight="semibold"
                 letterSpacing="wide"
               >

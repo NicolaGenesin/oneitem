@@ -28,11 +28,11 @@ const i18n = rosetta({
     },
     about: {
       title1: 'Hi',
-      description1: 'I am Nicola and I am an entrepreneur and computer scientist. I\'ve created ezyou because I\'ve seen people spending dozens of hours trying to set up online shops or spending a fortune paying a dedicated agency. This platform will let you create a minimal online store. Unlike other solutions, I am providing you only with the essential tools to bootstrap your online presence from scratch.',
-      title2: 'Ok, but what does it mean?',
-      description2: 'After spending no more than a minute to add your product, your customers will be able to see and buy it on a page like',
+      description1: 'I am Nicola and I am an entrepreneur and computer scientist. I\'ve created ezyou, a minimal online store creator, because I\'ve witnessed people spending dozens of hours trying to set up online shops or spending a fortune paying a dedicated agency for an overengineered solution. Unlike others, I am providing you only with the essential tools to bootstrap your online presence from scratch.',
+      title2: 'Ok, but what does it mean for my business?',
+      description2: 'After spending no more than a minute to add your first product, your customers will be able to see and buy it on a page like',
       description2link: 'this one',
-      title3: 'Is it safe?',
+      title3: 'Ok, but is it safe?',
       description3: 'The only informations this platform stores are the ones needed to create the product pages. The payment platform (Stripe) handles all the payment information and, by design, you will be the only entity to have have full control over it.',
     },
     product: {

@@ -40,7 +40,7 @@ function Main() {
   return (
     <Box bg="primary.50">
       <Header />
-      <HStack>
+      <HStack align>
         <Box
           flex="1"
           textAlign={['center', 'left']}

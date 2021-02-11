@@ -14,16 +14,15 @@ function Main() {
   return (
     <Box bg="primary.50">
       <Header />
-      <HStack>
+      <HStack spacing={0} align>
         <Box
           flex="1"
-          textAlign={['center', 'left']}
           minH="100%"
-          pl="5%"
-          pr="5%"
-          pb="20%"
+          ml="5%"
+          mr="5%"
+          pt={['8%', '4%']}
         >
-          <Box pt={['8%', '10%']}>
+          <Box>
             <Heading size="2xl" color="textColor.50">
               {i18n.t('about.title1')}
             </Heading>
@@ -42,7 +41,6 @@ function Main() {
                 {i18n.t('about.description2')}
                 {' '}
                 <u>
-
                   <Link href="todo/todo-1" target="_blank">
                     {i18n.t('about.description2link')}
                   </Link>
@@ -60,21 +58,22 @@ function Main() {
               </Text>
             </Box>
           </Box>
-          <Link href="/">
-            <Button
-              mt="48px"
-              boxShadow="2xl"
-              letterSpacing="wide"
-              colorScheme="primaryImportantButton"
-              color="white"
-              size="lg"
-            >
-              {i18n.t('pricing.button')}
-            </Button>
-          </Link>
+          <Box mt="48px" mb="64px">
+            <Link href="/">
+              <Button
+                boxShadow="2xl"
+                letterSpacing="wide"
+                colorScheme="primaryImportantButton"
+                color="white"
+                size="lg"
+              >
+                {i18n.t('pricing.button')}
+              </Button>
+            </Link>
+          </Box>
         </Box>
         {!isMobile && (
-        <Box flex="1">
+        <Box flex="1" h="100%" w="100px">
           <Image
             src="https://image.shutterstock.com/z/stock-photo-portrait-of-female-artisan-smiling-at-camera-while-working-with-leather-in-workshop-copy-space-1384220549.jpg"
             objectFit="cover"

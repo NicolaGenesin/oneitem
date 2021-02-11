@@ -5,6 +5,7 @@ import {
 } from '@chakra-ui/react';
 import Header from '../../components/Header';
 import usei18n from '../../i18n/index';
+import Footer from '../../components/Footer';
 
 function Main() {
   const i18n = usei18n();
@@ -71,6 +72,7 @@ function Main() {
           </Link>
         </VStack>
       </Center>
+      <Footer />
     </Box>
   );
 }

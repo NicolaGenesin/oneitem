@@ -22,15 +22,15 @@ export const copyToClipboard = (url) => {
     document.body.removeChild(textArea);
   };
 
-  if (!navigator.clipboard) {
+  try {
+    navigator.clipboard.writeText(url).then(() => {
+      console.log('Async: Copying to clipboard was successful!');
+    }, (err) => {
+      console.error('Async: Could not copy text: ', err);
+    });
+  } catch (error) {
     fallbackCopyTextToClipboard(url);
   }
-
-  navigator.clipboard.writeText(url).then(() => {
-    console.log('Async: Copying to clipboard was successful!');
-  }, (err) => {
-    console.error('Async: Could not copy text: ', err);
-  });
 };
 
 export default { copyToClipboard };

@@ -4,7 +4,8 @@ import {
   Input, SimpleGrid, Textarea, VStack, InputGroup,
   NumberInput, Select, Box, Image, Button,
   Heading, NumberInputField, HStack, IconButton,
-  Link, Spacer, Text,
+  Link, Spacer, Text, NumberInputStepper,
+  NumberIncrementStepper, NumberDecrementStepper,
 } from '@chakra-ui/react';
 import {
   MdClose,
@@ -185,7 +186,7 @@ const LeftColumn = ({
               precision={2}
               step={0.2}
               w="100%"
-              value={product.price}
+              value={`${product.price}`}
               onChange={() => {}}
             >
               <NumberInputField
@@ -195,6 +196,74 @@ const LeftColumn = ({
                 onInput={(e) => updateState('price', e.target.value)}
               />
             </NumberInput>
+          </InputGroup>
+        </Box>
+        <Box w="340px">
+          <Heading
+            size="xs"
+            mb="8px"
+          >
+            {i18n.t('components.leftColumn.quantity')}
+          </Heading>
+          <InputGroup>
+            <NumberInput
+              min={0}
+              max={50000}
+              step={1}
+              w="100%"
+              value={`${product.quantity}`}
+              onChange={(value) => updateState('quantity', value)}
+            >
+              <NumberInputField
+                boxShadow="md"
+                placeholder={placeholders.quantityPlaceholder}
+                bg="white"
+                onInput={(e) => updateState('quantity', e.target.value)}
+              />
+              <NumberInputStepper>
+                <NumberIncrementStepper />
+                <NumberDecrementStepper />
+              </NumberInputStepper>
+            </NumberInput>
+          </InputGroup>
+        </Box>
+        <Box w="340px">
+          <Heading
+            size="xs"
+            mb="8px"
+          >
+            {i18n.t('components.leftColumn.deliveryEstimate')}
+          </Heading>
+          <InputGroup>
+            <NumberInput
+              min={0}
+              max={50000}
+              step={1}
+              maxW="65px"
+              mr="8px"
+              value={`${product.deliveryEstimateValue}`}
+              onChange={(value) => updateState('deliveryEstimateValue', parseInt(value))}
+            >
+              <NumberInputField
+                boxShadow="md"
+                bg="white"
+                onInput={(e) => updateState('deliveryEstimateValue', parseInt(e.target.value))}
+              />
+              <NumberInputStepper>
+                <NumberIncrementStepper />
+                <NumberDecrementStepper />
+              </NumberInputStepper>
+            </NumberInput>
+            <Select
+              boxShadow="md"
+              onChange={() => {}}
+              bg="white"
+              value={product.deliveryEstimateRange}
+              onInput={(e) => updateState('deliveryEstimateRange', e.target.value)}
+            >
+              <option value="days">{product.deliveryEstimateValue === 1 ? i18n.t('components.leftColumn.deliveryEstimateRangeDay') : i18n.t('components.leftColumn.deliveryEstimateRangeDays')}</option>
+              <option value="weeks">{product.deliveryEstimateValue === 1 ? i18n.t('components.leftColumn.deliveryEstimateRangeWeek') : i18n.t('components.leftColumn.deliveryEstimateRangeWeeks')}</option>
+            </Select>
           </InputGroup>
         </Box>
         <Box w="340px">

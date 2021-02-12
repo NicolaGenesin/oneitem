@@ -18,6 +18,7 @@ const placeholders = {
   contactPlaceholder: 'hello@vincent.com',
   namePlaceholder: 'Zaino',
   pricePlaceholder: 35,
+  quantityPlaceholder: 1,
   currencyPlaceholder: '€',
   descriptionPlaceholder: 'Zaino mini. Foderato internamente e tasca con zip Base in ecopelle. Bretelle regolabili. Chiusura a sacca con coulisse e patta con asola e bottone. Può starci: l\'essenziale',
 };
@@ -42,6 +43,9 @@ const CreatePage = () => {
         contact: '',
         name: '',
         price: '',
+        quantity: 1,
+        deliveryEstimateValue: 3,
+        deliveryEstimateRange: 'days',
         currency: '€',
         images: [],
         description: '',
@@ -96,6 +100,9 @@ const CreatePage = () => {
       description: state.description,
       name: state.name,
       price: state.price,
+      quantity: state.quantity,
+      deliveryEstimateValue: state.deliveryEstimateValue,
+      deliveryEstimateRange: state.deliveryEstimateRange,
       storeName: state.storeName,
       views: state.views || 0,
       visible: true,
@@ -197,7 +204,7 @@ const CreatePage = () => {
 
           /* width */
           ::-webkit-scrollbar {
-            width: 5px;
+            width: 6px;
           }
 
           /* Track */
@@ -207,12 +214,12 @@ const CreatePage = () => {
 
           /* Handle */
           ::-webkit-scrollbar-thumb {
-            background: #888; 
+            background: #378c99; 
           }
 
           /* Handle on hover */
           ::-webkit-scrollbar-thumb:hover {
-            background: #555; 
+            background: #1a535c; 
           }
         `}
       </style>

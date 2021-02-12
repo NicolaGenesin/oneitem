@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import Router from 'next/router';
 import {
-  Box, Center, Link, Text, VStack, Spacer,
+  Box, Center, Link, Text, VStack,
 } from '@chakra-ui/react';
 import Head from 'next/head';
+import Loader from 'react-spinners/BarLoader';
 import Product from '../../components/Product';
 import fire from '../../config/fire-config';
 import usei18n from '../../i18n/index';
@@ -17,6 +18,10 @@ const ProductPage = (props) => {
       Router.push('/404');
     }
   }, [props]);
+
+  if (!props.id) {
+    return <Loader />;
+  }
 
   return (
     <Box>

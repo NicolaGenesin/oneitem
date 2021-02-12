@@ -21,7 +21,7 @@ const CreateModal = (isOpen, onOpen, onClose, storeId, productId) => {
   const [show, setShow] = useState(false);
   const handleClick = () => setShow(!show);
 
-  const [state, setState] = useState({ isLoading: false });
+  const [state, setState] = useState({ isLoading: false, error: false });
   const stateRef = useRef();
 
   stateRef.current = { ...state, storeId, productId };

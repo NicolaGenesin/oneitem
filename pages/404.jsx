@@ -24,7 +24,7 @@ export default function FourOhFour() {
                   mt="8px"
                   colorScheme="primaryButton"
                   color="white"
-                  variant="outline"
+                  variant="solid"
                 >
                   {i18n.t('fourOfFour.button')}
                 </Button>

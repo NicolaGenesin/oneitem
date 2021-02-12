@@ -41,7 +41,7 @@ function Main() {
                 {i18n.t('about.description2')}
                 {' '}
                 <u>
-                  <Link href="todo/todo-1" target="_blank">
+                  <Link href="peralab/zaino-in-ecopelle-810059" target="_blank">
                     {i18n.t('about.description2link')}
                   </Link>
                 </u>

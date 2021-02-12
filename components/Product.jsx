@@ -69,8 +69,7 @@ export default function Product({ product, preview }) {
                       bg="white"
                       boxSize={['340px', '400px']}
                       objectFit="cover"
-                      // src="https://via.placeholder.com/500?text=　"
-                      src="https://image.shutterstock.com/z/stock-vector-hands-knitting-with-giant-needles-and-yarn-decorative-craftwork-knitwork-handicraft-creative-1464390491.jpg"
+                      src="assets/product-page-placeholder-01.jpg"
                     />
                   )}
               </Carousel>

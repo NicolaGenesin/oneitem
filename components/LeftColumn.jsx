@@ -4,8 +4,7 @@ import {
   Input, SimpleGrid, Textarea, VStack, InputGroup,
   NumberInput, Select, Box, Image, Button,
   Heading, NumberInputField, HStack, IconButton,
-  Link, Spacer,
-  Alert, AlertIcon, Text,
+  Link, Spacer, Text,
 } from '@chakra-ui/react';
 import {
   MdClose,
@@ -93,12 +92,22 @@ const LeftColumn = ({
           </Link>
         </HStack>
         {(createMode && !isMobile) && (
-        <Alert status="info" bg="primary.50" rounded="md" w="340px">
-          <AlertIcon />
-          <Text fontSize="sm">
+        <Box
+          boxShadow="md"
+          bg="white"
+          p="16px"
+          borderWidth="1px"
+          borderRadius="lg"
+          rounded="md"
+          w="340px"
+        >
+          <Text
+            fontWeight="semibold"
+            fontSize="xs"
+          >
             {i18n.t('components.leftColumn.alertInfo')}
           </Text>
-        </Alert>
+        </Box>
         )}
         <Box w="340px">
           <Heading
@@ -108,6 +117,7 @@ const LeftColumn = ({
             {i18n.t('components.leftColumn.authorName')}
           </Heading>
           <Input
+            boxShadow="md"
             bg="white"
             onChange={() => {}}
             onInput={(e) => updateState('author', e.target.value)}
@@ -123,6 +133,7 @@ const LeftColumn = ({
             {i18n.t('components.leftColumn.itemName')}
           </Heading>
           <Input
+            boxShadow="md"
             bg="white"
             onChange={() => {}}
             onInput={(e) => updateState('name', e.target.value)}
@@ -138,6 +149,7 @@ const LeftColumn = ({
             {i18n.t('components.leftColumn.itemDescription')}
           </Heading>
           <Textarea
+            boxShadow="md"
             bg="white"
             h="150px"
             onChange={() => {}}
@@ -155,6 +167,7 @@ const LeftColumn = ({
           </Heading>
           <InputGroup>
             <Select
+              boxShadow="md"
               onChange={() => {}}
               bg="white"
               value={product.currency}
@@ -176,6 +189,7 @@ const LeftColumn = ({
               onChange={() => {}}
             >
               <NumberInputField
+                boxShadow="md"
                 placeholder={placeholders.pricePlaceholder}
                 bg="white"
                 onInput={(e) => updateState('price', e.target.value)}
@@ -186,6 +200,7 @@ const LeftColumn = ({
         <Box w="340px">
           <Heading size="xs" mb="8px">{i18n.t('components.leftColumn.contactEmail')}</Heading>
           <Input
+            boxShadow="md"
             bg="white"
             placeholder={placeholders.contactPlaceholder}
             onInput={(e) => updateState('contact', e.target.value)}
@@ -215,11 +230,12 @@ const LeftColumn = ({
                 {imageList.length < maxImages
                 && (
                 <Button
+                  boxShadow="md"
                   width="100%"
                   height="100px"
                   bg="white"
-                  borderColor="primary.100"
-                  color="black"
+                  color="primary.200"
+                  fontSize="sm"
                   variant="outline"
                   style={isDragging ? { color: 'red' } : undefined}
                   onClick={onImageUpload}

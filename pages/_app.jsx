@@ -18,16 +18,16 @@ export default class CustomApp extends App {
         <AppWrapper>
           {!isProductPage && (
           <Head>
-            <title>ezyou</title>
+            <title>ezyou - make it easy</title>
             <link rel="icon" href="/favicon.ico" />
-            <meta property="og:title" content="ezyou online shop" />
+            <meta property="og:title" content="the ezyou ecommerce" />
             <meta property="og:type" content="website" />
             <meta property="og:url" content="https://ezyou.shop" />
             <meta property="og:image" content="https://ezyou.shop/assets/og-01.png" />
             <meta property="og:image:type" content="image/jpeg" />
             <meta property="og:image:width" content="200" />
             <meta property="og:image:height" content="200" />
-            <meta property="og:description" content="Site description" />
+            <meta property="og:description" content="Welcome to ezyou" />
           </Head>
           )}
           <Component {...pageProps} />

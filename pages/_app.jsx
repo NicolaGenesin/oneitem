@@ -11,12 +11,12 @@ export default class CustomApp extends App {
   render() {
     const { Component, pageProps } = this.props;
 
-    console.log();
+    const isProductPage = this.props.router.pathname === '/[storeId]/[productId]';
 
     return (
       <ChakraProvider theme={theme}>
         <AppWrapper>
-          {this.props.router.pathname !== '/[storeId]/[productId]' && (
+          {!isProductPage && (
           <Head>
             <title>ezyou</title>
             <link rel="icon" href="/favicon.ico" />
@@ -35,7 +35,7 @@ export default class CustomApp extends App {
         <style global jsx>
           {`
             html, body {
-              background: #f7fff7;
+              background: ${isProductPage ? '#ffffff' : '#f7fff7'};
             }
           `}
         </style>

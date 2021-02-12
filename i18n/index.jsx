@@ -21,7 +21,7 @@ const i18n = rosetta({
       titlePartOne: 'Create your online',
       titlePartTwo: 'shop — in a minute',
       inputLeftAddon: 'Your Store Name',
-      listItem1: 'Let\'s take it easy - shops shouldn\'t be complicated.',
+      listItem1: 'Let\'s make it easy - an ecommerce shouldn\'t be complicated.',
       listItem2: 'Add your products and share them through the platform you like the most.',
       listItem3: 'Enable payments at any time.',
       buttonCreate: 'Add my first product',

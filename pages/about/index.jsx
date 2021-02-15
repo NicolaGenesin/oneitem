@@ -73,7 +73,12 @@ function Main() {
           </Box>
         </Box>
         {!isMobile && (
-        <Box flex="1" h="100%" w="100px">
+        <Box
+          flex="1"
+          h="100%"
+          background="primary.200"
+          w="100px"
+        >
           <Image
             src="assets/about-01.jpg"
             objectFit="cover"

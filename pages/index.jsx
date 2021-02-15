@@ -103,7 +103,10 @@ function Main() {
           </Box>
         </Box>
         {!isMobile && (
-        <Box flex="1">
+        <Box
+          flex="1"
+          background="primary.200"
+        >
           <Image
             src="assets/home-01.jpg"
             objectFit="cover"

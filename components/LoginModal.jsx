@@ -104,7 +104,7 @@ const LoginModal = (isOpen, onOpen, onClose) => {
             </Alert>
             )}
             <Box mt="24px">
-              <Link href="/editor">
+              <Link href="/">
                 <Text fontSize="sm">
                   {i18n.t('loginModal.createLink')}
                 </Text>

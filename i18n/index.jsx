@@ -40,6 +40,19 @@ const i18n = rosetta({
       buy: 'Buy',
       author: 'brought to you by {{author}}',
       contact: 'Contact: {{contact}}',
+      pricingInformation: 'VAT included, postage included',
+      descriptionTitle: 'Description',
+      deliveredIn(product) {
+        let range;
+
+        if (product.deliveryEstimateRange === 'weeks') {
+          range = product.deliveryEstimateValue == 1 ? 'week' : 'weeks';
+        } else {
+          range = product.deliveryEstimateValue == 1 ? 'day' : 'days';
+        }
+
+        return `Delivered in ${product.deliveryEstimateValue} ${range}`;
+      },
     },
     header: {
       pricing: 'Pricing',

@@ -83,7 +83,7 @@ export default function Product({ product, preview }) {
                 mb="16px"
                 fontWeight="bold"
               >
-                Description
+                {i18n.t('product.descriptionTitle')}
               </Text>
               <Text fontSize="md" whiteSpace="pre-line">{product.description || 'Zaino mini. Foderato internamente e tasca con zip Base in ecopelle. Bretelle regolabili. Chiusura a sacca con coulisse e patta con asola e bottone. Può starci: l\'essenziale'}</Text>
               <VStack mt="24px">
@@ -96,10 +96,16 @@ export default function Product({ product, preview }) {
                 </Heading>
                 <Text
                   w="100%"
+                  fontSize="xs"
+                >
+                  {i18n.t('product.deliveredIn', product)}
+                </Text>
+                <Text
+                  w="100%"
                   mb="16px"
                   fontSize="xs"
                 >
-                  VAT included, postage included
+                  {i18n.t('product.pricingInformation')}
                 </Text>
                 <Button
                   w="100%"

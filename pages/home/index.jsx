@@ -39,7 +39,7 @@ const logout = (event) => {
 const enablePayments = async (event, storeId, stripeAccountId) => {
   event.preventDefault();
 
-  let url = 'http://localhost:5000/onboarding/';
+  let url = 'http://192.168.178.100/onboarding/';
 
   if (stripeAccountId) {
     url += stripeAccountId;

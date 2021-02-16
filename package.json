@@ -23,7 +23,10 @@
     "react-responsive-carousel": "3.2.11",
     "react-share": "^4.3.1",
     "react-spinners": "^0.10.4",
-    "rosetta": "^1.1.0"
+    "rosetta": "^1.1.0",
+    "axios": "0.21.1",
+    "stripe": "8.135.0",
+    "@stripe/stripe-js": "1.12.1"
   },
   "devDependencies": {
     "eslint": "^7.17.0",

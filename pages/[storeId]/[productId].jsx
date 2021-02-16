@@ -10,16 +10,16 @@ import fire from '../../config/fire-config';
 import usei18n from '../../i18n/index';
 import Logo from '../../components/Logo';
 
-const ProductPage = (props) => {
+const ProductPage = ({ data, stripeAccountId }) => {
   const i18n = usei18n();
 
   useEffect(() => {
-    if (!props.id) {
+    if (!data.id) {
       Router.push('/404');
     }
-  }, [props]);
+  }, [data]);
 
-  if (!props.id) {
+  if (!data.id) {
     return <Loader />;
   }
 
@@ -27,19 +27,19 @@ const ProductPage = (props) => {
     <Box>
       <Head>
         <title>
-          {`ezyou - ${props.name}`}
+          {`ezyou - ${data.name}`}
         </title>
         <link rel="icon" href="/favicon.ico" />
-        <meta property="og:title" content={props.name} />
+        <meta property="og:title" content={data.name} />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://ezyou.shop" />
-        <meta property="og:image" content={props.images[0].data_url} />
+        <meta property="og:image" content={data.images[0].data_url} />
         <meta property="og:image:width" content="200" />
         <meta property="og:image:height" content="200" />
         <meta property="og:description" content="Welcome to ezyou" />
       </Head>
       <VStack>
-        <Product preview={false} product={props} />
+        <Product preview={false} product={data} stripeAccountId={stripeAccountId} />
         <Box>
           <Center p="16px" color="white">
             <Center>
@@ -58,25 +58,39 @@ const ProductPage = (props) => {
 };
 
 ProductPage.getInitialProps = async function ({ query }) {
-  const productReference = fire.firestore()
-    .collection('products')
-    .doc(query.productId);
+  try {
+    const storeReference = fire.firestore()
+      .collection('stores')
+      .doc(query.storeId);
 
-  productReference.update({
-    views: fire.firestore.FieldValue.increment(1),
-  });
+    const store = await storeReference.get();
+    const storeData = store.data();
 
-  const doc = await productReference.get();
+    if (storeData.productIds.includes(query.productId)) {
+      const productReference = fire.firestore()
+        .collection('products')
+        .doc(query.productId);
 
-  if (doc.exists) {
-    const data = doc.data();
+      productReference.update({
+        views: fire.firestore.FieldValue.increment(1),
+      });
 
-    if (data.visible) {
-      return { ...data };
+      const doc = await productReference.get();
+
+      if (doc.exists) {
+        const data = doc.data();
+
+        if (data.visible) {
+          return {
+            data,
+            stripeAccountId: storeData.stripe && storeData.stripe.account.id,
+          };
+        }
+      }
     }
+  } catch (error) {
+    return {};
   }
-
-  return {};
 };
 
 export default ProductPage;

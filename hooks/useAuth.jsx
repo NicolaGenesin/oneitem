@@ -43,6 +43,7 @@ const useAuth = (redirectToLandingPage) => {
                 }));
 
                 setLoggedInState({
+                  ...data,
                   user,
                   pending: false,
                   isSignedIn: !!user,

@@ -99,6 +99,20 @@ const i18n = rosetta({
       description: 'The page you were looking for might have been unpublished or deleted.',
       button: 'Return to Homepage',
     },
+    payment: {
+      success: {
+        title: 'Thank you for your purchase!',
+        subtitle: 'Your order has been received',
+        description: 'You will receive shortly an order confirmation email with details of your order.',
+        button: 'Return to Product Page',
+      },
+      issue: {
+        title: 'Something went wrong!',
+        subtitle: 'Checkout has been interrupted or payment has been declined',
+        description: 'Please try again later.',
+        button: 'Return to Product Page',
+      },
+    },
     components: {
       leftColumn: {
         alertInfo: 'Complete all fields on this column and see your product preview on your right! All fields are required. After clicking on the create button at the bottom of the page, your store will be online and visible to everyone.',

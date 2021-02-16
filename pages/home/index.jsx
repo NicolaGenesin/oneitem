@@ -24,6 +24,7 @@ import {
   FacebookIcon, TwitterIcon, LinkedinIcon, PinterestIcon, TelegramIcon,
   WhatsappIcon, RedditIcon, TumblrIcon, EmailIcon,
 } from 'react-share';
+import axios from 'axios';
 import { copyToClipboard } from '../../utils/document';
 import fire from '../../config/fire-config';
 import useAuth from '../../hooks/useAuth';
@@ -35,8 +36,30 @@ const logout = (event) => {
   fire.auth().signOut();
 };
 
-const acceptPayments = (event) => {
+const enablePayments = async (event, storeId, stripeAccountId) => {
   event.preventDefault();
+
+  let url = 'http://localhost:5000/onboarding/';
+
+  if (stripeAccountId) {
+    url += stripeAccountId;
+  }
+
+  const response = await axios.get(url);
+
+  // todo change this to use fetch
+  if (response.status === 200) {
+    window.open(response.data.url);
+
+    if (!stripeAccountId) {
+      fire.firestore()
+        .collection('stores')
+        .doc(storeId)
+        .set({ stripe: { account: { id: response.data.stripeAccountId } } }, { merge: true });
+    }
+  } else {
+    console.log('Error creating creating an account for this user');
+  }
 };
 
 const editListing = (event, productId) => {
@@ -83,7 +106,7 @@ const LoggedInHome = () => {
   const auth = useAuth(true);
   const { setLoggedInState } = auth;
   const { loggedInState } = auth;
-  const { pending, store } = loggedInState;
+  const { pending, store, storeId } = loggedInState;
 
   if (pending) {
     return <Loader />;
@@ -126,26 +149,20 @@ const LoggedInHome = () => {
                     </Stat>
                   </VStack>
                 </HStack>
-                <Popover>
-                  <PopoverTrigger>
-                    <Button
-                      w="100%"
-                      leftIcon={<MdPayment />}
-                      colorScheme="primaryButton"
-                    >
-                      {i18n.t('home.acceptPayments')}
-                    </Button>
-                  </PopoverTrigger>
-                  <PopoverContent>
-                    <PopoverArrow />
-                    <PopoverCloseButton />
-                    <PopoverHeader>Not implemented / Non implementato</PopoverHeader>
-                    <PopoverBody>
-                      From here you will create an account with Stripe so you can receive money.
-                      After this is done, people will be able to buy your product.
-                    </PopoverBody>
-                  </PopoverContent>
-                </Popover>
+                <Button
+                  w="100%"
+                  leftIcon={<MdPayment />}
+                  colorScheme="primaryButton"
+                  onClick={(event) => {
+                    enablePayments(
+                      event,
+                      storeId,
+                      store.stripe && store.stripe.account.id,
+                    );
+                  }}
+                >
+                  {i18n.t('home.acceptPayments')}
+                </Button>
                 <Button
                   w="100%"
                   leftIcon={<MdAddCircleOutline />}
@@ -154,7 +171,6 @@ const LoggedInHome = () => {
                 >
                   {i18n.t('home.createNewListing')}
                 </Button>
-                {/* <Button w="100%" leftIcon={<MdPermIdentity />} colorScheme="primaryButton" color="black">{i18n.t('home.changeStoreName')}</Button> */}
               </VStack>
             </Box>
             <Heading size="lg" mb="16px">

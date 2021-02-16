@@ -1,14 +1,54 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useRouter } from 'next/router';
 import {
   Text, VStack, Box, Image, Button, Heading,
-  Divider, HStack, Center, Badge,
+  Divider, Center, Badge,
 } from '@chakra-ui/react';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
+import { loadStripe } from '@stripe/stripe-js';
 import usei18n from '../i18n/index';
 
-export default function Product({ product, preview }) {
+let stripePromise;
+
+const handleBuy = async (product, stripeAccountId, pagePath) => {
+  const stripe = await stripePromise;
+  const response = await fetch('http://localhost:5000/create-checkout-session', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      product,
+      stripeAccountId,
+      pagePath,
+    }),
+  });
+  const session = await response.json();
+
+  // When the customer clicks on the button, redirect them to Checkout.
+  const result = await stripe.redirectToCheckout({
+    sessionId: session.id,
+  });
+
+  if (result.error) {
+    // If `redirectToCheckout` fails due to a browser or network
+    // error, display the localized error message to your customer
+    // using `result.error.message`.
+  }
+};
+
+export default function Product({ product, preview, stripeAccountId }) {
   const i18n = usei18n();
+  const pagePath = useRouter().asPath;
+
+  useEffect(() => {
+    if (stripeAccountId) {
+      stripePromise = loadStripe('pk_test_51IAtqhIS8juGZ20VrUaYrFjZshhIQnIfguB3XCKQE3rP6a9mASUb8BjUpjbnop29eQkbw3isDg23wWqen38ydxvG00X0BKv16E', {
+        stripeAccount: stripeAccountId,
+      });
+    }
+  }, [stripeAccountId]);
 
   if (!product) {
     return <div />;
@@ -109,13 +149,13 @@ export default function Product({ product, preview }) {
                 </Text>
                 <Button
                   w="100%"
-                  disabled
+                  disabled={!stripeAccountId || preview}
                   colorScheme="primaryButton"
                   color="white"
                   size="lg"
+                  onClick={() => { handleBuy(product, stripeAccountId, pagePath); }}
                 >
                   {i18n.t('product.buy')}
-
                 </Button>
               </VStack>
             </Box>

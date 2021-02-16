@@ -108,7 +108,7 @@ const i18n = rosetta({
       },
       issue: {
         title: 'Something went wrong!',
-        subtitle: 'Checkout has been interrupted or payment has been declined',
+        subtitle: 'The checkout process has been interrupted or payment has been declined',
         description: 'Please try again later.',
         button: 'Return to Product Page',
       },

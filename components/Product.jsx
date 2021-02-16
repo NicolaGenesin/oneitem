@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useRouter } from 'next/router';
+import Router, { useRouter } from 'next/router';
 import {
   Text, VStack, Box, Image, Button, Heading,
   Divider, Center, Badge,
@@ -35,6 +35,7 @@ const handleBuy = async (product, stripeAccountId, pagePath) => {
     // If `redirectToCheckout` fails due to a browser or network
     // error, display the localized error message to your customer
     // using `result.error.message`.
+    Router.push(`${pagePath}/issue`);
   }
 };
 

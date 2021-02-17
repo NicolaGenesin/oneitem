@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 @app.route('/<path:path>', methods=["POST"])
 def main(path):
-    accountId = request.json.get('accountId')
+    accountId = request.json.get('stripeAccountId')
 
     if accountId:
         account = stripe.Account.retrieve(accountId)

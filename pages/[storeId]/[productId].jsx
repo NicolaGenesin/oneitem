@@ -5,10 +5,10 @@ import {
 } from '@chakra-ui/react';
 import Head from 'next/head';
 import Loader from 'react-spinners/BarLoader';
-import Product from '../../../components/Product';
-import fire from '../../../config/fire-config';
-import usei18n from '../../../i18n/index';
-import Logo from '../../../components/Logo';
+import Product from '../../components/Product';
+import fire from '../../config/fire-config';
+import usei18n from '../../i18n/index';
+import Logo from '../../components/Logo';
 
 const ProductPage = ({ data, stripeAccountId }) => {
   const i18n = usei18n();

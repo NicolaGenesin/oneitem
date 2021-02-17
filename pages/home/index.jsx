@@ -39,23 +39,35 @@ const logout = (event) => {
 const enablePayments = async (event, storeId, stripeAccountId) => {
   event.preventDefault();
 
-  let url = 'http://192.168.178.100/onboarding/';
-
-  if (stripeAccountId) {
-    url += stripeAccountId;
-  }
-
-  const response = await axios.get(url);
+  const response = await fetch('http://localhost:3000/api/onboarding', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      stripeAccountId,
+    }),
+  });
 
   // todo change this to use fetch
   if (response.status === 200) {
-    window.open(response.data.url);
+    const json = await response.json();
+
+    window.open(json.url);
 
     if (!stripeAccountId) {
       fire.firestore()
         .collection('stores')
         .doc(storeId)
-        .set({ stripe: { account: { id: response.data.stripeAccountId } } }, { merge: true });
+        .set({
+          stripe:
+          {
+            account: { id: json.stripeAccountId },
+          },
+        }, {
+          merge:
+          true,
+        });
     }
   } else {
     console.log('Error creating creating an account for this user');

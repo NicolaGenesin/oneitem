@@ -13,7 +13,7 @@ let stripePromise;
 
 const handleBuy = async (product, stripeAccountId, pagePath) => {
   const stripe = await stripePromise;
-  const response = await fetch('http://192.168.178.100:5000/create-checkout-session', {
+  const response = await fetch('http://localhost:3000/api/sessions', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

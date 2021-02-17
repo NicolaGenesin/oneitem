@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 
 @app.route('/<path:path>', methods=["POST"])
-def create_checkout_session():
+def create_checkout_session(path):
     body = request.json
     product = body.get('product')
     currency = 'eur'

@@ -12,7 +12,7 @@ export default function Error() {
   return (
     <>
       <Center bg="primary.50" h="100vh">
-        <VStack>
+        <VStack w={['90%', '70%']}>
           <Heading size="xl" mb="24px" textAlign="center">
             {i18n.t('payment.issue.title')}
             <br />

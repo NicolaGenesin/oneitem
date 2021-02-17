@@ -87,9 +87,9 @@ from flask import Flask, Response
 app = Flask(__name__)
 
 @app.route('/')
-def catch_all(path):
+def one(path):
     return Response("<h1>Flask</h1><p>ROOT: /%s</p>" % (path), mimetype="text/html")
 
 @app.route('/test')
-def catch_all(path):
+def two(path):
     return Response("<h1>Flask</h1><p>TEST: /%s</p>" % (path), mimetype="text/html")

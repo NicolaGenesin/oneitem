@@ -24,7 +24,6 @@ import {
   FacebookIcon, TwitterIcon, LinkedinIcon, PinterestIcon, TelegramIcon,
   WhatsappIcon, RedditIcon, TumblrIcon, EmailIcon,
 } from 'react-share';
-import axios from 'axios';
 import { copyToClipboard } from '../../utils/document';
 import fire from '../../config/fire-config';
 import useAuth from '../../hooks/useAuth';

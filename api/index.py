@@ -35,20 +35,6 @@ def get_stripe_onboarding_details(accountId):
         'stripeAccountId': account.id
     }
 
-# # https://stripe.com/docs/connect/standard-accounts#return-user
-# @app.route("/accounts/<accountId>")
-# def has_completed_onboarding(accountId):
-#     try:
-#         account = stripe.Account.retrieve(accountId)
-        
-#         if account:
-#             if account.details_submitted:
-#                 return account
-#     except stripe.error.PermissionError:
-#         pass
-
-#     return {'status': 'error'}
-
 @app.route('/create-checkout-session', methods=['POST'])
 def create_checkout_session():
     body = request.json

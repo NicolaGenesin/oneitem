@@ -48,7 +48,6 @@ const enablePayments = async (event, storeId, stripeAccountId) => {
     }),
   });
 
-  // todo change this to use fetch
   if (response.status === 200) {
     const json = await response.json();
 

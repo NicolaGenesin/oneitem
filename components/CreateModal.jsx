@@ -48,6 +48,11 @@ const CreateModal = (isOpen, onOpen, onClose, storeId, productId) => {
           .doc(response.user.uid)
           .set({ storeId: newState.storeId });
 
+        fire.firestore()
+          .collection('stores')
+          .doc(storeId)
+          .set({ hasCreatedAccount: true }, { merge: true });
+
         setTimeout(() => {
           onClose();
           Router.push('/home');

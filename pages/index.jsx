@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import Router from 'next/router';
-import Link from 'next/link';
 import {
   Box, Heading, Button, Input, List, ListItem,
   ListIcon, HStack, Image, VStack, InputGroup, InputLeftAddon,
+  Alert, AlertIcon, Text,
 } from '@chakra-ui/react';
 import {
   MdExtension, MdLink,
@@ -17,11 +17,27 @@ import Footer from '../components/Footer';
 import fire from '../config/fire-config';
 import usei18n from '../i18n/index';
 
+const canUseName = async (storeName) => {
+  if (!storeName) {
+    return false;
+  }
+
+  const storeRef = fire.firestore().collection('stores').doc(storeName.replace(/[^A-Z0-9]/ig, '-').toLowerCase());
+  const doc = await storeRef.get();
+
+  if (!doc.exists) {
+    return true;
+  }
+
+  return !doc.data().hasCreatedAccount;
+};
+
 function Main() {
   const i18n = usei18n();
-
   const [state, setState] = useState({ storeName: '', clicked: false });
-  const isInvalid = !state.storeName && state.clicked;
+  const [isNameAvailable, setIdAvailability] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const isInvalid = (!state.storeName && state.clicked) || !isNameAvailable;
 
   useEffect(() => {
     if (fire) {
@@ -86,18 +102,38 @@ function Main() {
                     onChange={(e) => { setState({ storeName: e.target.value, clicked: true }); }}
                   />
                 </InputGroup>
-                <Link href={state.storeName ? `/editor/?name=${state.storeName}` : ''}>
-                  <Button
-                    boxShadow="dark-lg"
-                    letterSpacing="wide"
-                    colorScheme="primaryImportantButton"
-                    color="white"
-                    size="lg"
-                    w="100%"
-                  >
-                    {i18n.t('homeSignedOut.buttonCreate')}
-                  </Button>
-                </Link>
+                {!isNameAvailable
+                  && (
+                    <Alert status="error" rounded="md" mt="16px">
+                      <AlertIcon />
+                      <Box>
+                        <Text fontSize="sm">
+                          {i18n.t('homeSignedOut.nameNotAvailable')}
+                        </Text>
+                      </Box>
+                    </Alert>
+                  )}
+                <Button
+                  boxShadow="dark-lg"
+                  letterSpacing="wide"
+                  colorScheme="primaryImportantButton"
+                  color="white"
+                  size="lg"
+                  w="100%"
+                  isLoading={isLoading}
+                  onClick={async () => {
+                    setIsLoading(true);
+
+                    if (await canUseName(state.storeName)) {
+                      Router.push(state.storeName ? `/editor/?name=${state.storeName}` : '');
+                    } else {
+                      setIsLoading(false);
+                      setIdAvailability(false);
+                    }
+                  }}
+                >
+                  {i18n.t('homeSignedOut.buttonCreate')}
+                </Button>
               </VStack>
             </Box>
           </Box>

@@ -25,6 +25,7 @@ const i18n = rosetta({
       listItem2: 'Add your products and share them through the platform you like the most.',
       listItem3: 'Enable payments at any time.',
       buttonCreate: 'Add my first product',
+      nameNotAvailable: 'Please use a different name. The current one is already used by a different registered Store.',
     },
     about: {
       title1: 'Hi',

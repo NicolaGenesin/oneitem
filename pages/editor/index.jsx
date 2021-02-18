@@ -76,7 +76,7 @@ const CreatePage = () => {
       setState({
         ...state,
         [target]: value,
-        id: `${value.replace(/[^A-Z0-9]/ig, '-').toLowerCase()}-${Math.floor(Math.random() * 10000000)}`,
+        id: `${value.replace(/[^A-Z0-9]/ig, '-').toLowerCase()}`,
       });
     } else {
       setState({
@@ -91,8 +91,35 @@ const CreatePage = () => {
 
     setSavingState(true);
 
+    // productId is obtained from the URL
+    // CREATE: if !productId && signed in, check if one store.products has clashing id with state.id
+    // CREATE: if !productId && not signed in, use state.id
+    // EDIT: if productId the user IS signed in, reuse it (we keep url even if we change name)
+
+    let updatedId;
+
+    if (productId) {
+      updatedId = productId;
+    } else if (!productId && isSignedIn) {
+      const clash = store.products.find((product) => product.id === state.id);
+
+      if (clash) {
+        let index = 0;
+
+        while (store.products.find((product) => product.id === `${state.id}-${index}`)) {
+          index += 1;
+        }
+
+        updatedId = `${state.id}-${index}`;
+      } else {
+        updatedId = state.id;
+      }
+    } else if (!productId && !isSignedIn) {
+      updatedId = state.id;
+    }
+
     const data = {
-      id: state.id,
+      id: updatedId,
       storeId: state.storeId,
       author: state.author,
       contact: state.contact,
@@ -147,7 +174,7 @@ const CreatePage = () => {
 
     const imagesToUpload = state.images.filter((image) => !image.data_url.startsWith('https'));
 
-    await uploadImages(imagesToUpload, state.storeId, state.id);
+    await uploadImages(imagesToUpload, state.storeId, updatedId);
 
     setSavingState(false);
 

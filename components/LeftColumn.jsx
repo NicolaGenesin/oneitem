@@ -353,7 +353,7 @@ const LeftColumn = ({
              color="white"
              onClick={handleSubmit}
              isLoading={isLoading}
-             loadingText="TODO"
+             loadingText={i18n.t('components.leftColumn.buttonUpdateLoading')}
            >
              {i18n.t('components.leftColumn.buttonCreate')}
            </Button>
@@ -368,7 +368,7 @@ const LeftColumn = ({
              disabled={isDisabled}
              onClick={handleSubmit}
              isLoading={isLoading}
-             loadingText="TODO"
+             loadingText={i18n.t('components.leftColumn.buttonUpdateLoading')}
            >
              {i18n.t('components.leftColumn.buttonUpdate')}
            </Button>

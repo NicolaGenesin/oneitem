@@ -4,15 +4,14 @@ import {
   Box, Image, Spacer, Badge, Wrap, WrapItem,
   Button, Text, HStack, VStack, Stat, StatNumber,
   Heading, StatLabel, Center, IconButton, Input,
-  Popover, PopoverTrigger, PopoverContent, PopoverHeader,
-  PopoverBody, PopoverArrow, PopoverCloseButton,
+  Alert, AlertIcon, Link,
 } from '@chakra-ui/react';
 import {
   MdBuild, MdDelete, MdPayment, MdExitToApp, MdLink,
   MdAddCircleOutline,
 } from 'react-icons/md';
 import {
-  AiOutlineEye,
+  AiOutlineEye, AiOutlineDashboard,
 } from 'react-icons/ai';
 import {
   HiOutlineExternalLink,
@@ -117,10 +116,59 @@ const LoggedInHome = () => {
   const { setLoggedInState } = auth;
   const { loggedInState } = auth;
   const { pending, store, storeId } = loggedInState;
+  const [hasCalledStripe, setHasCalledStripe] = useState(false);
+
+  useEffect(() => {
+    async function getOnboardingState() {
+      if (!hasCalledStripe && store && store.stripe && store.stripe.account.id) {
+        const response = await fetch('/api/onboarding_state', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            stripeAccountId: store.stripe.account.id,
+          }),
+        });
+
+        if (response.status === 200) {
+          const json = await response.json();
+
+          fire.firestore()
+            .collection('stores')
+            .doc(storeId)
+            .set({
+              stripe:
+            {
+              account: { ...json },
+            },
+            }, {
+              merge: true,
+            });
+
+          const copy = { ...loggedInState };
+
+          copy.store.stripe.account.detailsSubmitted = json.detailsSubmitted;
+          copy.store.stripe.account.chargesEnabled = json.chargesEnabled;
+
+          setLoggedInState(copy);
+          setHasCalledStripe(true);
+        }
+      }
+    }
+
+    getOnboardingState();
+  }, [store]);
 
   if (pending) {
     return <Loader />;
   }
+
+  const canCreateCharges = store
+    && store.stripe
+    && store.stripe.account
+    && store.stripe.account.chargesEnabled
+    && store.stripe.account.detailsSubmitted;
 
   return (
     <div>
@@ -140,12 +188,12 @@ const LoggedInHome = () => {
             >
               <VStack>
                 <HStack spacing="48px">
-                  <VStack>
+                  {/* <VStack>
                     <Stat>
                       <StatLabel>{i18n.t('home.itemsSold')}</StatLabel>
                       <StatNumber align="center">0</StatNumber>
                     </Stat>
-                  </VStack>
+                  </VStack> */}
                   <VStack>
                     <Stat>
                       <StatLabel>{i18n.t('home.pageViews')}</StatLabel>
@@ -159,6 +207,13 @@ const LoggedInHome = () => {
                     </Stat>
                   </VStack>
                 </HStack>
+                {!canCreateCharges && (
+                <Alert status="info" rounded="md">
+                  <AlertIcon />
+                  {i18n.t('home.pendingStripeVerification')}
+                </Alert>
+                )}
+                {!canCreateCharges && (
                 <Button
                   w="100%"
                   leftIcon={<MdPayment />}
@@ -171,8 +226,20 @@ const LoggedInHome = () => {
                     );
                   }}
                 >
-                  {i18n.t('home.acceptPayments')}
+                  {!store.stripe ? i18n.t('home.acceptPayments') : i18n.t('home.updateBankDetails')}
                 </Button>
+                )}
+                {canCreateCharges && (
+                <Link w="100%" href="https://dashboard.stripe.com/login" target="_blank">
+                  <Button
+                    w="100%"
+                    leftIcon={<AiOutlineDashboard />}
+                    colorScheme="primaryButton"
+                  >
+                    {i18n.t('home.linkToStripe')}
+                  </Button>
+                </Link>
+                )}
                 <Button
                   w="100%"
                   leftIcon={<MdAddCircleOutline />}

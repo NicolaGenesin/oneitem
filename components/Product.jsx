@@ -84,7 +84,7 @@ export default function Product({ product, preview, stripeAccountId }) {
               h={['340px', '400px']}
             >
               <Carousel
-                showArrows={false}
+                showArrows
                 autoPlay
                 swipeable
                 infiniteLoop

@@ -13,7 +13,7 @@ let stripePromise;
 
 const handleBuy = async (product, stripeAccountId, pagePath) => {
   const stripe = await stripePromise;
-  const response = await fetch('http://localhost:3000/api/sessions', {
+  const response = await fetch('/api/sessions', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

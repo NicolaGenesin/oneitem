@@ -38,7 +38,7 @@ const logout = (event) => {
 const enablePayments = async (event, storeId, stripeAccountId) => {
   event.preventDefault();
 
-  const response = await fetch('http://localhost:3000/api/onboarding', {
+  const response = await fetch('/api/onboarding', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

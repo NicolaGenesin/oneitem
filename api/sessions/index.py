@@ -1,9 +1,10 @@
 from flask import Flask, request, jsonify
+import os
 import stripe
 
 # TODO Set your secret key. Remember to switch to your live secret key in production!
 # See your keys here: https://dashboard.stripe.com/account/apikeys
-stripe.api_key = 'sk_test_51IAtqhIS8juGZ20Vm2LRwyAklABPSu5miNHuGxGSil5siicDndllLAywuigaazTUpGeUxDMjcKvmrCgOuIgQ80GU00sBK7UpAk'
+stripe.api_key = os.environ.get('STRIPE_SK')
 app = Flask(__name__)
 
 

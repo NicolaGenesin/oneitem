@@ -45,7 +45,7 @@ export default function Product({ product, preview, stripeAccountId }) {
 
   useEffect(() => {
     if (stripeAccountId) {
-      stripePromise = loadStripe('pk_test_51IAtqhIS8juGZ20VrUaYrFjZshhIQnIfguB3XCKQE3rP6a9mASUb8BjUpjbnop29eQkbw3isDg23wWqen38ydxvG00X0BKv16E', {
+      stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PK, {
         stripeAccount: stripeAccountId,
       });
     }

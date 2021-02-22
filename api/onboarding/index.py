@@ -1,7 +1,8 @@
 from flask import Flask, request
+import os
 import stripe
 
-stripe.api_key = 'sk_test_51IAtqhIS8juGZ20Vm2LRwyAklABPSu5miNHuGxGSil5siicDndllLAywuigaazTUpGeUxDMjcKvmrCgOuIgQ80GU00sBK7UpAk'
+stripe.api_key = os.environ.get('STRIPE_SK')
 app = Flask(__name__)
 
 @app.route('/<path:path>', methods=["POST"])

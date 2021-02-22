@@ -18,8 +18,8 @@ def main(path):
 
     account_link = stripe.AccountLink.create(
         account=account.id,
-        refresh_url='http://ezyou.shop/home',
-        return_url='http://ezyou.shop/home',
+        refresh_url='https://ezyou.shop/home',
+        return_url='https://ezyou.shop/home',
         type='account_onboarding',
     )
 

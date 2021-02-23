@@ -4,8 +4,14 @@ import {
 } from '@chakra-ui/react';
 import usei18n from '../i18n/index';
 
-const submitFeedback = (content) => {
-  console.log(content);
+const submitFeedback = async (content) => {
+  await fetch('/api/feedback', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(content),
+  });
 };
 
 const Feedback = () => {

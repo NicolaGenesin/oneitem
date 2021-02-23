@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {
   Box, Input, Button, Text, HStack, Spacer, Textarea,
 } from '@chakra-ui/react';
+import { isMobile } from 'react-device-detect';
 import usei18n from '../i18n/index';
 
 const submitFeedback = async (content) => {
@@ -20,6 +21,12 @@ const Feedback = () => {
   const [isButtonClicked, setIsButtonClicked] = useState(false);
   const [isSent, setIsSent] = useState(false);
   const [content, setContent] = useState({});
+
+  let triggerText = !isSent ? i18n.t('feedback.title') : i18n.t('feedback.thankYou');
+
+  if (isMobile) {
+    triggerText = !isSent ? '☝️' : i18n.t('feedback.thankYou');
+  }
 
   return (
     <Box
@@ -43,7 +50,7 @@ const Feedback = () => {
             setIsButtonClicked(!isButtonClicked);
           }}
         >
-          {!isSent ? i18n.t('feedback.title') : i18n.t('feedback.thankYou')}
+          {triggerText}
         </Text>
       ) : (
         <Box>

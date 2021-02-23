@@ -140,6 +140,15 @@ const i18n = rosetta({
         buttonUpdateLoading: 'Please Wait',
       },
     },
+    feedback: {
+      title: 'Feedback? Need help? ☝️',
+      description: 'If you need a feature, found a bug, need help, or have feedback, write it here. I\'ll build the feature / fix the bug for you!',
+      email: 'Your email (optional)',
+      message: 'Your message',
+      submit: 'Send Feedback',
+      close: 'Close',
+      thankYou: 'Thank You! ❤️',
+    },
     // support(obj) {
     //   const hour = Math.floor(Math.random() * 3) + 9;
     //   let str = `For questions, I'm available on ${obj.date.toLocaleDateString()}`;
@@ -285,6 +294,15 @@ const i18n = rosetta({
         removeImage: 'Rimuovi',
         buttonUpdateLoading: 'Attendi',
       },
+    },
+    feedback: {
+      title: 'Feedback? Serve aiuto?',
+      description: 'Se pensi sia interessante una feature, hai trovato un problema, hai bisogno di assistenza, o vuoi condividere una tua opinione, scrivimi qui. Farò del mio meglio per accontentarti!',
+      email: 'La tua email',
+      message: 'Il tuo messaggio',
+      submit: 'Invia Feedback',
+      close: 'Chiudi',
+      thankYou: 'Grazie Mille! ❤️',
     },
   },
 });

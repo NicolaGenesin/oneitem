@@ -4,6 +4,7 @@ import App from 'next/app';
 import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 import { AppWrapper } from '../context/state';
 import colors from '../config/theme';
+import Feedback from '../components/Feedback';
 
 const theme = extendTheme({ colors });
 
@@ -31,6 +32,7 @@ export default class CustomApp extends App {
           </Head>
           )}
           <Component {...pageProps} />
+          <Feedback />
         </AppWrapper>
         <style global jsx>
           {`

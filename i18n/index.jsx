@@ -117,7 +117,7 @@ const i18n = rosetta({
     },
     components: {
       leftColumn: {
-        alertInfo: 'Complete all fields on this column and see your product preview on your right! All fields are required. After clicking on the create button at the bottom of the page, your store will be online and visible to everyone.',
+        alertInfo: 'Please fill all fields on this column. After clicking on the create button at the bottom of the page, your page will be online and visible to everyone.',
         titleCreate: 'Add a new product',
         titleEdit: 'Edit your Website',
         authorName: 'Author Name',

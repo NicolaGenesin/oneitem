@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Router, { useRouter } from 'next/router';
 import {
   Text, VStack, Box, Image, Button, Heading,
@@ -42,6 +42,7 @@ const handleBuy = async (product, stripeAccountId, pagePath) => {
 export default function Product({ product, preview, stripeAccountId }) {
   const i18n = usei18n();
   const pagePath = useRouter().asPath;
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (stripeAccountId) {
@@ -151,10 +152,14 @@ export default function Product({ product, preview, stripeAccountId }) {
                 <Button
                   w="100%"
                   disabled={!stripeAccountId || preview}
+                  isLoading={isLoading}
                   colorScheme="primaryButton"
                   color="white"
                   size="lg"
-                  onClick={() => { handleBuy(product, stripeAccountId, pagePath); }}
+                  onClick={() => {
+                    setIsLoading(true);
+                    handleBuy(product, stripeAccountId, pagePath);
+                  }}
                 >
                   {i18n.t('product.buy')}
                 </Button>

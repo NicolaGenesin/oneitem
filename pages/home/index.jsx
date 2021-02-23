@@ -117,6 +117,7 @@ const LoggedInHome = () => {
   const { loggedInState } = auth;
   const { pending, store, storeId } = loggedInState;
   const [hasCalledStripe, setHasCalledStripe] = useState(false);
+  const [isCheckingStripeAccount, setIsCheckingStripeAccount] = useState(false);
 
   useEffect(() => {
     async function getOnboardingState() {
@@ -218,12 +219,17 @@ const LoggedInHome = () => {
                   w="100%"
                   leftIcon={<MdPayment />}
                   colorScheme="primaryButton"
-                  onClick={(event) => {
-                    enablePayments(
+                  isLoading={isCheckingStripeAccount}
+                  onClick={async (event) => {
+                    setIsCheckingStripeAccount(true);
+
+                    await enablePayments(
                       event,
                       storeId,
                       store.stripe && store.stripe.account.id,
                     );
+
+                    setIsCheckingStripeAccount(false);
                   }}
                 >
                   {!store.stripe ? i18n.t('home.acceptPayments') : i18n.t('home.updateBankDetails')}

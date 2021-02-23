@@ -208,7 +208,7 @@ const LoggedInHome = () => {
                     </Stat>
                   </VStack>
                 </HStack>
-                {!canCreateCharges && (
+                {(!canCreateCharges && store.stripe && store.stripe.account.id) && (
                 <Alert status="info" rounded="md">
                   <AlertIcon />
                   {i18n.t('home.pendingStripeVerification')}

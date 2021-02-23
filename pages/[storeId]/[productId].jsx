@@ -80,10 +80,21 @@ ProductPage.getInitialProps = async function ({ query }) {
       if (doc.exists) {
         const data = doc.data();
 
+        let stripeAccountId;
+
+        const canCreateCharges = storeData.stripe
+          && storeData.stripe.account
+          && storeData.stripe.account.chargesEnabled
+          && storeData.stripe.account.detailsSubmitted;
+
+        if (canCreateCharges && storeData.stripe.account) {
+          stripeAccountId = storeData.stripe.account.id;
+        }
+
         if (data.visible) {
           return {
             data,
-            stripeAccountId: storeData.stripe && storeData.stripe.account.id,
+            stripeAccountId,
           };
         }
       }

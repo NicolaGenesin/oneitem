@@ -71,6 +71,7 @@ const Feedback = () => {
             bg="white"
             onChange={() => {}}
             mb="8px"
+            fontSize="sm"
             onInput={(e) => setContent({ ...content, email: e.target.value })}
             placeholder={i18n.t('feedback.email')}
             value={content.email}
@@ -80,6 +81,7 @@ const Feedback = () => {
             bg="white"
             onChange={() => {}}
             mb="16px"
+            fontSize="sm"
             h="150px"
             onInput={(e) => setContent({ ...content, message: e.target.value })}
             placeholder={i18n.t('feedback.message')}

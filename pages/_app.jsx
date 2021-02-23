@@ -32,7 +32,7 @@ export default class CustomApp extends App {
           </Head>
           )}
           <Component {...pageProps} />
-          <Feedback />
+          {!isProductPage && <Feedback />}
         </AppWrapper>
         <style global jsx>
           {`

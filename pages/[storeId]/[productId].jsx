@@ -48,7 +48,7 @@ const ProductPage = ({ data, stripeAccountId }) => {
               </Text>
             </Center>
             <Link p="4px" href="/">
-              <Logo width="60px" height="20px" />
+              <Logo height="30px" />
             </Link>
           </Center>
         </Box>

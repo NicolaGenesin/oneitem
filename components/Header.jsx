@@ -20,14 +20,13 @@ const Header = (props) => {
       pb="1.5rem"
       pl="5%"
       pr="5%"
-      bg="primary.50"
       color="white"
       {...props}
     >
       {LoginModal(isOpen, onOpen, onClose)}
       <HStack w="100%">
-        <Link href="/">
-          <Logo width="100px" height="40px" />
+        <Link ml="-4px" href="/">
+          <Logo height="50px" />
         </Link>
         <Spacer />
         <Center>

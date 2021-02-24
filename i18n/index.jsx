@@ -31,12 +31,12 @@ const i18n = rosetta({
     },
     about: {
       title1: 'Hi',
-      description1: 'I am Nicola and I am an entrepreneur and computer scientist. I\'ve created ezyou, a minimal online store creator, because I\'ve witnessed people spending dozens of hours trying to set up online shops or spending a fortune paying a dedicated agency for an overengineered solution. Unlike others, I am providing you only with the essential tools to bootstrap your online presence from scratch.',
+      description1: 'I am Nicola, a computer scientist from Italy. I\'ve created ezyou, a minimal online store creator, because I\'ve witnessed people spending dozens of hours trying to set up online shops or spending a fortune paying a dedicated agency for an overengineered solution. Unlike others, I am giving you only the essential tools to bootstrap your online presence from scratch.',
       title2: 'Ok, but what does it mean for my business?',
       description2: 'After spending no more than a minute to add your first product, your customers will be able to see and buy it on a page like',
       description2link: 'this one',
       title3: 'Ok, but is it safe?',
-      description3: 'The only informations this platform stores are the ones needed to create the product pages. The payment platform (Stripe) handles all the payment information and, by design, you will be the only entity to have have full control over it.',
+      description3: 'The only informations this platform stores are the ones needed to create the product pages. The payment platform (Stripe) handles all the payment information and, by design, you will be the only entity to have have full control on it.',
     },
     product: {
       preview: 'Preview',
@@ -185,7 +185,7 @@ const i18n = rosetta({
     },
     about: {
       title1: 'Ciao',
-      description1: 'Mi chiamo Nicola e sono un imprenditore ed informatico. Ho creato ezyou, un creatore di ecommerce minimali, perchè ho assistito ad artigiani spendere decine di ore nel tentare di crearsi un eccommerce online o (peggio) pagare agenzie migliaia di euro per una soluzione esagerata. Al contrario di altri, la mia piattaforma ti darà solo gli strumenti assolutamente essenziali per far partire la tua presenza online.',
+      description1: 'Mi chiamo Nicola e sono un informatico italiano. Ho creato ezyou, un creatore di ecommerce minimale, perchè ho assistito ad artigiani spendere decine di ore nel tentare di crearsi un eccommerce online o (peggio) pagare agenzie migliaia di euro per una soluzione esagerata. Al contrario di altri, la mia piattaforma ti darà solo gli strumenti assolutamente essenziali per far partire la tua presenza online.',
       title2: 'Ok, ma cosa significa?',
       description2: 'Dopo aver speso circa un minuto per aggiungere il tuo primo prodotto, i tuoi clienti saranno in grado di vederlo attraverso una pagina come',
       description2link: 'questa',

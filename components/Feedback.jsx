@@ -35,6 +35,7 @@ const Feedback = () => {
       maxW="350px"
       position="fixed"
       bottom="0"
+      right="0"
       boxShadow="md"
       borderRadius="5px 5px 0 0"
       borderColor="#ded"

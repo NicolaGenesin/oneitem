@@ -19,7 +19,7 @@ export default class CustomApp extends App {
         <AppWrapper>
           {!isProductPage && (
           <Head>
-            <title>ezyou - make it easy</title>
+            <title>ezyou — make it easy</title>
             <link rel="icon" href="/favicon.ico" />
             <meta property="og:title" content="the ezyou ecommerce" />
             <meta property="og:type" content="website" />

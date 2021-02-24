@@ -21,13 +21,21 @@ export default class CustomApp extends App {
           <Head>
             <title>ezyou — make it easy</title>
             <link rel="icon" href="/favicon.ico" />
-            <meta property="og:title" content="The ez ecommerce solution for you" />
+            <meta name="description" content="Sell your handmade gift, vintage & on-trend clothes, unique jewelry, and more… lots more." />
+
             <meta property="og:type" content="website" />
-            <meta property="og:url" content="https://ezyou.shop" />
+            <meta property="og:url" content="https://ezyou.shop/" />
+            <meta property="og:type" content="website" />
+            <meta property="og:title" content="The easy ecommerce solution, for you" />
+            <meta property="og:description" content="Sell your handmade gift, vintage & on-trend clothes, unique jewelry, and more… lots more." />
             <meta property="og:image" content="https://ezyou.shop/assets/og.png" />
-            <meta property="og:image:type" content="image/jpeg" />
-            <meta property="og:image:width" content="200" />
-            <meta property="og:image:height" content="200" />
+
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta property="twitter:domain" content="ezyou.shop" />
+            <meta property="twitter:url" content="https://ezyou.shop/" />
+            <meta name="twitter:title" content="The easy ecommerce solution, for you" />
+            <meta name="twitter:description" content="Sell your handmade gift, vintage \& on-trend clothes, unique jewelry, and more… lots more." />
+            <meta name="twitter:image" content="https://ezyou.shop/assets/og.png" />
           </Head>
           )}
           <Component {...pageProps} />

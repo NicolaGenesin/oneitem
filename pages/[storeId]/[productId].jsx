@@ -30,13 +30,21 @@ const ProductPage = ({ data, stripeAccountId }) => {
           {`ezyou - ${data.name}`}
         </title>
         <link rel="icon" href="/favicon.ico" />
-        <meta property="og:title" content={data.name} />
+        <meta name="description" content="Sell your handmade gift, vintage & on-trend clothes, unique jewelry, and more… lots more." />
+
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://ezyou.shop" />
+        <meta property="og:url" content="https://ezyou.shop/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={data.name} />
+        <meta property="og:description" content={`Brought to you by ${data.author}`} />
         <meta property="og:image" content={data.images[0].data_url} />
-        <meta property="og:image:width" content="200" />
-        <meta property="og:image:height" content="200" />
-        <meta property="og:description" content="Welcome to ezyou" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="twitter:domain" content="ezyou.shop" />
+        <meta property="twitter:url" content="https://ezyou.shop/" />
+        <meta name="twitter:title" content={data.name} />
+        <meta name="twitter:description" content={`Brought to you by ${data.author}`} />
+        <meta name="twitter:image" content={data.images[0].data_url} />
       </Head>
       <VStack>
         <Product preview={false} product={data} stripeAccountId={stripeAccountId} />

@@ -5,7 +5,7 @@ export default function Logo({ height }) {
   return (
     <Image
       src="/assets/logo.png"
-      objectFit="fit"
+      objectFit="contain"
       height={height}
     />
   );

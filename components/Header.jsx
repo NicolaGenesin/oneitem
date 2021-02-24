@@ -25,8 +25,8 @@ const Header = (props) => {
     >
       {LoginModal(isOpen, onOpen, onClose)}
       <HStack w="100%">
-        <Link ml="-4px" href="/">
-          <Logo height="50px" />
+        <Link ml="-6px" mt="4px" href="/">
+          <Logo w="300px" height="50px" />
         </Link>
         <Spacer />
         <Center>
@@ -36,7 +36,7 @@ const Header = (props) => {
           >
             <Center>
               <Link
-                color="black"
+                color="textColor.50"
                 href="/about"
                 fontWeight="semibold"
                 letterSpacing="wide"
@@ -46,7 +46,7 @@ const Header = (props) => {
             </Center>
             <Center>
               <Link
-                color="black"
+                color="textColor.50"
                 href="/pricing"
                 fontWeight="semibold"
                 letterSpacing="wide"

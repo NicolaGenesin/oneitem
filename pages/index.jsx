@@ -65,7 +65,7 @@ function Main() {
           pr="5%"
           pb="20%"
         >
-          <Box pt={['8%', '10%']}>
+          <Box pt={['0%', '10%']}>
             <Heading size="2xl" color="textColor.50">
               {i18n.t('homeSignedOut.titlePartOne')}
               <br />

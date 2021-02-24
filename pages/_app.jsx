@@ -5,8 +5,15 @@ import { ChakraProvider, extendTheme } from '@chakra-ui/react';
 import { AppWrapper } from '../context/state';
 import colors from '../config/theme';
 import Feedback from '../components/Feedback';
+import Fonts from '../components/Fonts';
 
-const theme = extendTheme({ colors });
+const theme = extendTheme({
+  colors,
+  fonts: {
+    heading: 'Raleway',
+    body: 'Raleway',
+  },
+});
 
 export default class CustomApp extends App {
   render() {
@@ -16,6 +23,7 @@ export default class CustomApp extends App {
 
     return (
       <ChakraProvider theme={theme}>
+        <Fonts />
         <AppWrapper>
           {!isProductPage && (
           <Head>

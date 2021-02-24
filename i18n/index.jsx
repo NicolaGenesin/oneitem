@@ -43,6 +43,10 @@ const i18n = rosetta({
       buy: 'Buy',
       author: 'brought to you by {{author}}',
       contact: 'Contact: {{contact}}',
+      authorPlaceholder: '[Author name]',
+      contactPlaceholder: '[Email or phone number]',
+      descriptionPlaceholder: '[Product description]',
+      namePlaceholder: '[Product name]',
       pricingInformation: 'VAT included, postage included',
       descriptionTitle: 'Description',
       deliveredIn(product) {
@@ -197,6 +201,10 @@ const i18n = rosetta({
       buy: 'Compra',
       author: 'creato da {{author}}',
       contact: 'Contatto: {{contact}}',
+      authorPlaceholder: '[Nome autore]',
+      contactPlaceholder: '[Email o recapito telefonico]',
+      descriptionPlaceholder: '[Descrizione prodotto]',
+      namePlaceholder: '[Nome prodotto]',
       pricingInformation: 'IVA e spedizione incluse',
       descriptionTitle: 'Descrizione',
       deliveredIn(product) {

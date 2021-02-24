@@ -61,7 +61,7 @@ export default function Product({ product, preview, stripeAccountId }) {
       <Center>
         <Box m="24px">
           <Heading as="h2" size="xl">
-            {product.storeName || 'Vincent Lab'}
+            {product.storeName}
             {' '}
             {preview && <Badge colorScheme="green">{i18n.t('product.preview')}</Badge>}
           </Heading>
@@ -72,7 +72,7 @@ export default function Product({ product, preview, stripeAccountId }) {
         <Box>
           <Center mb="3%">
             <Text>
-              {i18n.t('product.author', { author: product.author || 'Giulia Pera' })}
+              {i18n.t('product.author', { author: product.author || i18n.t('product.authorPlaceholder') })}
             </Text>
           </Center>
           <Box p={4} display={{ md: 'flex' }}>
@@ -111,14 +111,14 @@ export default function Product({ product, preview, stripeAccountId }) {
                       bg="white"
                       boxSize={['340px', '400px']}
                       objectFit="cover"
-                      src="assets/product-page-placeholder-01.jpg"
+                      src="https://via.placeholder.com/500?text=　"
                     />
                   )}
               </Carousel>
             </Box>
             <Box w={['340px', '400px']}>
               <Heading size="xl" mb="16px" mt={['24px', '0px']}>
-                {product.name || 'Zaino'}
+                {product.name || i18n.t('product.namePlaceholder')}
               </Heading>
               <Text
                 w="100%"
@@ -127,14 +127,14 @@ export default function Product({ product, preview, stripeAccountId }) {
               >
                 {i18n.t('product.descriptionTitle')}
               </Text>
-              <Text fontSize="md" whiteSpace="pre-line">{product.description || 'Zaino mini. Foderato internamente e tasca con zip Base in ecopelle. Bretelle regolabili. Chiusura a sacca con coulisse e patta con asola e bottone. Può starci: l\'essenziale'}</Text>
+              <Text fontSize="md" whiteSpace="pre-line">{product.description || i18n.t('product.descriptionPlaceholder')}</Text>
               <VStack mt="24px">
                 <Heading
                   size="xl"
                   w="100%"
                 >
                   {product.currency || '€'}
-                  {(product.price && product.price) || '35'}
+                  {(product.price && product.price) || '0'}
                 </Heading>
                 <Text
                   w="100%"
@@ -169,7 +169,7 @@ export default function Product({ product, preview, stripeAccountId }) {
           <Center mt="48px" mb="64px">
             <VStack maxW="400px">
               <Text>
-                {i18n.t('product.contact', { contact: product.contact || 'hello@vincent.com' })}
+                {i18n.t('product.contact', { contact: product.contact || i18n.t('product.contactPlaceholder') })}
               </Text>
             </VStack>
           </Center>

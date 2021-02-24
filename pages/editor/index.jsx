@@ -13,14 +13,13 @@ import useAuth from '../../hooks/useAuth';
 import { uploadImages } from '../../utils/upload';
 
 const placeholders = {
-  storeNamePlaceholder: 'Vincent Lab',
-  authorPlaceholder: 'Giulia Pera',
-  contactPlaceholder: 'hello@vincent.com',
-  namePlaceholder: 'Zaino',
-  pricePlaceholder: 35,
+  authorPlaceholder: '',
+  contactPlaceholder: '',
+  namePlaceholder: '',
+  pricePlaceholder: 0,
   quantityPlaceholder: 1,
   currencyPlaceholder: '€',
-  descriptionPlaceholder: 'Zaino mini. Foderato internamente e tasca con zip Base in ecopelle. Bretelle regolabili. Chiusura a sacca con coulisse e patta con asola e bottone. Può starci: l\'essenziale',
+  descriptionPlaceholder: '',
 };
 
 const CreatePage = () => {
@@ -31,9 +30,13 @@ const CreatePage = () => {
   const [state, setState] = useState({});
   const [isLoading, setSavingState] = useState(false);
   const router = useRouter();
-  const storeName = router.query.name || (store && store.name);
   const { productId } = router.query;
   const createMode = !productId;
+  let storeName = router.query.name;
+
+  if (store && store.name) {
+    storeName = store.name;
+  }
 
   useEffect(() => {
     if ((createMode && !isSignedIn) || (createMode && isSignedIn)) {
@@ -59,7 +62,7 @@ const CreatePage = () => {
     } else {
       console.log('Loading...');
     }
-  }, [createMode, isSignedIn]);
+  }, [createMode, isSignedIn, storeName]);
 
   if (pending) {
     // add loader while we check if there's a user

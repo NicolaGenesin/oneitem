@@ -107,9 +107,9 @@ ProductPage.getInitialProps = async function ({ query }) {
         }
       }
     }
-  } catch (error) {
-    return {};
-  }
+  } catch (error) {}
+
+  return { data: {} };
 };
 
 export default ProductPage;

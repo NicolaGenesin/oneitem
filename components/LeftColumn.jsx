@@ -267,17 +267,6 @@ const LeftColumn = ({
           </InputGroup>
         </Box>
         <Box w="340px">
-          <Heading size="xs" mb="8px">{i18n.t('components.leftColumn.contactEmail')}</Heading>
-          <Input
-            boxShadow="md"
-            bg="white"
-            placeholder={placeholders.contactPlaceholder}
-            onInput={(e) => updateState('contact', e.target.value)}
-            onChange={() => {}}
-            value={product.contact}
-          />
-        </Box>
-        <Box w="340px">
           <Heading size="xs" mb="8px">{i18n.t('components.leftColumn.image')}</Heading>
           <ImageUploading
             multiple
@@ -316,9 +305,9 @@ const LeftColumn = ({
                 </Button>
                 )}
                 {/* <Button onClick={onImageRemoveAll}>Remove all images</Button> */}
-                <SimpleGrid columns={[2, null, 3]} spacing="16px" mt="16px" maxW="100%">
+                <SimpleGrid columns={[2, null, 3]} spacing="16px" maxW="100%">
                   {imageList.map((image, index) => (
-                    <VStack key={index}>
+                    <VStack key={index} mt="16px">
                       <Image
                         src={image.data_url}
                         alt="Image to upload"
@@ -341,6 +330,17 @@ const LeftColumn = ({
               </div>
             )}
           </ImageUploading>
+        </Box>
+        <Box w="340px">
+          <Heading size="xs" mb="8px">{i18n.t('components.leftColumn.contactEmail')}</Heading>
+          <Input
+            boxShadow="md"
+            bg="white"
+            placeholder={placeholders.contactPlaceholder}
+            onInput={(e) => updateState('contact', e.target.value)}
+            onChange={() => {}}
+            value={product.contact}
+          />
         </Box>
         <HStack w="340px">
           {createMode

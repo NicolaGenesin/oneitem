@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Router from 'next/router';
 import {
-  Box, Center, Link, Text, VStack,
+  Box, Center, Link, Spacer, Text, VStack, Divider,
 } from '@chakra-ui/react';
 import Head from 'next/head';
 import Loader from 'react-spinners/BarLoader';
@@ -46,8 +46,15 @@ const ProductPage = ({ data, stripeAccountId }) => {
         <meta name="twitter:description" content={`Brought to you by ${data.author}`} />
         <meta name="twitter:image" content={data.images[0].data_url} />
       </Head>
-      <VStack>
-        <Product preview={false} product={data} stripeAccountId={stripeAccountId} />
+      <VStack h="100vh">
+        <Box w="100%">
+          <Product
+            preview={false}
+            product={data}
+            stripeAccountId={stripeAccountId}
+          />
+        </Box>
+        <Spacer />
         <Box>
           <Center p="16px" color="white">
             <Center>

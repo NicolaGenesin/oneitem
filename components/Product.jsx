@@ -57,7 +57,7 @@ export default function Product({ product, preview, stripeAccountId }) {
   }
 
   return (
-    <Box h="100%">
+    <Box>
       <Center>
         <Box m="24px">
           <Heading as="h2" size="xl">
@@ -68,9 +68,9 @@ export default function Product({ product, preview, stripeAccountId }) {
         </Box>
       </Center>
       <Divider orientation="horizontal" />
-      <Center mt="5%">
+      <Center mt={['7%', '5%']}>
         <Box>
-          <Center mb="3%">
+          <Center mb={['3%', '5%']}>
             <Text>
               {i18n.t('product.author', { author: product.author || i18n.t('product.authorPlaceholder') })}
             </Text>
@@ -122,29 +122,31 @@ export default function Product({ product, preview, stripeAccountId }) {
               </Heading>
               <Text
                 w="100%"
-                mb="16px"
-                fontWeight="bold"
+                mb="8px"
+                fontWeight="semibold"
               >
                 {i18n.t('product.descriptionTitle')}
               </Text>
               <Text fontSize="md" whiteSpace="pre-line">{product.description || i18n.t('product.descriptionPlaceholder')}</Text>
-              <VStack mt="24px">
+              <VStack mt="24px" spacing={0}>
                 <Heading
                   size="xl"
                   w="100%"
+                  mb="16px"
                 >
                   {product.currency || '€'}
                   {(product.price && product.price) || '0'}
                 </Heading>
                 <Text
                   w="100%"
-                  fontSize="xs"
+                  fontSize="sm"
+                  fontWeight="semibold"
                 >
                   {i18n.t('product.deliveredIn', product)}
                 </Text>
                 <Text
                   w="100%"
-                  mb="16px"
+                  mb="24px"
                   fontSize="xs"
                 >
                   {i18n.t('product.pricingInformation')}
@@ -166,7 +168,7 @@ export default function Product({ product, preview, stripeAccountId }) {
               </VStack>
             </Box>
           </Box>
-          <Center mt="48px" mb="64px">
+          <Center mt={['7%', '5%']} mb="64px">
             <VStack maxW="400px">
               <Text>
                 {i18n.t('product.contact', { contact: product.contact || i18n.t('product.contactPlaceholder') })}

@@ -18,6 +18,7 @@ const i18n = rosetta({
       hideListing: 'Hide',
       publishListing: 'Publish',
       logout: 'Logout',
+      updatedOn: 'updated on',
     },
     homeSignedOut: {
       titlePartOne: 'Create your online',
@@ -176,6 +177,7 @@ const i18n = rosetta({
       hideListing: 'Nascondi',
       publishListing: 'Pubblica',
       logout: 'Esci',
+      updatedOn: 'aggiornato il',
     },
     homeSignedOut: {
       titlePartOne: 'Crea il tuo ecommerce',

@@ -300,10 +300,9 @@ const LoggedInHome = () => {
                           fontWeight="semibold"
                           letterSpacing="wide"
                           fontSize="xs"
-                          textTransform="uppercase"
                           ml="2"
                         >
-                          updated on
+                          {i18n.t('home.updatedOn')}
                           {' '}
                           {new Date(product.updatedAt * 1000).toLocaleString('us').slice(0, 10)}
                         </Box>

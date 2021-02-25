@@ -293,7 +293,7 @@ const LoggedInHome = () => {
                           borderRadius="md"
                           colorScheme={product.visible ? 'teal' : 'yellow'}
                         >
-                          {product.visible ? 'published' : 'unpublished'}
+                          {product.visible ? i18n.t('home.item.published') : i18n.t('home.item.unpublished')}
                         </Badge>
                         <Box
                           color="gray.500"
@@ -302,7 +302,7 @@ const LoggedInHome = () => {
                           fontSize="xs"
                           ml="2"
                         >
-                          {i18n.t('home.updatedOn')}
+                          {i18n.t('home.item.updatedOn')}
                           {' '}
                           {new Date(product.updatedAt * 1000).toLocaleString('us').slice(0, 10)}
                         </Box>
@@ -325,7 +325,7 @@ const LoggedInHome = () => {
                           color="white"
                           onClick={(event) => { seeListing(event, `${product.storeId}/${product.id}`); }}
                         >
-                          {i18n.t('home.seeListing')}
+                          {i18n.t('home.item.seeListing')}
                         </Button>
                         <Spacer />
                         {product.visible && (
@@ -342,7 +342,7 @@ const LoggedInHome = () => {
                               setLoggedInState);
                           }}
                         >
-                          {i18n.t('home.hideListing')}
+                          {i18n.t('home.item.hideListing')}
                         </Button>
                         )}
                         {!product.visible && (
@@ -359,7 +359,7 @@ const LoggedInHome = () => {
                               setLoggedInState);
                           }}
                         >
-                          {i18n.t('home.publishListing')}
+                          {i18n.t('home.item.publishListing')}
                         </Button>
                         )}
                         <Button
@@ -370,7 +370,7 @@ const LoggedInHome = () => {
                           color="white"
                           onClick={(event) => { editListing(event, product.id); }}
                         >
-                          {i18n.t('home.editListing')}
+                          {i18n.t('home.item.editListing')}
                         </Button>
                       </HStack>
                       {product.visible && (
@@ -381,7 +381,7 @@ const LoggedInHome = () => {
                             fontSize="sm"
                             mb="8px"
                           >
-                            {i18n.t('home.share')}
+                            {i18n.t('home.item.share')}
                           </Text>
                           <HStack w="100%" mb="8px">
                             <Input

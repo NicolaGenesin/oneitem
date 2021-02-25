@@ -216,6 +216,7 @@ const LoggedInHome = () => {
                 )}
                 {!canCreateCharges && (
                 <Button
+                  boxShadow="md"
                   w="100%"
                   leftIcon={<MdPayment />}
                   colorScheme="primaryButton"
@@ -238,6 +239,7 @@ const LoggedInHome = () => {
                 {canCreateCharges && (
                 <Link w="100%" href="https://dashboard.stripe.com/login" target="_blank">
                   <Button
+                    boxShadow="md"
                     w="100%"
                     leftIcon={<AiOutlineDashboard />}
                     colorScheme="primaryButton"
@@ -247,6 +249,7 @@ const LoggedInHome = () => {
                 </Link>
                 )}
                 <Button
+                  boxShadow="md"
                   w="100%"
                   leftIcon={<MdAddCircleOutline />}
                   colorScheme="primaryButton"
@@ -267,7 +270,6 @@ const LoggedInHome = () => {
                 return (
                   <Box
                     key={index}
-                    borderWidth="1px"
                     borderRadius="lg"
                     overflow="hidden"
                     bg="white"
@@ -318,8 +320,9 @@ const LoggedInHome = () => {
                       </Box>
                       <HStack mt="16px" mb="16px">
                         <Button
+                          boxShadow="md"
                           variant="solid"
-                          size="sm"
+                          size="md"
                           leftIcon={<HiOutlineExternalLink />}
                           colorScheme="primaryButton"
                           color="white"
@@ -330,8 +333,9 @@ const LoggedInHome = () => {
                         <Spacer />
                         {product.visible && (
                         <Button
+                          boxShadow="md"
                           variant="solid"
-                          size="sm"
+                          size="md"
                           leftIcon={<MdDelete />}
                           colorScheme="primaryImportantButton"
                           color="white"
@@ -347,8 +351,9 @@ const LoggedInHome = () => {
                         )}
                         {!product.visible && (
                         <Button
+                          boxShadow="md"
                           variant="solid"
-                          size="sm"
+                          size="md"
                           leftIcon={<AiOutlineEye />}
                           colorScheme="primaryButton"
                           color="white"
@@ -363,8 +368,9 @@ const LoggedInHome = () => {
                         </Button>
                         )}
                         <Button
+                          boxShadow="md"
                           variant="solid"
-                          size="sm"
+                          size="md"
                           leftIcon={<MdBuild />}
                           colorScheme="primaryButton"
                           color="white"
@@ -386,11 +392,13 @@ const LoggedInHome = () => {
                           <HStack w="100%" mb="8px">
                             <Input
                               p="8px"
+                              boxShadow="md"
                               variant="filled"
                               value={pageUrl}
                               onChange={() => {}}
                             />
                             <IconButton
+                              boxShadow="md"
                               colorScheme="pink"
                               aria-label="Link share"
                               icon={<MdLink />}
@@ -398,35 +406,35 @@ const LoggedInHome = () => {
                             />
                           </HStack>
                           <Wrap spacing="12px">
-                            <WrapItem>
+                            <WrapItem boxShadow="md">
                               <FacebookShareButton
                                 url={pageUrl}
                               >
                                 <FacebookIcon size={40} borderRadius="8px" />
                               </FacebookShareButton>
                             </WrapItem>
-                            <WrapItem>
+                            <WrapItem boxShadow="md">
                               <TwitterShareButton
                                 url={pageUrl}
                               >
                                 <TwitterIcon size={40} borderRadius="8px" />
                               </TwitterShareButton>
                             </WrapItem>
-                            <WrapItem>
+                            <WrapItem boxShadow="md">
                               <WhatsappShareButton
                                 url={pageUrl}
                               >
                                 <WhatsappIcon size={40} borderRadius="8px" />
                               </WhatsappShareButton>
                             </WrapItem>
-                            <WrapItem>
+                            <WrapItem boxShadow="md">
                               <TelegramShareButton
                                 url={pageUrl}
                               >
                                 <TelegramIcon size={40} borderRadius="8px" />
                               </TelegramShareButton>
                             </WrapItem>
-                            <WrapItem>
+                            <WrapItem boxShadow="md">
                               <PinterestShareButton
                                 url={pageUrl}
                                 media={product.images[0].data_url}
@@ -434,7 +442,7 @@ const LoggedInHome = () => {
                                 <PinterestIcon size={40} borderRadius="8px" />
                               </PinterestShareButton>
                             </WrapItem>
-                            <WrapItem>
+                            <WrapItem boxShadow="md">
                               <RedditShareButton
                                 url={pageUrl}
                                 title={product.name}
@@ -444,7 +452,7 @@ const LoggedInHome = () => {
                                 <RedditIcon size={40} borderRadius="8px" />
                               </RedditShareButton>
                             </WrapItem>
-                            <WrapItem>
+                            <WrapItem boxShadow="md">
                               <TumblrShareButton
                                 url={pageUrl}
                                 title={product.name}
@@ -452,14 +460,14 @@ const LoggedInHome = () => {
                                 <TumblrIcon size={40} borderRadius="8px" />
                               </TumblrShareButton>
                             </WrapItem>
-                            <WrapItem>
+                            <WrapItem boxShadow="md">
                               <LinkedinShareButton
                                 url={pageUrl}
                               >
                                 <LinkedinIcon size={40} borderRadius="8px" />
                               </LinkedinShareButton>
                             </WrapItem>
-                            <WrapItem>
+                            <WrapItem boxShadow="md">
                               <EmailShareButton
                                 url={pageUrl}
                                 subject={product.name}
@@ -475,7 +483,15 @@ const LoggedInHome = () => {
                   </Box>
                 );
               })}
-            <Button colorScheme="primaryButton" variant="outline" leftIcon={<MdExitToApp />} onClick={logout}>{i18n.t('home.logout')}</Button>
+            <Button
+              colorScheme="primaryButton"
+              variant="outline"
+              leftIcon={<MdExitToApp />}
+              onClick={logout}
+            >
+              {i18n.t('home.logout')}
+
+            </Button>
           </VStack>
         </Center>
       </div>

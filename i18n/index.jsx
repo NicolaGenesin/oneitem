@@ -12,7 +12,7 @@ const i18n = rosetta({
       updateBankDetails: 'Update my bank details',
       pendingStripeVerification: 'Your banking data is being verified, please return here in a few minutes. Once you\'re verified, your products can be bought.',
       linkToStripe: 'Go to the payments dashboard',
-      createNewListing: 'Add new product',
+      createNewListing: 'Add a new product',
       logout: 'Logout',
       item: {
         updatedOn: 'updated on',
@@ -177,7 +177,7 @@ const i18n = rosetta({
       updateBankDetails: 'Aggiorna i miei dati bancari',
       pendingStripeVerification: 'I tuoi dati sono in fase di verifica, si prega di tornare fra qualche minuto. Al termine della fase di verifica, i tuoi prodotti potranno essere comprati.',
       linkToStripe: 'Vai alla pagina dei pagamenti',
-      createNewListing: 'Aggiungi nuovo prodotto',
+      createNewListing: 'Aggiungi un nuovo prodotto',
       logout: 'Esci',
       item: {
         updatedOn: 'aggiornato il',

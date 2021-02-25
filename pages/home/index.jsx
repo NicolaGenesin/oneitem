@@ -237,7 +237,7 @@ const LoggedInHome = () => {
                 </Button>
                 )}
                 {canCreateCharges && (
-                <Link w="100%" href="https://dashboard.stripe.com/login" target="_blank">
+                <Link w="100%" href="https://dashboard.stripe.com/payments?status%5B%5D=successful" target="_blank">
                   <Button
                     boxShadow="md"
                     w="100%"

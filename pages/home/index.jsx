@@ -188,13 +188,13 @@ const LoggedInHome = () => {
               w="100%"
             >
               <VStack>
-                <HStack spacing="48px">
-                  {/* <VStack>
+                {/* <HStack spacing="48px">
+                  <VStack>
                     <Stat>
                       <StatLabel>{i18n.t('home.itemsSold')}</StatLabel>
                       <StatNumber align="center">0</StatNumber>
                     </Stat>
-                  </VStack> */}
+                  </VStack>
                   <VStack>
                     <Stat>
                       <StatLabel>{i18n.t('home.pageViews')}</StatLabel>
@@ -207,7 +207,7 @@ const LoggedInHome = () => {
                       </StatNumber>
                     </Stat>
                   </VStack>
-                </HStack>
+                </HStack> */}
                 {(!canCreateCharges && store.stripe && store.stripe.account.id) && (
                 <Alert status="info" rounded="md">
                   <AlertIcon />
@@ -381,7 +381,7 @@ const LoggedInHome = () => {
                             fontSize="sm"
                             mb="8px"
                           >
-                            Share:
+                            {i18n.t('home.share')}
                           </Text>
                           <HStack w="100%" mb="8px">
                             <Input

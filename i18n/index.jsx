@@ -105,6 +105,7 @@ const i18n = rosetta({
     },
     publicProduct: {
       footer: 'Created with',
+      share: 'Like it? Share it!',
     },
     fourOfFour: {
       title: 'Page Not Found',
@@ -269,6 +270,7 @@ const i18n = rosetta({
     },
     publicProduct: {
       footer: 'Pagina creata con',
+      share: 'Ti piace? Condividilo!',
     },
     fourOfFour: {
       title: 'Pagina non trovata',

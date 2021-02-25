@@ -1,14 +1,102 @@
 import React, { useEffect } from 'react';
 import Router from 'next/router';
 import {
-  Box, Center, Link, Spacer, Text, VStack, Divider,
+  Box, Spacer, Text, HStack, VStack, Center, Link,
 } from '@chakra-ui/react';
+import {
+  EmailShareButton, FacebookShareButton,
+  PinterestShareButton, RedditShareButton, TelegramShareButton,
+  TumblrShareButton, TwitterShareButton, WhatsappShareButton,
+  FacebookIcon, TwitterIcon, PinterestIcon, TelegramIcon,
+  WhatsappIcon, RedditIcon, TumblrIcon, EmailIcon,
+} from 'react-share';
 import Head from 'next/head';
 import Loader from 'react-spinners/BarLoader';
 import Product from '../../components/Product';
 import fire from '../../config/fire-config';
 import usei18n from '../../i18n/index';
 import Logo from '../../components/Logo';
+
+const Footer = ({ i18n }) => (
+  <Box>
+    <Center p="16px" color="white">
+      <Center>
+        <Text mr="8px" fontSize="sm" color="black">
+          {i18n.t('publicProduct.footer')}
+        </Text>
+      </Center>
+      <Link p="4px" href="/">
+        <Logo height="30px" />
+      </Link>
+    </Center>
+  </Box>
+);
+
+const ShareModule = ({ i18n, product }) => {
+  const pageUrl = `https://ezyou.shop/${product.storeId}/${product.id}`;
+
+  return (
+    <VStack spacing="8px">
+      <Text
+        mb="8px"
+        fontWeight="semibold"
+      >
+        {i18n.t('publicProduct.share')}
+      </Text>
+      <HStack spacing="8px">
+        <FacebookShareButton
+          url={pageUrl}
+        >
+          <FacebookIcon size={40} borderRadius="8px" />
+        </FacebookShareButton>
+        <TwitterShareButton
+          url={pageUrl}
+        >
+          <TwitterIcon size={40} borderRadius="8px" />
+        </TwitterShareButton>
+        <WhatsappShareButton
+          url={pageUrl}
+        >
+          <WhatsappIcon size={40} borderRadius="8px" />
+        </WhatsappShareButton>
+        <TelegramShareButton
+          url={pageUrl}
+        >
+          <TelegramIcon size={40} borderRadius="8px" />
+        </TelegramShareButton>
+      </HStack>
+      <HStack spacing="8px">
+        <PinterestShareButton
+          url={pageUrl}
+          media={product.images[0].data_url}
+        >
+          <PinterestIcon size={40} borderRadius="8px" />
+        </PinterestShareButton>
+        <RedditShareButton
+          url={pageUrl}
+          title={product.name}
+          windowWidth={660}
+          windowHeight={460}
+        >
+          <RedditIcon size={40} borderRadius="8px" />
+        </RedditShareButton>
+        <TumblrShareButton
+          url={pageUrl}
+          title={product.name}
+        >
+          <TumblrIcon size={40} borderRadius="8px" />
+        </TumblrShareButton>
+        <EmailShareButton
+          url={pageUrl}
+          subject={product.name}
+          body="body"
+        >
+          <EmailIcon size={40} borderRadius="8px" />
+        </EmailShareButton>
+      </HStack>
+    </VStack>
+  );
+};
 
 const ProductPage = ({ data, stripeAccountId }) => {
   const i18n = usei18n();
@@ -54,19 +142,9 @@ const ProductPage = ({ data, stripeAccountId }) => {
             stripeAccountId={stripeAccountId}
           />
         </Box>
+        <ShareModule i18n={i18n} product={data} />
         <Spacer />
-        <Box>
-          <Center p="16px" color="white">
-            <Center>
-              <Text mr="8px" fontSize="sm" color="black">
-                {i18n.t('publicProduct.footer')}
-              </Text>
-            </Center>
-            <Link p="4px" href="/">
-              <Logo height="30px" />
-            </Link>
-          </Center>
-        </Box>
+        <Footer i18n={i18n} />
       </VStack>
     </Box>
   );

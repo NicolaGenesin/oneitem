@@ -49,8 +49,12 @@ def create_checkout_session(path):
         }],
         mode='payment',
         success_url='https://ezyou.shop{}/success'.format(body.get('pagePath')),
-        cancel_url='https://ezyou.shop{}/issue'.format(body.get('pagePath')),
-        stripe_account=body.get('stripeAccountId')
+        cancel_url='https://ezyou.shop{}'.format(body.get('pagePath')),
+        stripe_account=body.get('stripeAccountId'),
+        payment_intent_data={
+            'receipt_email': body.get('customerEmail')
+        },
+        customer_email=body.get('customerEmail')
     )
 
     return jsonify(id=session.id)

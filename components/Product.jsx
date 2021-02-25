@@ -2,16 +2,17 @@ import React, { useEffect, useState } from 'react';
 import Router, { useRouter } from 'next/router';
 import {
   Text, VStack, Box, Image, Button, Heading,
-  Divider, Center, Badge,
+  Divider, Center, Badge, useDisclosure,
 } from '@chakra-ui/react';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 import { loadStripe } from '@stripe/stripe-js';
 import usei18n from '../i18n/index';
+import EmailCheckoutModal from './EmailCheckoutModal';
 
 let stripePromise;
 
-const handleBuy = async (product, stripeAccountId, pagePath) => {
+const handleBuy = async (product, stripeAccountId, pagePath, customerEmail) => {
   const stripe = await stripePromise;
   const response = await fetch('/api/sessions', {
     method: 'POST',
@@ -22,6 +23,7 @@ const handleBuy = async (product, stripeAccountId, pagePath) => {
       product,
       stripeAccountId,
       pagePath,
+      customerEmail,
     }),
   });
   const session = await response.json();
@@ -43,6 +45,9 @@ export default function Product({ product, preview, stripeAccountId }) {
   const i18n = usei18n();
   const pagePath = useRouter().asPath;
   const [isLoading, setIsLoading] = useState(false);
+  const [email, setEmail] = useState();
+  const [emailValidity, setEmailValidity] = useState();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
     if (stripeAccountId) {
@@ -52,12 +57,28 @@ export default function Product({ product, preview, stripeAccountId }) {
     }
   }, [stripeAccountId]);
 
+  useEffect(() => {
+    if (emailValidity) {
+      setIsLoading(true);
+      handleBuy(product, stripeAccountId, pagePath, email);
+    }
+  }, [emailValidity]);
+
   if (!product) {
     return <div />;
   }
 
   return (
     <Box>
+      <EmailCheckoutModal
+        isOpen={isOpen}
+        onOpen={onOpen}
+        onClose={onClose}
+        email={email}
+        setEmail={setEmail}
+        emailValidity={emailValidity}
+        setEmailValidity={setEmailValidity}
+      />
       <Center>
         <Box m="24px">
           <Heading as="h2" size="xl">
@@ -159,8 +180,7 @@ export default function Product({ product, preview, stripeAccountId }) {
                   color="white"
                   size="lg"
                   onClick={() => {
-                    setIsLoading(true);
-                    handleBuy(product, stripeAccountId, pagePath);
+                    onOpen();
                   }}
                 >
                   {i18n.t('product.buy')}

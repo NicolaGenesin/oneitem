@@ -50,10 +50,7 @@ def create_checkout_session(path):
         mode='payment',
         success_url='https://ezyou.shop{}/success'.format(body.get('pagePath')),
         cancel_url='https://ezyou.shop{}/issue'.format(body.get('pagePath')),
-        stripe_account=body.get('stripeAccountId'),
-        payment_intent_data={
-            'receipt_email': 'nicolagenesin@yahoo.it'
-        }
+        stripe_account=body.get('stripeAccountId')
     )
 
     return jsonify(id=session.id)

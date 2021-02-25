@@ -129,7 +129,7 @@ const i18n = rosetta({
       leftColumn: {
         alertInfo: 'Please fill all fields on this column. After clicking on the create button at the bottom of the page, your page will be online and visible to everyone.',
         titleCreate: 'Add a new product',
-        titleEdit: 'Edit your Website',
+        titleEdit: 'Edit product',
         authorName: 'Author Name',
         itemName: 'Item Name',
         itemDescription: 'Item Description',
@@ -145,7 +145,7 @@ const i18n = rosetta({
         buttonCreate: 'Add',
         buttonUpdate: 'Update',
         clickOr: 'Click or',
-        dropHere: 'Drop here',
+        dropHere: 'drop here',
         removeImage: 'Remove',
         buttonUpdateLoading: 'Please Wait',
       },
@@ -172,11 +172,11 @@ const i18n = rosetta({
       title: 'I tuoi prodotti',
       itemsSold: 'Totale prodotti venduti',
       pageViews: 'Visite totali',
-      acceptPayments: 'Abilita Pagamenti',
+      acceptPayments: 'Abilita pagamenti',
       updateBankDetails: 'Aggiorna i miei dati bancari',
       pendingStripeVerification: 'I tuoi dati sono in fase di verifica, si prega di tornare fra qualche minuto. Al termine della fase di verifica, i tuoi prodotti potranno essere comprati.',
-      linkToStripe: 'Vai alla pagina dei Pagamenti',
-      createNewListing: 'Aggiungi nuovo Prodotto',
+      linkToStripe: 'Vai alla pagina dei pagamenti',
+      createNewListing: 'Aggiungi nuovo prodotto',
       logout: 'Esci',
       item: {
         updatedOn: 'aggiornato il',
@@ -268,7 +268,7 @@ const i18n = rosetta({
       copiedToClipboard: 'Copiato nelle note! Incolla dove preferisci e vedi il risultato',
     },
     publicProduct: {
-      footer: 'pagina creata grazie a',
+      footer: 'Pagina creata con',
     },
     fourOfFour: {
       title: 'Pagina non trovata',

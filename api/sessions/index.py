@@ -19,6 +19,8 @@ def create_checkout_session(path):
     elif product.get('currency') == '£':
         currency = 'gbp'
 
+    product_name = str(product.get('name'))
+
     session = stripe.checkout.Session.create(
         billing_address_collection='auto',
         shipping_address_collection={
@@ -41,12 +43,13 @@ def create_checkout_session(path):
             'price_data': {
                 'currency': currency,
                 'product_data': {
-                    'name': product.get('name'),
+                    'name': product_name,
                 },
                 'unit_amount': int(float(product.get('price')) * 100),
             },
             'quantity': 1,
         }],
+        metadata={'product_name': product_name},
         mode='payment',
         success_url='https://ezyou.shop{}/success'.format(body.get('pagePath')),
         cancel_url='https://ezyou.shop{}'.format(body.get('pagePath')),

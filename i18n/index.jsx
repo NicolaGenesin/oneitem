@@ -126,6 +126,9 @@ const i18n = rosetta({
         button: 'Return to Product Page',
       },
     },
+    publicStorePage: {
+      open: 'Open product page',
+    },
     components: {
       leftColumn: {
         alertInfo: 'Please fill all fields on this column. After clicking on the create button at the bottom of the page, your page will be online and visible to everyone.',
@@ -142,7 +145,7 @@ const i18n = rosetta({
         deliveryEstimateRangeWeek: 'week',
         deliveryEstimateRangeWeeks: 'weeks',
         image: 'Images (up to 6)',
-        contactEmail: 'Contact Email (or phone number)',
+        contactEmail: 'Contact email (or phone number)',
         buttonCreate: 'Add',
         buttonUpdate: 'Update',
         clickOr: 'Click or',

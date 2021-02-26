@@ -7,13 +7,23 @@ app = Flask(__name__)
 
 @app.route('/<path:path>', methods=["POST"])
 def main(path):
-    accountId = request.json.get('stripeAccountId')
+    account_id= request.json.get('stripeAccountId')
+    page_url = request.json.get('pageUrl')
+    store_name = request.json.get('storeName')
 
-    if accountId:
-        account = stripe.Account.retrieve(accountId)
+    if account_id:
+        account = stripe.Account.retrieve(account_id)
     else:
         account = stripe.Account.create(
             type='standard',
+            business_profile={
+                'url': page_url,
+            },
+            settings={
+                'payments': {
+                    'statement_descriptor': store_name,
+                }
+            }
         )
 
     account_link = stripe.AccountLink.create(

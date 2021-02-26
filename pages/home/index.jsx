@@ -34,7 +34,7 @@ const logout = (event) => {
   fire.auth().signOut();
 };
 
-const enablePayments = async (event, storeId, stripeAccountId) => {
+const enablePayments = async (event, storeId, storeName, stripeAccountId) => {
   event.preventDefault();
 
   const response = await fetch('/api/onboarding', {
@@ -44,6 +44,8 @@ const enablePayments = async (event, storeId, stripeAccountId) => {
     },
     body: JSON.stringify({
       stripeAccountId,
+      storeName,
+      pageUrl: `https://ezyou.shop/${storeId}/`,
     }),
   });
 
@@ -227,6 +229,7 @@ const LoggedInHome = () => {
                     await enablePayments(
                       event,
                       storeId,
+                      store.name,
                       store.stripe && store.stripe.account.id,
                     );
 

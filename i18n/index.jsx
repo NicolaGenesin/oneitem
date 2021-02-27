@@ -131,7 +131,7 @@ const i18n = rosetta({
     },
     components: {
       leftColumn: {
-        alertInfo: 'Please fill all fields on this column. After clicking on the create button at the bottom of the page, your page will be online and visible to everyone.',
+        alertInfo: 'Please complete all fields on this column. Your ecommerce will be online and visible to everyone once you click the button at the bottom of the page.',
         titleCreate: 'Add a new product',
         titleEdit: 'Edit product',
         authorName: 'Author Name',
@@ -303,7 +303,9 @@ const i18n = rosetta({
     },
     components: {
       leftColumn: {
-        alertInfo: 'Completa tutti i campi in questa colonna. Dopo aver cliccato il bottone in basso, il tuo ecommerce sarà visibile a tutti.',
+        alertInfo: 'Please complete all fields on this column. Your ecommerce will be online and visible to everyone once you click the button at the bottom of the page.',
+
+        alertInfo: 'Completa tutti i campi in questa colonna. Il tuo ecommerce sarà visibile a tutti una volta cliccato il tasto alla fine della pagina.',
         titleCreate: 'Aggiungi un nuovo prodotto',
         titleEdit: 'Modifica il prodotto',
         storeName: 'Store Name',

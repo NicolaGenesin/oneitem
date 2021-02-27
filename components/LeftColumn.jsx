@@ -70,7 +70,6 @@ const LeftColumn = ({
   return (
     <Box
       bg="primary.50"
-      h="100%"
     >
       <VStack
         spacing="24px"
@@ -78,7 +77,7 @@ const LeftColumn = ({
         pb="24px"
         color="textColor.50"
       >
-        <HStack w="340px">
+        <HStack w="320px">
           <Heading as="h3" size="lg">
             {createMode ? i18n.t('components.leftColumn.titleCreate') : i18n.t('components.leftColumn.titleEdit')}
           </Heading>
@@ -100,7 +99,7 @@ const LeftColumn = ({
           borderWidth="1px"
           borderRadius="lg"
           rounded="md"
-          w="340px"
+          w="320px"
         >
           <Text
             fontWeight="semibold"
@@ -110,7 +109,7 @@ const LeftColumn = ({
           </Text>
         </Box>
         )}
-        <Box w="340px">
+        <Box w="320px">
           <Heading
             size="xs"
             mb="8px"
@@ -126,7 +125,7 @@ const LeftColumn = ({
             value={product.author}
           />
         </Box>
-        <Box w="340px">
+        <Box w="320px">
           <Heading
             size="xs"
             mb="8px"
@@ -142,7 +141,7 @@ const LeftColumn = ({
             value={product.name}
           />
         </Box>
-        <Box w="340px">
+        <Box w="320px">
           <Heading
             size="xs"
             mb="8px"
@@ -159,7 +158,7 @@ const LeftColumn = ({
             value={product.description}
           />
         </Box>
-        <Box w="340px">
+        <Box w="320px">
           <Heading
             size="xs"
             mb="8px"
@@ -198,7 +197,7 @@ const LeftColumn = ({
             </NumberInput>
           </InputGroup>
         </Box>
-        <Box w="340px">
+        <Box w="320px">
           <Heading
             size="xs"
             mb="8px"
@@ -227,7 +226,7 @@ const LeftColumn = ({
             </NumberInput>
           </InputGroup>
         </Box>
-        <Box w="340px">
+        <Box w="320px">
           <Heading
             size="xs"
             mb="8px"
@@ -266,7 +265,7 @@ const LeftColumn = ({
             </Select>
           </InputGroup>
         </Box>
-        <Box w="340px">
+        <Box w="320px">
           <Heading size="xs" mb="8px">{i18n.t('components.leftColumn.image')}</Heading>
           <ImageUploading
             multiple
@@ -331,7 +330,7 @@ const LeftColumn = ({
             )}
           </ImageUploading>
         </Box>
-        <Box w="340px">
+        <Box w="320px">
           <Heading size="xs" mb="8px">{i18n.t('components.leftColumn.contactEmail')}</Heading>
           <Input
             boxShadow="md"
@@ -342,7 +341,7 @@ const LeftColumn = ({
             value={product.contact}
           />
         </Box>
-        <HStack w="340px">
+        <HStack w="320px">
           {createMode
            && (
            <Button

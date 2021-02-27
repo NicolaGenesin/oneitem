@@ -188,8 +188,43 @@ const CreatePage = () => {
     }
   };
 
+  if (isMobile) {
+    return (
+      <Box>
+        {CreateModal(isOpen, onOpen, onClose, state.storeId, state.id)}
+        <div className="container">
+          <div className="column">
+            <LeftColumn
+              product={state}
+              placeholders={placeholders}
+              state={state}
+              updateState={updateState}
+              handleSubmit={handleSubmit}
+              createMode={createMode}
+              isMobile={isMobile}
+              isLoading={isLoading}
+            />
+          </div>
+        </div>
+        <style jsx>
+          {`
+            .container {
+              height: 100vh;
+            }
+            
+            .column {
+              overflow-y: scroll;
+              width: 375px;
+              float: left;
+            }
+          `}
+        </style>
+      </Box>
+    ); 
+  }
+
   return (
-    <Box bg="white">
+    <Box>
       {CreateModal(isOpen, onOpen, onClose, state.storeId, state.id)}
       <div className="container">
         <div className="left">
@@ -204,32 +239,29 @@ const CreatePage = () => {
             isLoading={isLoading}
           />
         </div>
-        {!isMobile
-          && (
-          <div className="right">
-            <Product mt="24px" preview product={state} />
-          </div>
-          )}
+        <div className="right">
+          <Product mt="24px" preview product={state} />
+        </div>
       </div>
       <style jsx>
         {`
           .container {
-              height: 100vh;
-              overflow: hidden;
+            height: 100vh;
+            overflow: hidden;
           }
 
           .left {
-              height: 100vh;
-              overflow-y: scroll;
-              width: 375px;
-              float: left;
+            height: 100vh;
+            overflow-y: scroll;
+            width: 375px;
+            float: left;
           }
 
           .right {
-              height: 100vh;
-              overflow-y: scroll;
-              float: none;
-              width: auto;
+            height: 100vh;
+            overflow-y: scroll;
+            float: none;
+            width: auto;
           }
 
           /* width */

@@ -33,7 +33,9 @@ const CreateModal = (isOpen, onOpen, onClose, storeId, productId) => {
   const handleSubmit = (event) => {
     const newState = stateRef.current;
 
-    if (newState.password !== newState.confirmPassword || !isValidEmail(newState.email)) {
+    if (newState.password !== newState.confirmPassword
+       || (newState.password && newState.password.length < 10)
+       || !isValidEmail(newState.email)) {
       setState({ ...newState, isLoading: false, error: true });
       return;
     }

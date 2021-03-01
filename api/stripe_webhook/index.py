@@ -60,7 +60,7 @@ def main(path):
         #     }
 
         connected_account_email = connected_account.get('email')
-        connected_account_name = connected_account.get('business_profile').get('name')
+        # connected_account_name = connected_account.get('business_profile').get('name') this is null for Elena
         country = connected_account.get('country')
         template_id = EN_TEMPLATE_ID
 
@@ -145,18 +145,18 @@ def main(path):
         # todo this is a tmp very bad solution to inject all the text directly from here. ideally we'd use different templates 
         if country == 'IT':
             title = 'Hai ricevuto un nuovo ordine!'
-            subtitle = 'Ciao {}, un nuovo cliente ha appena comprato un tuo prodotto chiamato {} da questa pagina {}'.format(connected_account_name, product_name, product_page_url)
+            subtitle = 'Ciao! Un nuovo cliente ha appena comprato un tuo prodotto chiamato {} da questa pagina {}'.format(product_name, product_page_url)
             shippingTitle = 'Le informazioni di spedizione del tuo cliente'
             button = 'Controlla questo ordine sul pannello dei pagamenti'
         else:
             title = 'You\'ve received a New Order!'
-            subtitle = 'Hi {}, a new customer just bought a product named {} from this page {}'.format(connected_account_name, product_name, product_page_url)
+            subtitle = 'Hi! A new customer just bought a product named {} from this page {}'.format(product_name, product_page_url)
             shippingTitle = 'Your Customer Shipping Information'
             button = 'Check this order in the Payments Dashboard'
 
         dynamic_template_data = {
             'connected_account_email': connected_account_email,
-            'connected_account_name': connected_account_name,
+            # 'connected_account_name': connected_account_name,
             'product_name': product_name,
             'product_page_url': product_page_url,
             'dashboard_link': 'https://dashboard.stripe.com/payments/{}'.format(object_data.get('payment_intent')),

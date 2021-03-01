@@ -74,13 +74,13 @@ const CreateModal = (isOpen, onOpen, onClose, storeId, productId) => {
     }
   }, []);
 
-  useEffect(() => {
-    document.addEventListener('keydown', onEnterPress, false);
+  // useEffect(() => {
+  //   document.addEventListener('keydown', onEnterPress, false);
 
-    return () => {
-      document.removeEventListener('keydown', onEnterPress, false);
-    };
-  }, []);
+  //   return () => {
+  //     document.removeEventListener('keydown', onEnterPress, false);
+  //   };
+  // }, []);
 
   const pageUrl = `ezyou.shop/${storeId}-${productId}`;
 

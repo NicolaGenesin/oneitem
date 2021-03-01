@@ -29,9 +29,9 @@ const i18n = rosetta({
       titlePartOne: 'Create your online',
       titlePartTwo: 'shop — in a minute',
       inputLeftAddon: 'Your Store Name',
-      listItem1: 'Let\'s make it easy - an ecommerce shouldn\'t be complicated.',
-      listItem2: 'Add your products and share them through the platform you like the most.',
-      listItem3: 'Enable payments at any time.',
+      listItem1: 'You don\'t need a fully fledged ecommerce — add your products with minimal effort',
+      listItem2: 'Let your followers know — share your products to the platforms you prefer',
+      listItem3: 'Enable payments at any time',
       buttonCreate: 'Add my first product',
       nameNotAvailable: 'Please use a different name. The current one is already used by a different registered Store.',
     },
@@ -42,7 +42,7 @@ const i18n = rosetta({
       description2: 'After spending no more than a minute to add your first product, your customers will be able to see and buy it on a page like',
       description2link: 'this one',
       title3: 'Ok, but is it safe?',
-      description3: 'The only informations this platform stores are the ones needed to create the product pages. The payment platform (Stripe) handles all the payment information and, by design, you will be the only entity to have have full control on it.',
+      description3: 'The only informations this platform stores are the ones needed to create the product pages. The payment platform (Stripe) handles all the payment information and, by design, you will be the only person to have have full control.',
     },
     product: {
       preview: 'Preview',
@@ -303,8 +303,6 @@ const i18n = rosetta({
     },
     components: {
       leftColumn: {
-        alertInfo: 'Please complete all fields on this column. Your ecommerce will be online and visible to everyone once you click the button at the bottom of the page.',
-
         alertInfo: 'Completa tutti i campi in questa colonna. Il tuo ecommerce sarà visibile a tutti una volta cliccato il tasto alla fine della pagina.',
         titleCreate: 'Aggiungi un nuovo prodotto',
         titleEdit: 'Modifica il prodotto',

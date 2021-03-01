@@ -58,7 +58,10 @@ function Main() {
               </Text>
             </Box>
           </Box>
-          <Box mt="48px" mb="64px">
+          <Box pt="24px" mb="64px">
+            <Heading size="2xl" mb="24px" color="textColor.50">
+              {i18n.t('about.title4')}
+            </Heading>
             <Link href="/">
               <Button
                 boxShadow="2xl"
@@ -66,7 +69,7 @@ function Main() {
                 colorScheme="primaryImportantButton"
                 color="white"
                 size="lg"
-              >
+                >
                 {i18n.t('pricing.button')}
               </Button>
             </Link>

@@ -121,7 +121,7 @@ const ProductPage = ({ data, stripeAccountId }) => {
         <meta name="description" content="Sell your handmade gift, vintage & on-trend clothes, unique jewelry, and more… lots more." />
 
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://ezyou.shop/" />
+        <meta property="og:url" content={`https://ezyou.shop/${data.id}`} />
         <meta property="og:type" content="website" />
         <meta property="og:title" content={data.name} />
         <meta property="og:description" content={`Brought to you by ${data.author}`} />

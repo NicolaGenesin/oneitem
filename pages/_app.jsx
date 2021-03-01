@@ -27,7 +27,7 @@ export default class CustomApp extends App {
         <AppWrapper>
           {!isProductPage && (
           <Head>
-            <title>ezyou — make it easy</title>
+            <title>ezyou — Sell it easily</title>
             <link rel="icon" href="/favicon.ico" />
             <meta name="description" content="Sell your handmade gift, vintage & on-trend clothes, unique jewelry, and more… lots more." />
 

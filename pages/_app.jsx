@@ -19,7 +19,7 @@ export default class CustomApp extends App {
   render() {
     const { Component, pageProps } = this.props;
 
-    const isProductPage = this.props.router.pathname === '/[storeId]/[productId]';
+    const isProductPage = this.props.router.pathname === '/[productId]';
 
     return (
       <ChakraProvider theme={theme}>

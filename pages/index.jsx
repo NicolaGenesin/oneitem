@@ -81,10 +81,10 @@ function Main() {
                   <ListIcon as={MdLink} color="textColor.50" />
                   {i18n.t('homeSignedOut.listItem2')}
                 </ListItem>
-                <ListItem>
+                {/* <ListItem>
                   <ListIcon as={MdExtension} color="textColor.50" />
                   {i18n.t('homeSignedOut.listItem3')}
-                </ListItem>
+                </ListItem> */}
               </List>
             </Box>
             <Box mt={["24px", "48px"]}>

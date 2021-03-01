@@ -41,7 +41,7 @@ function Main() {
                 {i18n.t('about.description2')}
                 {' '}
                 <u>
-                  <Link href="pera-lab/zaino" target="_blank">
+                  <Link href="pera-lab-eco-leather-backpack" target="_blank">
                     {i18n.t('about.description2link')}
                   </Link>
                 </u>

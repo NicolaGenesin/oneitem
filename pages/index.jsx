@@ -66,13 +66,13 @@ function Main() {
           pb="20%"
         >
           <Box pt={['0%', '10%']}>
-            <Heading size="2xl" color="textColor.50">
+            <Heading fontSize={["2xl", "5xl"]} color="textColor.50">
               {i18n.t('homeSignedOut.titlePartOne')}
               <br />
               {i18n.t('homeSignedOut.titlePartTwo')}
             </Heading>
-            <Box mt="48px" color="textColor.50">
-              <List spacing={3} mt="48px">
+            <Box mt="24px" color="textColor.50">
+              <List spacing={3}>
                 <ListItem>
                   <ListIcon as={IoShapesSharp} color="textColor.50" />
                   {i18n.t('homeSignedOut.listItem1')}
@@ -87,7 +87,7 @@ function Main() {
                 </ListItem>
               </List>
             </Box>
-            <Box mt="48px">
+            <Box mt={["24px", "48px"]}>
               <VStack w={['100%', '80%']}>
                 <InputGroup size="lg">
                   <InputLeftAddon

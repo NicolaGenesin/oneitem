@@ -126,6 +126,7 @@ const ProductPage = ({ data, stripeAccountId }) => {
         <meta property="og:title" content={data.name} />
         <meta property="og:description" content={`Brought to you by ${data.author}`} />
         <meta property="og:image" content={data.images[0].data_url} />
+        <meta property="og:image:url" content={data.images[0].data_url} />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta property="twitter:domain" content="ezyou.shop" />

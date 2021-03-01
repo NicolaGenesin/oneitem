@@ -104,18 +104,18 @@ const CreatePage = () => {
     if (productId) {
       updatedId = productId;
     } else if (!productId && isSignedIn) {
-      const clash = store.products.find((product) => product.id === state.id);
+      const clash = store.products.find((product) => product.id === `${state.storeId}-${state.id}`);
 
       if (clash) {
-        let index = 0;
+        let index = 2;
 
-        while (store.products.find((product) => product.id === `${state.id}-${index}`)) {
+        while (store.products.find((product) => product.id === `${state.storeId}-${state.id}-${index}`)) {
           index += 1;
         }
 
-        updatedId = `${state.id}-${index}`;
+        updatedId = `${state.storeId}-${state.id}-${index}`;
       } else {
-        updatedId = state.id;
+        updatedId = `${state.storeId}-${state.id}`;
       }
     } else if (!productId && !isSignedIn) {
       updatedId = `${state.storeId}-${state.id}`;

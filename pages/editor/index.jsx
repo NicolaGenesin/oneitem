@@ -118,7 +118,7 @@ const CreatePage = () => {
         updatedId = state.id;
       }
     } else if (!productId && !isSignedIn) {
-      updatedId = state.id;
+      updatedId = `${state.storeId}-${state.id}`;
     }
 
     const data = {

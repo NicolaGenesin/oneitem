@@ -3,9 +3,9 @@ import { useRouter } from 'next/router';
 import {
   VStack, Center, Link, Text, Heading, Button,
 } from '@chakra-ui/react';
-import usei18n from '../../../i18n/index';
+import usei18n from '../../i18n/index';
 
-export default function Error() {
+export default function Issue() {
   const i18n = usei18n();
   const { query } = useRouter();
 
@@ -21,7 +21,7 @@ export default function Error() {
           <Text mb="24px">
             {i18n.t('payment.issue.description')}
           </Text>
-          <Link href={`/${query.storeId}/${query.productId}/`}>
+          <Link href={`/${query.productId}/`}>
             <Button
               colorScheme="primaryButton"
               color="white"

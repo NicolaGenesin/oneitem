@@ -3,8 +3,9 @@ import Router from 'next/router';
 import {
   Box, VStack, Center, Button, Link, Heading, Image, Text,
 } from '@chakra-ui/react';
-import usei18n from '../i18n/index';
-import fire from '../config/fire-config';
+import Loader from 'react-spinners/BarLoader';
+import usei18n from '../../i18n/index';
+import fire from '../../config/fire-config';
 
 const PublicStorePage = ({ products, store }) => {
   const i18n = usei18n();
@@ -14,6 +15,10 @@ const PublicStorePage = ({ products, store }) => {
       Router.push('/404');
     }
   }, [store, products]);
+
+  if (!store) {
+    return <Loader />;
+  }
 
   return (
     <>
@@ -65,7 +70,7 @@ const PublicStorePage = ({ products, store }) => {
                           )
                         </Text>
                       </Box>
-                      <Link ml="-6px" mt="4px" href={`${product.storeId}/${product.id}`}>
+                      <Link ml="-6px" mt="4px" href={`/${product.id}`}>
                         <Button
                           boxShadow="md"
                           variant="solid"

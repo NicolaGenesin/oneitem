@@ -45,7 +45,7 @@ const enablePayments = async (event, storeId, storeName, stripeAccountId) => {
     body: JSON.stringify({
       stripeAccountId,
       storeName,
-      pageUrl: `https://ezyou.shop/${storeId}/`,
+      pageUrl: `https://ezyou.shop/stores/${storeId}/`,
     }),
   });
 
@@ -268,7 +268,7 @@ const LoggedInHome = () => {
             {store.products
               .sort((a, b) => b.updatedAt - a.updatedAt)
               .map((product, index) => {
-                const pageUrl = `https://ezyou.shop/${product.storeId}/${product.id}`;
+                const pageUrl = `https://ezyou.shop/${product.id}`;
 
                 return (
                   <Box
@@ -329,7 +329,7 @@ const LoggedInHome = () => {
                           leftIcon={<HiOutlineExternalLink />}
                           colorScheme="primaryButton"
                           color="white"
-                          onClick={(event) => { seeListing(event, `${product.storeId}/${product.id}`); }}
+                          onClick={(event) => { seeListing(event, `${product.id}`); }}
                         >
                           {i18n.t('home.item.seeListing')}
                         </Button>

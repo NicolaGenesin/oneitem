@@ -80,7 +80,7 @@ const CreateModal = (isOpen, onOpen, onClose, storeId, productId) => {
     };
   }, []);
 
-  const pageUrl = `ezyou.shop/${storeId}/${productId}`;
+  const pageUrl = `ezyou.shop/${productId}`;
 
   return (
     <>

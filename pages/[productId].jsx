@@ -12,10 +12,10 @@ import {
 } from 'react-share';
 import Head from 'next/head';
 import Loader from 'react-spinners/BarLoader';
-import Product from '../../components/Product';
-import fire from '../../config/fire-config';
-import usei18n from '../../i18n/index';
-import Logo from '../../components/Logo';
+import Product from '../components/Product';
+import fire from '../config/fire-config';
+import usei18n from '../i18n/index';
+import Logo from '../components/Logo';
 
 const Footer = ({ i18n }) => (
   <Box>
@@ -33,7 +33,7 @@ const Footer = ({ i18n }) => (
 );
 
 const ShareModule = ({ i18n, product }) => {
-  const pageUrl = `https://ezyou.shop/${product.storeId}/${product.id}`;
+  const pageUrl = `https://ezyou.shop/${product.id}`;
 
   return (
     <VStack spacing="8px">
@@ -152,44 +152,42 @@ const ProductPage = ({ data, stripeAccountId }) => {
 
 ProductPage.getInitialProps = async function ({ query }) {
   try {
-    const storeReference = fire.firestore()
-      .collection('stores')
-      .doc(query.storeId);
+    const productReference = fire.firestore()
+      .collection('products')
+      .doc(query.productId);
 
-    const store = await storeReference.get();
-    const storeData = store.data();
+    productReference.update({
+      views: fire.firestore.FieldValue.increment(1),
+    });
 
-    if (storeData.productIds.includes(query.productId)) {
-      const productReference = fire.firestore()
-        .collection('products')
-        .doc(query.productId);
+    const productDoc = await productReference.get();
 
-      productReference.update({
-        views: fire.firestore.FieldValue.increment(1),
-      });
+    if (productDoc.exists) {
+      const productData = productDoc.data();
 
-      const doc = await productReference.get();
+      let stripeAccountId;
 
-      if (doc.exists) {
-        const data = doc.data();
+      const storeReference = fire.firestore()
+        .collection('stores')
+        .doc(productData.storeId);
 
-        let stripeAccountId;
+      const storeDoc = await storeReference.get();
+      const storeData = storeDoc.data();
 
-        const canCreateCharges = storeData.stripe
+      const canCreateCharges = storeData.stripe
           && storeData.stripe.account
           && storeData.stripe.account.chargesEnabled
           && storeData.stripe.account.detailsSubmitted;
 
-        if (canCreateCharges && storeData.stripe.account) {
-          stripeAccountId = storeData.stripe.account.id;
-        }
+      if (canCreateCharges && storeData.stripe.account) {
+        stripeAccountId = storeData.stripe.account.id;
+      }
 
-        if (data.visible) {
-          return {
-            data,
-            stripeAccountId,
-          };
-        }
+      if (productData.visible) {
+        return {
+          data: productData,
+          stripeAccountId,
+        };
       }
     }
   } catch (error) {}

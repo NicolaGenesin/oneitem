@@ -48,6 +48,7 @@ const i18n = rosetta({
     product: {
       preview: 'Preview',
       buy: 'Buy',
+      outOfStock: 'Out of Stock',
       author: 'Brought to you by {{author}}',
       contact: 'Contact: {{contact}}',
       authorPlaceholder: '[Author name]',
@@ -224,6 +225,7 @@ const i18n = rosetta({
     product: {
       preview: 'Anteprima',
       buy: 'Compra',
+      outOfStock: 'Prodotto Esaurito',
       author: 'Presentato da {{author}}',
       contact: 'Contatto: {{contact}}',
       authorPlaceholder: '[Nome autore]',

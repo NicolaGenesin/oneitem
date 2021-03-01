@@ -174,7 +174,7 @@ export default function Product({ product, preview, stripeAccountId }) {
                 </Text>
                 <Button
                   w="100%"
-                  disabled={!stripeAccountId || preview}
+                  disabled={!stripeAccountId || preview || product.quantity === 0}
                   isLoading={isLoading}
                   colorScheme="primaryButton"
                   color="white"
@@ -183,7 +183,7 @@ export default function Product({ product, preview, stripeAccountId }) {
                     onOpen();
                   }}
                 >
-                  {i18n.t('product.buy')}
+                  {product.quantity !== 0 ? i18n.t('product.buy') : i18n.t('product.outOfStock')}
                 </Button>
               </VStack>
             </Box>

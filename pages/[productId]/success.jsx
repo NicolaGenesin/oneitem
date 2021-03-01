@@ -4,8 +4,9 @@ import {
   VStack, Center, Link, Text, Heading, Button,
 } from '@chakra-ui/react';
 import usei18n from '../../i18n/index';
+import fire from '../../config/fire-config';
 
-export default function Success() {
+const Success = ({}) => {
   const i18n = usei18n();
   const { query } = useRouter();
 
@@ -34,4 +35,20 @@ export default function Success() {
       </Center>
     </>
   );
-}
+};
+
+Success.getInitialProps = async function ({ query }) {
+  try {
+    const productReference = fire.firestore()
+      .collection('products')
+      .doc(query.productId);
+
+    productReference.update({
+      quantity: fire.firestore.FieldValue.increment(-1),
+    });
+  } catch (error) {}
+
+  return {};
+};
+
+export default Success;

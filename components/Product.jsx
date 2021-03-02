@@ -122,7 +122,7 @@ export default function Product({ product, preview, stripeAccountId }) {
                       key={`index-${index}`}
                       bg="white"
                       boxSize={['340px', '400px']}
-                      objectFit="cover"
+                      objectFit="contain"
                       src={image.data_url}
                       fallbackSrc="https://via.placeholder.com/500?text=　"
                     />

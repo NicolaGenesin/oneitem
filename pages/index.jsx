@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, use } from 'react';
 import { isMobile } from 'react-device-detect';
 import Router from 'next/router';
 import {
@@ -16,6 +16,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import fire from '../config/fire-config';
 import usei18n from '../i18n/index';
+import {useInterval} from 'react-use';
 
 const canUseName = async (storeName) => {
   if (!storeName) {
@@ -53,6 +54,30 @@ function Main() {
     }
   });
 
+  const imageURLs = [
+    "assets/home-01.jpg",
+    "assets/home-04.jpg",
+    "assets/home-08.jpg",
+    "assets/home-05.jpg",
+    "assets/home-02.jpg",
+    "assets/home-09.jpg",
+  ]
+
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useInterval(
+    () => {
+      let nextImageIndex = currentImageIndex + 1
+
+      if (nextImageIndex >= imageURLs.length) {
+        nextImageIndex = 0
+      }
+
+      setCurrentImageIndex(nextImageIndex)
+    },
+    5000
+  );
+
   return (
     <Box bg="primary.50">
       <Header />
@@ -87,7 +112,7 @@ function Main() {
                 </ListItem> */}
               </List>
             </Box>
-            <Box mt={["24px", "48px"]}>
+            <Box mt={["24px", "64px"]}>
               <VStack w={['100%', '80%']}>
                 <InputGroup size="lg">
                   <InputLeftAddon
@@ -141,10 +166,10 @@ function Main() {
         {!isMobile && (
         <Box
           flex="1"
-          background="primary.200"
         >
           <Image
-            src="assets/home-01.jpg"
+            key={Math.random()}
+            src={imageURLs[currentImageIndex]}
             objectFit="cover"
             height="100vh"
           />

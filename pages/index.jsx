@@ -14,9 +14,11 @@ import {
 } from 'react-icons/io5';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import CrossfadeImage from '../components/CrossfadeImage';
 import fire from '../config/fire-config';
 import usei18n from '../i18n/index';
 import {useInterval} from 'react-use';
+
 
 const canUseName = async (storeName) => {
   if (!storeName) {
@@ -167,11 +169,10 @@ function Main() {
         <Box
           flex="1"
         >
-          <Image
-            key={Math.random()}
+          <CrossfadeImage
+            duration={1000}
+            style={{ height: '100vh', objectFit: 'cover' }}
             src={imageURLs[currentImageIndex]}
-            objectFit="cover"
-            height="100vh"
           />
         </Box>
         )}

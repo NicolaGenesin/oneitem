@@ -18,8 +18,8 @@ const theme = extendTheme({
 export default class CustomApp extends App {
   render() {
     const { Component, pageProps } = this.props;
-
     const isProductPage = this.props.router.pathname === '/[productId]';
+    const isLandingPage = this.props.router.pathname === '/';
 
     return (
       <ChakraProvider theme={theme}>
@@ -44,6 +44,17 @@ export default class CustomApp extends App {
             <meta name="twitter:title" content="The easy ecommerce solution, for you" />
             <meta name="twitter:description" content="Sell your handmade gift, vintage \& on-trend clothes, unique jewelry, and more… lots more." />
             <meta name="twitter:image" content="https://ezyou.shop/assets/og.png" />
+
+            {isLandingPage && (
+              <div>
+                <link rel="preload" href="assets/home-01.jpg" as="image" />
+                <link rel="preload" href="assets/home-02.jpg" as="image" />
+                <link rel="preload" href="assets/home-04.jpg" as="image" />
+                <link rel="preload" href="assets/home-05.jpg" as="image" />
+                <link rel="preload" href="assets/home-08.jpg" as="image" />
+                <link rel="preload" href="assets/home-09.jpg" as="image" />
+              </div>
+            )}
           </Head>
           )}
           <Component {...pageProps} />

@@ -1,24 +1,23 @@
-import React, { useEffect, useState, use } from 'react';
+import React, { useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import Router from 'next/router';
 import {
   Box, Heading, Button, Input, List, ListItem,
-  ListIcon, HStack, Image, VStack, InputGroup, InputLeftAddon,
+  ListIcon, HStack, VStack, InputGroup, InputLeftAddon,
   Alert, AlertIcon, Text,
 } from '@chakra-ui/react';
 import {
-  MdExtension, MdLink,
+  MdLink,
 } from 'react-icons/md';
 import {
   IoShapesSharp,
 } from 'react-icons/io5';
+import { useInterval } from 'react-use';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import CrossfadeImage from '../components/CrossfadeImage';
 import fire from '../config/fire-config';
 import usei18n from '../i18n/index';
-import {useInterval} from 'react-use';
-
 
 const canUseName = async (storeName) => {
   if (!storeName) {
@@ -57,27 +56,27 @@ function Main() {
   });
 
   const imageURLs = [
-    "assets/home-01.jpg",
-    "assets/home-04.jpg",
-    "assets/home-08.jpg",
-    "assets/home-05.jpg",
-    "assets/home-02.jpg",
-    "assets/home-09.jpg",
-  ]
+    'assets/home-01.jpg',
+    'assets/home-04.jpg',
+    'assets/home-08.jpg',
+    'assets/home-05.jpg',
+    'assets/home-02.jpg',
+    'assets/home-09.jpg',
+  ];
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useInterval(
     () => {
-      let nextImageIndex = currentImageIndex + 1
+      let nextImageIndex = currentImageIndex + 1;
 
       if (nextImageIndex >= imageURLs.length) {
-        nextImageIndex = 0
+        nextImageIndex = 0;
       }
 
-      setCurrentImageIndex(nextImageIndex)
+      setCurrentImageIndex(nextImageIndex);
     },
-    5000
+    5000,
   );
 
   return (
@@ -93,7 +92,7 @@ function Main() {
           pb="20%"
         >
           <Box pt={['0%', '10%']}>
-            <Heading fontSize={["2xl", "5xl"]} color="textColor.50">
+            <Heading fontSize={['2xl', '5xl']} color="textColor.50">
               {i18n.t('homeSignedOut.titlePartOne')}
               <br />
               {i18n.t('homeSignedOut.titlePartTwo')}
@@ -114,7 +113,7 @@ function Main() {
                 </ListItem> */}
               </List>
             </Box>
-            <Box mt={["24px", "64px"]}>
+            <Box mt={['24px', '64px']}>
               <VStack w={['100%', '80%']}>
                 <InputGroup size="lg">
                   <InputLeftAddon
